@@ -27,7 +27,7 @@ const config: Config = {
         background: {
           white: "#FFFFFF",
           sand: "#FBF9EE",
-          "dark-sand": "#FBF9EE",
+          "dark-sand": "#EFEDE1",
           black: "#1F1F1F",
           "dark-gray": "#3A3A3A",
         },

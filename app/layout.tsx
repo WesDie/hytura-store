@@ -25,7 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${generalSans.variable} ${kaiseiTokumin.variable}`}>
+      <body
+        className={`${generalSans.variable} ${kaiseiTokumin.variable} bg-background-sand`}
+      >
         {children}
       </body>
     </html>

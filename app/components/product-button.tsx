@@ -6,7 +6,7 @@ export default function ProductButton(product: { product: any[] }) {
   const productItem = product.product;
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full cursor-pointer hover:bg-background-dark-sand transition-colors">
       {productItem.images.nodes.map((node: any) => (
         <Image
           key={node.id}
@@ -29,7 +29,7 @@ export default function ProductButton(product: { product: any[] }) {
             Spray | Bottle | Instructions
           </p>
         </div>
-        <button className="bg-background-black h-[35px] px-2x text-body-sm text-text-white hover:bg-black transition-colors my-auto">
+        <button className="bg-background-black h-[35px] px-2x border border-solid border-stroke-black text-body-sm text-text-white hover:bg-transparent hover:text-text-black transition-colors my-auto">
           Add
         </button>
       </div>

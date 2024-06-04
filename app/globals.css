@@ -47,4 +47,18 @@
   .text-link-xs {
     @apply font-generalsans text-[0.75rem] underline text-text-black;
   }
+
+  .button-primary {
+    @apply text-body-sm text-text-white px-2x pt-[7px] pb-[9px] bg-background-black hover:bg-black transition-all;
+  }
+  .button-secondary {
+    @apply text-body-sm text-text-black px-2x pt-[7px] pb-[9px] border border-solid border-background-black hover:bg-background-black hover:text-text-white transition-all;
+
+    svg {
+      @apply my-auto transition-all;
+    }
+    &:hover path {
+      @apply fill-stroke-white;
+    }
+  }
 }
