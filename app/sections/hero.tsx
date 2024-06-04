@@ -1,28 +1,33 @@
-import Image from "next/image";
+import RenderImage from "../components/render-Image";
 
 export default async function Hero({
   direction,
   title,
   buttonTitle,
+  imageSrc,
 }: {
   direction: "left" | "right";
   title: string;
   buttonTitle: string;
+  imageSrc: string;
 }) {
   return (
-    <section className={`w-full grid grid-cols-2 h-[667px] overflow-hidden`}>
-      <Image
-        src={"/hero.png"}
+    <section
+      className={`w-full grid grid-rows-2 md:grid-cols-2 h-[592px] md:h-[667px] overflow-hidden`}
+    >
+      <RenderImage
+        src={imageSrc}
         alt={"product image"}
         width={1000}
         height={667}
-        className={`w-full h-[667px] object-cover ${
+        className={`w-full h-full md:h-[667px] ${
           direction === "left" ? "order-1" : "order-0"
         }`}
-      ></Image>
-      <div className="w-full h-full flex border-b border-stroke-gray border-solid">
-        <div className="m-auto ml-[64px] flex flex-col gap-3x w-[365px]">
-          <h1 className="text-heading-xl">{title}</h1>
+        imageClassName="w-full h-full object-cover"
+      />
+      <div className="w-full md:h-[667px] flex border-b border-stroke-gray border-solid">
+        <div className="m-auto ml-2x md:ml-[64px] flex flex-col gap-3x w-[365px]">
+          <h1 className="text-heading-lg md:text-heading-xl">{title}</h1>
           <div className="flex gap-2x">
             <a className="button-secondary flex gap-4x" href="/collection/all">
               {buttonTitle}

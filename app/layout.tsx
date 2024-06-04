@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Kaisei_Tokumin } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
+import Header from "./sections/header";
 
 const generalSans = localFont({
   src: "../fonts/GeneralSans-Variable.ttf",
@@ -28,6 +29,7 @@ export default function RootLayout({
       <body
         className={`${generalSans.variable} ${kaiseiTokumin.variable} bg-background-sand`}
       >
+        <Header />
         {children}
       </body>
     </html>

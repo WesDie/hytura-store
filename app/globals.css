@@ -25,7 +25,7 @@
     @apply font-kaiseitokumin text-[0.875rem] text-text-black;
   }
   .text-heading-4xs {
-    @apply font-kaiseitokumin text-[0.75rem] text-text-black;
+    @apply font-kaiseitokumin text-[0.75rem] leading-[16px] text-text-black;
   }
 
   .text-body-lg {
@@ -60,5 +60,14 @@
     &:hover path {
       @apply fill-stroke-white;
     }
+  }
+
+  .blur {
+    filter: blur(3px);
+    transition: filter 0.3s ease-in;
+  }
+  .remove-blur {
+    filter: blur(0px);
+    transition: filter 0.3s ease-in;
   }
 }

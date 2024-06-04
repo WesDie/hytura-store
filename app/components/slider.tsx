@@ -20,8 +20,8 @@ export default function Slider(products: { products: any[] }) {
 
   return (
     <div>
-      <div className="w-full justify-between px-[32px] pt-[24px] pb-[16px] flex">
-        <h1 className="text-heading-md">Our products</h1>
+      <div className="w-full justify-between px-2x md:px-4x py-2x md:pt-3x md:pb-2x flex">
+        <h1 className="text-heading-xs md:text-heading-md">Our products</h1>
         <div className="flex gap-2x">
           <button onClick={prevto} className="rotate-180">
             <svg

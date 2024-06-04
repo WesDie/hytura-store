@@ -14,7 +14,7 @@ export default function ProductButton(product: { product: any[] }) {
           alt={"product image"}
           width={500}
           height={500}
-          className="aspect-[32/34] w-full object-cover"
+          className="aspect-[29/27] md:aspect-[32/34] w-full object-cover"
         ></Image>
       ))}
       <div className="flex justify-between p-2x">
