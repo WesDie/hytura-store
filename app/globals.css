@@ -2,32 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer components {
+  .text-heading-xl {
+    @apply font-kaiseitokumin text-[2.5rem] leading-[50px] text-text-black;
   }
-}
+  .text-heading-lg {
+    @apply font-kaiseitokumin text-[2rem] leading-[35px] text-text-black;
+  }
+  .text-heading-md {
+    @apply font-kaiseitokumin text-[1.5rem] text-text-black;
+  }
+  .text-heading-sm {
+    @apply font-kaiseitokumin text-[1.375rem] text-text-black;
+  }
+  .text-heading-xs {
+    @apply font-kaiseitokumin text-[1.125rem] text-text-black;
+  }
+  .text-heading-2xs {
+    @apply font-kaiseitokumin text-[1rem] text-text-black;
+  }
+  .text-heading-3xs {
+    @apply font-kaiseitokumin text-[0.875rem] text-text-black;
+  }
+  .text-heading-4xs {
+    @apply font-kaiseitokumin text-[0.75rem] text-text-black;
+  }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+  .text-body-lg {
+    @apply font-generalsans text-[1.125rem] text-text-black;
+  }
+  .text-body-md {
+    @apply font-generalsans text-[1rem] text-text-black;
+  }
+  .text-body-sm {
+    @apply font-generalsans text-[0.875rem] text-text-black;
+  }
+  .text-body-xs {
+    @apply font-generalsans text-[0.75rem] text-text-black;
+  }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .text-link-sm {
+    @apply font-generalsans text-[0.875rem] underline text-text-black;
+  }
+  .text-link-xs {
+    @apply font-generalsans text-[0.75rem] underline text-text-black;
   }
 }
