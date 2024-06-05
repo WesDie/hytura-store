@@ -1,5 +1,6 @@
 import Hero from "./sections/hero";
 import ProductSlider from "./sections/product-slider";
+import TextImage from "./sections/text-and-image";
 
 export default async function Home() {
   return (
@@ -11,10 +12,18 @@ export default async function Home() {
         imageSrc="/hero.png"
       />
       <ProductSlider />
-      <Hero
+      <TextImage
         direction="left"
-        title="Want to try something new? We got you covered."
+        title="Enhanced Growth"
+        description="Our plant water collection is meticulously crafted to meet the diverse needs of various plant species. From succulents to tropical plants, our specialized water formulations help you achieve the healthiest growth possible. Browse through our selection and find the perfect match for your plant care routine."
         buttonTitle="Shop now"
+        imageSrc="/hero2.png"
+      />
+      <TextImage
+        direction="right"
+        title="It has never been easier"
+        description="Our plant water collection is meticulously crafted to meet the diverse needs of various plant species. From succulents to tropical plants, our specialized water formulations help you achieve the healthiest growth possible. Browse through our selection and find the perfect match for your plant care routine."
+        buttonTitle="Shop all products"
         imageSrc="/hero2.png"
       />
     </main>
