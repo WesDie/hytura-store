@@ -3,6 +3,12 @@ import { Kaisei_Tokumin } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
 import Header from "./sections/header";
+import SmoothScroller from "./components/smooth-scoller";
+import type { Viewport } from "next";
+
+export const viewport: Viewport = {
+  themeColor: "#FBF9EE",
+};
 
 const generalSans = localFont({
   src: "../fonts/GeneralSans-Variable.ttf",
@@ -17,8 +23,6 @@ const kaiseiTokumin = Kaisei_Tokumin({
 export const metadata: Metadata = {
   title: "Hytura store",
   description: "Store of Hytura",
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#FBF9EE",
 };
 
 export default function RootLayout({
@@ -31,6 +35,7 @@ export default function RootLayout({
       <body
         className={`${generalSans.variable} ${kaiseiTokumin.variable} bg-background-sand`}
       >
+        <SmoothScroller />
         <Header />
         {children}
       </body>

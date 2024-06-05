@@ -1,20 +1,43 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
+import RenderImage from "../components/render-Image";
 
 export default function Header() {
+  const [isTop, setIsTop] = useState(false);
+  const [isShopDropdownActive, setIsShopDropdownActive] = useState(false);
   const linkClass =
-    "text-heading-3xs inline-block relative after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-text-black after:origin-bottom-right after:transition-transform after:duration-200 after:ease-in-out hover:after:scale-x-[1] hover:after:origin-bottom-left";
+    "text-heading-3xs w-fit inline-block relative after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-text-black after:origin-bottom-right after:transition-transform after:duration-200 after:ease-in-out hover:after:scale-x-[1] hover:after:origin-bottom-left";
 
   useEffect(() => {
+    const checkScrollPosition = () => {
+      if (window.scrollY < 32) {
+        setIsTop(true);
+      } else {
+        setIsTop(false);
+      }
+    };
+    checkScrollPosition();
+
     window.onscroll = () => {
-      const header = document.querySelector("header");
-      if (header) {
-        header.style.top =
-          window.scrollY < 32 ? `${32 - window.scrollY}px` : "0";
+      const announcementBar = document.querySelector(
+        "#announcementBar"
+      ) as HTMLElement;
+      const header = document.querySelector("header") as HTMLElement;
+
+      if (window.scrollY < 32) {
+        setIsTop(true);
+      } else {
+        setIsTop(false);
       }
 
-      const announcementBar = document.querySelector("#announcementBar");
+      if (header) {
+        header.setAttribute(
+          "style",
+          `top: ${window.scrollY < 32 ? `${32 - window.scrollY}px` : "-0"}`
+        );
+      }
+
       if (announcementBar) {
         announcementBar.setAttribute(
           "style",
@@ -26,17 +49,23 @@ export default function Header() {
 
   return (
     <>
-      <div className="h-[86px]"></div>
-      <div
-        id="announcementBar"
-        className={`py-1x w-full bg-background-dark-gray fixed top-0 z-10`}
+      <div className="h-[86px]" id="empty-header-height"></div>
+      {isTop && (
+        <div
+          id="announcementBar"
+          className={`py-1x w-full bg-background-dark-gray fixed top-[0] z-[11]`}
+        >
+          <p className="text-center text-text-white text-heading-4xs">
+            All orders over €25 shipped for free
+          </p>
+        </div>
+      )}
+      <header
+        className={`w-full flex justify-between border-b border-stroke-black border-solid fixed backdrop-blur-lg  ${
+          isTop ? "top-[32px]" : "top-[0]"
+        } z-10 bg-background-sand md:bg-transparent`}
       >
-        <p className="text-center text-text-white text-heading-4xs">
-          All orders over €25 shipped for free
-        </p>
-      </div>
-      <header className="w-full flex justify-between py-2x px-2x md:px-3x border-b border-stroke-black border-solid fixed backdrop-blur-lg top-[32px] z-10 bg-background-sand md:bg-transparent">
-        <div className="gap-5x flex">
+        <div className="gap-5x flex z-[11] py-2x pl-2x md:pl-3x w-full">
           <a href="/" className="flex">
             <svg
               width="73"
@@ -56,7 +85,12 @@ export default function Header() {
             <a href="/" className={linkClass}>
               Home
             </a>
-            <a href="/shop" className={linkClass}>
+            <a
+              href="/shop"
+              className={linkClass}
+              onMouseOver={() => setIsShopDropdownActive(true)}
+              onMouseLeave={() => setIsShopDropdownActive(false)}
+            >
               Shop
             </a>
             <a href="/about" className={linkClass}>
@@ -64,12 +98,12 @@ export default function Header() {
             </a>
           </div>
         </div>
-        <div className="gap-2x hidden md:flex">
+        <div className="gap-2x hidden md:flex z-[11] py-2x pr-2x md:pr-3x w-full justify-end">
           <button className={linkClass}>EN</button>
           <button className={linkClass}>Login</button>
           <button className={linkClass}>Cart (0)</button>
         </div>
-        <div className="flex gap-2x md:hidden">
+        <div className="flex gap-2x md:hidden z-[11] py-2x pr-2x">
           <svg
             width="17"
             height="20"
@@ -110,6 +144,52 @@ export default function Header() {
               </clipPath>
             </defs>
           </svg>
+        </div>
+        <div
+          id="shop-dropdown-header"
+          className={`${
+            isShopDropdownActive
+              ? "max-h-[200px] py-3x border-b"
+              : "max-h-[0px] opacity-0 py-0"
+          } justify-between px-3x top-[54px] overflow-hidden backdrop-blur-lg w-full absolute left-0 right-0 border-stroke-black border-solid transition-all duration-300 ease-in-out delay-75 bg-background-sand flex`}
+          onMouseOver={() => setIsShopDropdownActive(true)}
+          onMouseLeave={() => setIsShopDropdownActive(false)}
+        >
+          <div className="flex gap-2x">
+            <div className="flex flex-col gap-1x min-w-[175px]">
+              <h3 className="text-heading-xs">Main products</h3>
+              <div className="flex flex-col gap-[4px]">
+                <a href="/" className={`${linkClass} text-body-sm`}>
+                  All
+                </a>
+                <a href="/" className={`${linkClass} text-body-sm`}>
+                  Tools
+                </a>
+                <a href="/" className={`${linkClass} text-body-sm`}>
+                  Product 1
+                </a>
+                <a href="/" className={`${linkClass} text-body-sm`}>
+                  Gardeners
+                </a>
+              </div>
+            </div>
+            <div className="flex flex-col gap-1x min-w-[175px]">
+              <h3 className="text-heading-xs">Other</h3>
+              <div className="flex flex-col gap-[4px]">
+                <a href="/" className={`${linkClass} text-body-sm`}>
+                  Accessories
+                </a>
+              </div>
+            </div>
+          </div>
+          <RenderImage
+            src={"/hero.png"}
+            alt={"product image"}
+            width={1000}
+            height={667}
+            className={`max-h-full w-[200px]`}
+            imageClassName="w-full h-full object-cover"
+          />
         </div>
       </header>
     </>

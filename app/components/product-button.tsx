@@ -1,6 +1,7 @@
 // @ts-nocheck
 "use client";
 import Image from "next/image";
+import RenderImage from "./render-Image";
 
 export default function ProductButton(product: { product: any[] }) {
   const productItem = product.product;
@@ -8,14 +9,14 @@ export default function ProductButton(product: { product: any[] }) {
   return (
     <div className="w-full h-full cursor-pointer hover:bg-background-dark-sand transition-colors">
       {productItem.images.nodes.map((node: any) => (
-        <Image
+        <RenderImage
           key={node.id}
           src={node.url}
           alt={"product image"}
           width={500}
           height={500}
           className="aspect-[29/27] md:aspect-[32/34] w-full object-cover"
-        ></Image>
+        />
       ))}
       <div className="flex justify-between p-2x">
         <div className="flex flex-col gap-[4px]">
