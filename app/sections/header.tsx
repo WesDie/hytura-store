@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 export default function Header() {
   const linkClass =
     "text-heading-3xs inline-block relative after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-text-black after:origin-bottom-right after:transition-transform after:duration-200 after:ease-in-out hover:after:scale-x-[1] hover:after:origin-bottom-left";
+
   useEffect(() => {
     window.onscroll = () => {
       const header = document.querySelector("header");
@@ -34,7 +35,7 @@ export default function Header() {
           All orders over €25 shipped for free
         </p>
       </div>
-      <header className="w-full flex justify-between py-2x px-2x md:px-3x border-b border-stroke-black border-solid fixed backdrop-blur-lg top-[32px] z-10">
+      <header className="w-full flex justify-between py-2x px-2x md:px-3x border-b border-stroke-black border-solid fixed backdrop-blur-lg top-[32px] z-10 bg-background-sand md:bg-transparent">
         <div className="gap-5x flex">
           <a href="/" className="flex">
             <svg

@@ -17,6 +17,8 @@ const kaiseiTokumin = Kaisei_Tokumin({
 export const metadata: Metadata = {
   title: "Hytura store",
   description: "Store of Hytura",
+  viewport: "width=device-width, initial-scale=1",
+  themeColor: "#FBF9EE",
 };
 
 export default function RootLayout({
