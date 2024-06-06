@@ -2,6 +2,7 @@ import Hero from "./sections/hero";
 import ProductSlider from "./sections/product-slider";
 import TextImage from "./sections/text-and-image";
 import BaseText from "./sections/base-text";
+import Footer from "./sections/footer";
 
 export default async function Home() {
   return (
@@ -33,6 +34,7 @@ export default async function Home() {
         buttonTitle="Shop all products"
         imageSrc="/hero2.png"
       />
+      <Footer />
     </main>
   );
 }
