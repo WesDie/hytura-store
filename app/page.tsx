@@ -3,6 +3,7 @@ import ProductSlider from "./sections/product-slider";
 import TextImage from "./sections/text-and-image";
 import BaseText from "./sections/base-text";
 import Footer from "./sections/footer";
+import Faq from "./sections/faq";
 
 export default async function Home() {
   return (
@@ -34,6 +35,7 @@ export default async function Home() {
         buttonTitle="Shop all products"
         imageSrc="/hero2.png"
       />
+      <Faq direction="right" />
       <Footer />
     </main>
   );
