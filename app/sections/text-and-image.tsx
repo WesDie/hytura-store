@@ -28,7 +28,7 @@ export default async function TextImage({
         imageClassName="w-full h-full object-cover"
       />
       <div className="w-full md:h-[436px] flex border-b border-stroke-gray border-solid">
-        <div className="m-auto ml-2x md:ml-[64px] flex flex-col gap-3x w-[500px]">
+        <div className="m-auto mx-2x w-full md:mr-0 md:ml-[64px] flex flex-col gap-3x md:w-[500px]">
           <h1 className="text-heading-md">{title}</h1>
           <p className="text-body-sm">{description}</p>
           <div className="flex gap-2x">

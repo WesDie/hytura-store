@@ -1,3 +1,5 @@
+import { unstable_noStore as noStore } from "next/cache";
+
 export async function shopifyFetch({
   query,
   variables,
@@ -5,6 +7,7 @@ export async function shopifyFetch({
   query: string;
   variables: any;
 }) {
+  noStore();
   const endpoint = process.env.SHOPIFY_STORE_DOMAIN;
   const key = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
@@ -71,6 +74,6 @@ export async function getAllProducts() {
         }
       }
     }`,
-    variables: {}, // Add an empty object for the variables property
+    variables: {},
   });
 }
