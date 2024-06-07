@@ -70,6 +70,16 @@ export async function getAllProducts() {
                 url
               }
             }
+            media(first: 10) {
+              nodes {
+                ... on Video {
+                  id
+                  sources {
+                    url
+                  }
+                }
+              }
+            }
           }
         }
       }
