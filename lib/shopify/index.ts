@@ -113,6 +113,7 @@ export async function getAllBlogsData() {
     variables: {},
   });
 }
+
 export async function getSingleArticleData(id: string) {
   return shopifyFetch({
     query: `query ($id: ID!) {  
@@ -133,5 +134,50 @@ export async function getSingleArticleData(id: string) {
     variables: {
       id,
     },
+  });
+}
+
+export async function getAllCollections() {
+  return shopifyFetch({
+    query: `{
+      collections(first: 10) {
+        nodes {
+          handle
+          id
+          title
+          description
+          products(first: 10) {
+            nodes {
+              id
+              handle
+              title
+              priceRange {
+                minVariantPrice {
+                  amount
+                  currencyCode
+                }
+              }
+              images(first: 10) {
+                nodes {
+                  id
+                  url
+                }
+              }
+              media(first: 10) {
+                nodes {
+                  ... on Video {
+                    id
+                    sources {
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }`,
+    variables: {},
   });
 }

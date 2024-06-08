@@ -1,3 +1,4 @@
+import Slider from "@/app/components/slider";
 import Article from "../../../sections/article";
 import { getSingleArticleData } from "@/lib/shopify";
 
