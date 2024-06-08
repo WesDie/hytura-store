@@ -21,7 +21,7 @@ export default function Header() {
 
     window.onscroll = () => {
       const announcementBar = document.querySelector(
-        "#announcementBar"
+        "#announcementBar",
       ) as HTMLElement;
       const header = document.querySelector("header") as HTMLElement;
 
@@ -34,14 +34,14 @@ export default function Header() {
       if (header) {
         header.setAttribute(
           "style",
-          `top: ${window.scrollY < 32 ? `${32 - window.scrollY}px` : "-0"}`
+          `top: ${window.scrollY < 32 ? `${32 - window.scrollY}px` : "-0"}`,
         );
       }
 
       if (announcementBar) {
         announcementBar.setAttribute(
           "style",
-          `top: ${window.scrollY < 32 ? `${0 - window.scrollY}px` : "-32px"}`
+          `top: ${window.scrollY < 32 ? `${0 - window.scrollY}px` : "-32px"}`,
         );
       }
     };
@@ -53,19 +53,19 @@ export default function Header() {
       {isTop && (
         <div
           id="announcementBar"
-          className={`py-1x w-full bg-background-dark-gray fixed top-[0] z-[11]`}
+          className={`fixed top-[0] z-[11] w-full bg-background-dark-gray py-1x`}
         >
-          <p className="text-center text-text-white text-heading-4xs">
+          <p className="text-heading-4xs text-center text-text-white">
             All orders over €25 shipped for free
           </p>
         </div>
       )}
       <header
-        className={`w-full flex justify-between border-b border-stroke-black border-solid fixed backdrop-blur-lg  ${
+        className={`fixed flex w-full justify-between border-b border-solid border-stroke-black backdrop-blur-lg ${
           isTop ? "top-[32px]" : "top-[0]"
         } z-10 bg-background-sand md:bg-transparent`}
       >
-        <div className="gap-5x flex z-[11] py-2x pl-2x md:pl-3x w-full">
+        <div className="z-[11] flex w-full gap-5x py-2x pl-2x md:pl-3x">
           <a href="/" className="flex">
             <svg
               width="73"
@@ -81,7 +81,7 @@ export default function Header() {
               />
             </svg>
           </a>
-          <div className="gap-2x hidden md:flex">
+          <div className="hidden gap-2x md:flex">
             <a href="/" className={linkClass}>
               Home
             </a>
@@ -96,17 +96,17 @@ export default function Header() {
             <a href="/about" className={linkClass}>
               About
             </a>
-            <a href="/journal" className={linkClass}>
+            <a href="/journal/news" className={linkClass}>
               Journal
             </a>
           </div>
         </div>
-        <div className="gap-2x hidden md:flex z-[11] py-2x pr-2x md:pr-3x w-full justify-end">
+        <div className="z-[11] hidden w-full justify-end gap-2x py-2x pr-2x md:flex md:pr-3x">
           <button className={linkClass}>EN</button>
           <button className={linkClass}>Login</button>
           <button className={linkClass}>Cart (0)</button>
         </div>
-        <div className="flex gap-2x md:hidden z-[11] py-2x pr-2x">
+        <div className="z-[11] flex gap-2x py-2x pr-2x md:hidden">
           <svg
             width="17"
             height="20"
@@ -152,14 +152,14 @@ export default function Header() {
           id="shop-dropdown-header"
           className={`${
             isShopDropdownActive
-              ? "max-h-[200px] py-3x border-b"
-              : "max-h-[0px] opacity-0 py-0"
-          } justify-between px-3x top-[54px] overflow-hidden backdrop-blur-lg w-full absolute left-0 right-0 border-stroke-black border-solid transition-all duration-300 ease-in-out delay-75 bg-background-sand flex`}
+              ? "max-h-[200px] border-b py-3x"
+              : "max-h-[0px] py-0 opacity-0"
+          } absolute left-0 right-0 top-[54px] flex w-full justify-between overflow-hidden border-solid border-stroke-black bg-background-sand px-3x backdrop-blur-lg transition-all delay-75 duration-300 ease-in-out`}
           onMouseOver={() => setIsShopDropdownActive(true)}
           onMouseLeave={() => setIsShopDropdownActive(false)}
         >
           <div className="flex gap-2x">
-            <div className="flex flex-col gap-1x min-w-[175px]">
+            <div className="flex min-w-[175px] flex-col gap-1x">
               <h3 className="text-heading-xs">Main products</h3>
               <div className="flex flex-col gap-[4px]">
                 <a href="/" className={`${linkClass} text-body-sm`}>
@@ -176,7 +176,7 @@ export default function Header() {
                 </a>
               </div>
             </div>
-            <div className="flex flex-col gap-1x min-w-[175px]">
+            <div className="flex min-w-[175px] flex-col gap-1x">
               <h3 className="text-heading-xs">Other</h3>
               <div className="flex flex-col gap-[4px]">
                 <a href="/" className={`${linkClass} text-body-sm`}>

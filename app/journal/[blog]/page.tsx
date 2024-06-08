@@ -13,7 +13,7 @@ export default async function Journal({
       id: blog.id,
       articles: blog.articles.nodes.map((article: any) => {
         return {
-          id: article.id,
+          id: article.id.split("/").pop(),
           title: article.title,
           content: article.content,
           image: article.image.url,

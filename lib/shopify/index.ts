@@ -113,3 +113,25 @@ export async function getAllBlogsData() {
     variables: {},
   });
 }
+export async function getSingleArticleData(id: string) {
+  return shopifyFetch({
+    query: `query ($id: ID!) {  
+      article(id: $id) {
+        handle
+        content
+        excerpt
+        author {
+          name
+        }
+        image {
+          url
+        }
+        publishedAt
+        title
+      }
+    }`,
+    variables: {
+      id,
+    },
+  });
+}

@@ -49,7 +49,7 @@ export default function Blog({
       <div className="grid grid-cols-1 gap-2x p-2x md:grid-cols-3 md:p-3x">
         {filteredBlog[0].articles.map((article: any, index: number) => (
           <div key={index} className="flex w-full flex-col gap-2x pb-3x">
-            <Link href={`/journal/article/${article.handle}`}>
+            <Link href={`/journal/article/${article.id}`}>
               <RenderImage
                 src={article.image}
                 alt="Article Image"
