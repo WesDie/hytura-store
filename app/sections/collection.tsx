@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
-import RenderImage from "../components/render-Image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import ProductButton from "../components/product-button";
+
+import { notFound } from "next/navigation";
 
 export default function Collection({
   collectionData,
@@ -31,7 +31,7 @@ export default function Collection({
     router.push(`/collection/${title.toLowerCase()}`);
   };
 
-  if (!filteredCollection.length) return null;
+  if (!filteredCollection.length) return notFound();
 
   return (
     <section className={`flex w-full flex-col`}>

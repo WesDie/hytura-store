@@ -1,8 +1,11 @@
 "use client";
 import { useState } from "react";
+
 import RenderImage from "../components/render-Image";
 import Link from "next/link";
+
 import { useRouter } from "next/navigation";
+import { notFound } from "next/navigation";
 
 export default function Blog({
   blogData,
@@ -25,7 +28,7 @@ export default function Blog({
     router.push(`/journal/${title.toLowerCase()}`);
   };
 
-  if (!filteredBlog.length) return null;
+  if (!filteredBlog.length) return notFound();
 
   return (
     <section className={`flex w-full flex-col border-b border-stroke-gray`}>
