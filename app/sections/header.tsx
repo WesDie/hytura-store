@@ -96,6 +96,9 @@ export default function Header() {
             <a href="/about" className={linkClass}>
               About
             </a>
+            <a href="/journal" className={linkClass}>
+              Journal
+            </a>
           </div>
         </div>
         <div className="gap-2x hidden md:flex z-[11] py-2x pr-2x md:pr-3x w-full justify-end">

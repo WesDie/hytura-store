@@ -1,25 +1,22 @@
-import Hero from "./sections/hero";
-import ProductSlider from "./sections/product-slider";
-import TextImage from "./sections/text-and-image";
-import BaseText from "./sections/base-text";
-import Faq from "./sections/faq";
+import Hero from "../sections/hero";
+import TextImage from "../sections/text-and-image";
+import BaseText from "../sections/base-text";
 
-export default async function Home() {
+export default async function About() {
   return (
     <main>
       <Hero
         direction="right"
-        title="High quality liquids like never before."
-        buttonTitle="Shop now"
-        imageSrc="/hero.png"
+        title="We value the health of your plants."
+        buttonTitle="Explore"
+        imageSrc="/about.png"
       />
-      <ProductSlider />
       <TextImage
         direction="left"
         title="Enhanced Growth"
         description="Our plant water collection is meticulously crafted to meet the diverse needs of various plant species. From succulents to tropical plants, our specialized water formulations help you achieve the healthiest growth possible. Browse through our selection and find the perfect match for your plant care routine."
         buttonTitle="Shop now"
-        imageSrc="/hero2.png"
+        imageSrc="/about.png"
       />
       <BaseText
         alignment="text-center"
@@ -32,9 +29,8 @@ export default async function Home() {
         title="It has never been easier"
         description="Our plant water collection is meticulously crafted to meet the diverse needs of various plant species. From succulents to tropical plants, our specialized water formulations help you achieve the healthiest growth possible. Browse through our selection and find the perfect match for your plant care routine."
         buttonTitle="Shop all products"
-        imageSrc="/hero2.png"
+        imageSrc="/about.png"
       />
-      <Faq direction="right" />
     </main>
   );
 }

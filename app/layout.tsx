@@ -2,9 +2,13 @@ import type { Metadata } from "next";
 import { Kaisei_Tokumin } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
-import Header from "./sections/header";
-import SmoothScroller from "./components/smooth-scoller";
+
 import type { Viewport } from "next";
+
+import SmoothScroller from "./components/smooth-scoller";
+
+import Header from "./sections/header";
+import Footer from "./sections/footer";
 
 export const viewport: Viewport = {
   themeColor: "#FBF9EE",
@@ -38,6 +42,7 @@ export default function RootLayout({
         <SmoothScroller />
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

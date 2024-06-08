@@ -87,3 +87,29 @@ export async function getAllProducts() {
     variables: {},
   });
 }
+
+export async function getAllBlogsData() {
+  return shopifyFetch({
+    query: `{
+      blogs(first: 10) {
+        nodes {
+          articles(first: 10) {
+            nodes {
+              id
+              handle
+              image {
+                url
+              }
+              title
+              content(truncateAt: 150)
+              publishedAt
+            }
+          }
+          title
+          id
+        }
+      }
+    }`,
+    variables: {},
+  });
+}
