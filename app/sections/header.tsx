@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import RenderImage from "../components/render-Image";
+import Link from "next/link";
 
 export default function Header() {
   const [isTop, setIsTop] = useState(false);
@@ -162,26 +163,32 @@ export default function Header() {
             <div className="flex min-w-[175px] flex-col gap-1x">
               <h3 className="text-heading-xs">Main products</h3>
               <div className="flex flex-col gap-[4px]">
-                <a href="/" className={`${linkClass} text-body-sm`}>
+                <Link
+                  href="/collection/all"
+                  className={`${linkClass} text-body-sm`}
+                >
                   All
-                </a>
-                <a href="/" className={`${linkClass} text-body-sm`}>
-                  Tools
-                </a>
-                <a href="/" className={`${linkClass} text-body-sm`}>
-                  Product 1
-                </a>
-                <a href="/" className={`${linkClass} text-body-sm`}>
-                  Gardeners
-                </a>
+                </Link>
+                <Link
+                  href="/collection/home%20page"
+                  className={`${linkClass} text-body-sm`}
+                >
+                  Home page
+                </Link>
+                <Link
+                  href="/collection/sprays"
+                  className={`${linkClass} text-body-sm`}
+                >
+                  Sprays
+                </Link>
               </div>
             </div>
             <div className="flex min-w-[175px] flex-col gap-1x">
               <h3 className="text-heading-xs">Other</h3>
               <div className="flex flex-col gap-[4px]">
-                <a href="/" className={`${linkClass} text-body-sm`}>
+                <Link href="/" className={`${linkClass} text-body-sm`}>
                   Accessories
-                </a>
+                </Link>
               </div>
             </div>
           </div>

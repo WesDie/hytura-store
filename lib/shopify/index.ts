@@ -140,7 +140,7 @@ export async function getSingleArticleData(id: string) {
 export async function getAllCollections() {
   return shopifyFetch({
     query: `{
-      collections(first: 10) {
+      collections(first: 10, sortKey: TITLE) {
         nodes {
           handle
           id
