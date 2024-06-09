@@ -332,6 +332,38 @@ export async function createCart(itemId: string, quantity: string) {
   });
 }
 
+export async function updateCart(
+  cartId: string,
+  lines: { id: string; merchandiseId: string; quantity: number }[],
+) {
+  return shopifyFetch({
+    query: `
+      mutation editCartItems($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+        cartLinesUpdate(cartId: $cartId, lines: $lines) {
+          cart {
+            id
+            totalQuantity
+            estimatedCost {
+              totalAmount {
+                amount
+              }
+            }
+            lines(first: 10) {
+              nodes {
+                id
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: {
+      cartId,
+      lines,
+    },
+  });
+}
+
 export async function addToCart(
   cartId: string,
   lines: { merchandiseId: string; quantity: number }[],

@@ -1,11 +1,22 @@
 "use client";
 
 import RenderImage from "./render-Image";
-import { removeItem } from "./cart/actions";
+import { removeItem, updateItemQuantity } from "./cart/actions";
 
 export default function CartItem(itemData: any) {
   const item = itemData.itemData.node;
   const product = item.merchandise.product;
+
+  const payloadPlus = {
+    lineId: item.id,
+    variantId: item.merchandise.id,
+    quantity: item.quantity + 1,
+  };
+  const payloadMinus = {
+    lineId: item.id,
+    variantId: item.merchandise.id,
+    quantity: item.quantity - 1,
+  };
 
   return (
     <div className="flex h-[150px] w-full border-b border-stroke-gray md:h-[170px]">
@@ -25,16 +36,26 @@ export default function CartItem(itemData: any) {
         <div className="flex flex-col">
           <h3 className="text-heading-2xs">{product.title}</h3>
           <p className="text-body-sm text-text-light-gray">
-            € {product.priceRange.maxVariantPrice.amount}
+            € {item.cost.totalAmount.amount}
           </p>
         </div>
         <div className="flex w-full justify-between">
           <div className="flex w-[80px] border border-stroke-gray py-[2px]">
-            <button className="text-body-sm w-full">-</button>
+            <button
+              onClick={() => updateItemQuantity(payloadMinus)}
+              className="text-body-sm w-full"
+            >
+              -
+            </button>
             <span className="text-body-sm w-full text-center">
               {item.quantity}
             </span>
-            <button className="text-body-sm w-full">+</button>
+            <button
+              onClick={() => updateItemQuantity(payloadPlus)}
+              className="text-body-sm w-full"
+            >
+              +
+            </button>
           </div>
           <button className="text-link-sm" onClick={() => removeItem(item.id)}>
             Remove
