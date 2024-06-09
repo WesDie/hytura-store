@@ -51,12 +51,12 @@ export async function removeItem(lineId: string) {
   }
 }
 
-export async function getCartItems() {
+export async function getCartData() {
   const cartId = cookies().get("cartId")?.value;
   if (!cartId) {
     return [];
   }
 
   const cart = await getCart(cartId);
-  return cart.body.data.cart.lines.edges.map((line) => line);
+  return cart.body.data;
 }

@@ -1,5 +1,5 @@
 "use client";
-import { use, useEffect } from "react";
+import { useEffect } from "react";
 
 export default function CartHeader(cartData: any) {
   const cart = cartData.cartData;
@@ -9,7 +9,6 @@ export default function CartHeader(cartData: any) {
     if (cartDrawer) {
       cartDrawer.ariaHidden =
         cartDrawer.ariaHidden === "true" ? "false" : "true";
-      console.log(cartDrawer.getAttribute("aria-hidden"));
     }
   }
 
@@ -22,7 +21,7 @@ export default function CartHeader(cartData: any) {
   });
 
   return (
-    <div className="flex justify-between border-b border-stroke-gray px-4x py-2x">
+    <div className="flex justify-between border-b border-stroke-gray px-2x py-2x md:px-4x">
       <p className="text-heading-3xs">Cart ({cart.length})</p>
       <button className="text-link-sm" onClick={() => toggleCart()}>
         Close

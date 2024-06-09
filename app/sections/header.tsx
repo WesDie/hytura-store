@@ -123,27 +123,29 @@ export default function Header() {
           </button>
         </div>
         <div className="z-[11] flex gap-2x py-2x pr-2x md:hidden">
-          <svg
-            width="17"
-            height="20"
-            viewBox="0 0 17 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="my-auto"
-          >
-            <g clipPath="url(#clip0_179_843)">
-              <path
-                d="M12.5 4.5C12.5 2.29086 10.7091 0.5 8.5 0.5C6.29086 0.5 4.5 2.29086 4.5 4.5"
-                stroke="black"
-              />
-              <path d="M16.5 4.5H0.5V19.5H16.5V4.5Z" stroke="black" />
-            </g>
-            <defs>
-              <clipPath id="clip0_179_843">
-                <rect width="17" height="20" fill="white" />
-              </clipPath>
-            </defs>
-          </svg>
+          <button onClick={() => toggleCart()}>
+            <svg
+              width="17"
+              height="20"
+              viewBox="0 0 17 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="my-auto"
+            >
+              <g clipPath="url(#clip0_179_843)">
+                <path
+                  d="M12.5 4.5C12.5 2.29086 10.7091 0.5 8.5 0.5C6.29086 0.5 4.5 2.29086 4.5 4.5"
+                  stroke="black"
+                />
+                <path d="M16.5 4.5H0.5V19.5H16.5V4.5Z" stroke="black" />
+              </g>
+              <defs>
+                <clipPath id="clip0_179_843">
+                  <rect width="17" height="20" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+          </button>
           <svg
             width="20"
             height="16"

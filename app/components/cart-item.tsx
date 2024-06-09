@@ -8,7 +8,7 @@ export default function CartItem(itemData: any) {
   const product = item.merchandise.product;
 
   return (
-    <div className="flex h-[170px] w-full border-b border-stroke-gray">
+    <div className="flex h-[150px] w-full border-b border-stroke-gray md:h-[170px]">
       {product?.featuredImage?.url ? (
         <RenderImage
           src={product.featuredImage.url}
@@ -25,7 +25,7 @@ export default function CartItem(itemData: any) {
         <div className="flex flex-col">
           <h3 className="text-heading-2xs">{product.title}</h3>
           <p className="text-body-sm text-text-light-gray">
-            {product.priceRange.maxVariantPrice.amount}
+            € {product.priceRange.maxVariantPrice.amount}
           </p>
         </div>
         <div className="flex w-full justify-between">
