@@ -48,6 +48,15 @@ export default function Header() {
     };
   });
 
+  function toggleCart() {
+    const cartDrawer = document.getElementById("cart-drawer") as HTMLElement;
+    if (cartDrawer) {
+      cartDrawer.ariaHidden =
+        cartDrawer.ariaHidden === "true" ? "false" : "true";
+      console.log(cartDrawer.getAttribute("aria-hidden"));
+    }
+  }
+
   return (
     <>
       <div className="h-[86px]" id="empty-header-height"></div>
@@ -105,7 +114,13 @@ export default function Header() {
         <div className="z-[11] hidden w-full justify-end gap-2x py-2x pr-2x md:flex md:pr-3x">
           <button className={linkClass}>EN</button>
           <button className={linkClass}>Login</button>
-          <button className={linkClass}>Cart (0)</button>
+          <button
+            className={linkClass}
+            onClick={() => toggleCart()}
+            id="cart-counter"
+          >
+            Cart (0)
+          </button>
         </div>
         <div className="z-[11] flex gap-2x py-2x pr-2x md:hidden">
           <svg

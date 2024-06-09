@@ -1,13 +1,16 @@
-import { unstable_noStore as noStore } from "next/cache";
+import { TAGS } from "@/lib/constants";
 
 export async function shopifyFetch({
+  cache = "no-store",
   query,
   variables,
+  tags,
 }: {
+  cache?: RequestCache;
   query: string;
   variables: any;
+  tags?: string[];
 }) {
-  noStore();
   const endpoint = process.env.SHOPIFY_STORE_DOMAIN;
   const key = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
@@ -28,6 +31,8 @@ export async function shopifyFetch({
         ...(query && { query }),
         ...(variables && { variables }),
       }),
+      cache,
+      ...(tags && { next: { tags } }),
     });
 
     const body = await result.json();
@@ -68,6 +73,11 @@ export async function getAllProducts() {
               nodes {
                 id
                 url
+              }
+            }
+            variants(first: 1) {
+              nodes {
+                id
               }
             }
             media(first: 10) {
@@ -179,5 +189,206 @@ export async function getAllCollections() {
       }
     }`,
     variables: {},
+  });
+}
+
+export async function getCart(id: string) {
+  return shopifyFetch({
+    query: `query ($id: ID!) {
+      cart(id: $id) {
+        id
+        checkoutUrl
+        cost {
+          subtotalAmount {
+            amount
+            currencyCode
+          }
+          totalAmount {
+            amount
+            currencyCode
+          }
+          totalTaxAmount {
+            amount
+            currencyCode
+          }
+        }
+        lines(first: 100) {
+          edges {
+            node {
+              id
+              quantity
+              cost {
+                totalAmount {
+                  amount
+                  currencyCode
+                }
+              }
+              merchandise {
+                ... on ProductVariant {
+                  id
+                  title
+                  selectedOptions {
+                    name
+                    value
+                  }
+                  product {
+                    id
+                    handle
+                    availableForSale
+                    title
+                    description
+                    descriptionHtml
+                    options {
+                      id
+                      name
+                      values
+                    }
+                    priceRange {
+                      maxVariantPrice {
+                        amount
+                        currencyCode
+                      }
+                      minVariantPrice {
+                        amount
+                        currencyCode
+                      }
+                    }
+                    variants(first: 250) {
+                      edges {
+                        node {
+                          id
+                          title
+                          availableForSale
+                          selectedOptions {
+                            name
+                            value
+                          }
+                          price {
+                            amount
+                            currencyCode
+                          }
+                        }
+                      }
+                    }
+                    featuredImage {
+                      url
+                      altText
+                      width
+                      height
+                    }
+                    images(first: 20) {
+                      edges {
+                        node {
+                          url
+                          altText
+                          width
+                          height
+                        }
+                      }
+                    }
+                    seo {
+                      description
+                      title
+                    }
+                    tags
+                    updatedAt
+                  }
+                }
+              }
+            }
+          }
+        }
+        totalQuantity
+      }
+    }`,
+    variables: {
+      id,
+    },
+    tags: [TAGS.cart],
+  });
+}
+
+export async function createCart(itemId: string, quantity: string) {
+  return shopifyFetch({
+    query: `
+      mutation createCart($lineItems: [CartLineInput!]) {
+        cartCreate(input: { lines: $lineItems }) {
+          cart {
+            id
+          }
+        }
+      }
+    `,
+    variables: {
+      cartInput: {
+        lines: [
+          {
+            quantity: parseInt(quantity),
+            merchandiseId: itemId,
+          },
+        ],
+      },
+    },
+  });
+}
+
+export async function addToCart(
+  cartId: string,
+  lines: { merchandiseId: string; quantity: number }[],
+) {
+  return shopifyFetch({
+    query: `
+      mutation addCart($id: ID!, $lineItems: [CartLineInput!]!) {
+        cartLinesAdd(cartId: $id, lines: $lineItems) {
+          cart {
+            id
+            totalQuantity
+            estimatedCost {
+              totalAmount {
+                amount
+              }
+            }
+            lines(first: 10) {
+              nodes {
+                id
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: {
+      id: cartId,
+      lineItems: lines,
+    },
+  });
+}
+
+export async function removeFromCart(cartId: string, lineIds: string[]) {
+  return shopifyFetch({
+    query: `
+      mutation removeFromCart($cartId: ID!, $lineIds: [ID!]!) {
+        cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+          cart {
+            id
+            totalQuantity
+            estimatedCost {
+              totalAmount {
+                amount
+              }
+            }
+            lines(first: 10) {
+              nodes {
+                id
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: {
+      cartId,
+      lineIds,
+    },
   });
 }
