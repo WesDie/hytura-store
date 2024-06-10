@@ -12,7 +12,7 @@ import {
 import { TAGS } from "@/lib/constants";
 import { revalidateTag } from "next/cache";
 
-export async function addItem(selectedVariantId: string) {
+export async function addItem(selectedVariantId: string, quantity: number = 1) {
   let cartId = cookies().get("cartId")?.value;
   let cart;
 
@@ -34,7 +34,7 @@ export async function addItem(selectedVariantId: string) {
 
   try {
     await addToCart(cartId, [
-      { merchandiseId: selectedVariantId, quantity: 1 },
+      { merchandiseId: selectedVariantId, quantity: quantity },
     ]);
     revalidateTag(TAGS.cart);
   } catch (e) {

@@ -1,6 +1,6 @@
 import { TAGS } from "@/lib/constants";
 import { getCartQuery } from "./queries/cart";
-import { getAllProductsQuery } from "./queries/product";
+import { getAllProductsQuery, getSingleProductQuery } from "./queries/product";
 import { getAllBlogsQuery, getSingleArticleQuery } from "./queries/blog";
 import {
   createCartMutation,
@@ -83,6 +83,15 @@ export async function getSingleArticleData(id: string) {
     query: getSingleArticleQuery,
     variables: {
       id,
+    },
+  });
+}
+
+export async function getSingleProductData(handle: string) {
+  return shopifyFetch({
+    query: getSingleProductQuery,
+    variables: {
+      handle,
     },
   });
 }

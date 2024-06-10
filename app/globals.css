@@ -42,17 +42,17 @@
   }
 
   .text-link-sm {
-    @apply font-generalsans text-[0.875rem] underline text-text-black;
+    @apply font-generalsans text-[0.875rem] text-text-black underline;
   }
   .text-link-xs {
-    @apply font-generalsans text-[0.75rem] underline text-text-black;
+    @apply font-generalsans text-[0.75rem] text-text-black underline;
   }
 
   .button-primary {
-    @apply text-body-sm text-text-white px-2x pt-[7px] pb-[9px] bg-background-black hover:bg-black transition-all;
+    @apply text-body-sm border border-background-black bg-background-black px-2x pb-[9px] pt-[7px] text-text-white transition-all hover:bg-black;
   }
   .button-secondary {
-    @apply text-body-sm text-text-black px-2x pt-[7px] pb-[9px] border border-solid border-background-black hover:bg-background-black hover:text-text-white transition-all;
+    @apply text-body-sm border border-solid border-background-black px-2x pb-[9px] pt-[7px] text-text-black transition-all hover:bg-background-black hover:text-text-white;
 
     svg {
       @apply my-auto transition-all;

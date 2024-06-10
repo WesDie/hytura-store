@@ -12,3 +12,12 @@ export const getAllProductsQuery = `
   }
   ${productFragment}
 `;
+
+export const getSingleProductQuery = `
+  query ($handle: String!) {  
+    product(handle: $handle) {
+      ...product
+    }
+  }
+  ${productFragment}
+`;

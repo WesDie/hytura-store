@@ -34,7 +34,9 @@ export default function CartItem(itemData: any) {
       )}
       <div className="flex w-full flex-col justify-between p-2x">
         <div className="flex flex-col">
-          <h3 className="text-heading-2xs">{product.title}</h3>
+          <h3 className="text-heading-2xs">
+            {product.title} - {item.merchandise.title}
+          </h3>
           <p className="text-body-sm text-text-light-gray">
             € {item.cost.totalAmount.amount}
           </p>

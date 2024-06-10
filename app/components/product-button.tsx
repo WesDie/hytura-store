@@ -3,6 +3,7 @@
 import RenderImage from "./render-Image";
 import { useState, useRef } from "react";
 import { addItem } from "./cart/actions";
+import Link from "next/link";
 
 export default function ProductButton(product: { product: any[] }) {
   const productItem = product.product;
@@ -10,7 +11,7 @@ export default function ProductButton(product: { product: any[] }) {
   const videoRef = useRef(null);
 
   const productHoverToggle = (hover) => {
-    if (product.product.media.edges[1]) {
+    if (productItem.media.edges[1]?.node?.sources) {
       setShowSecondProductImage(hover);
       if (hover) {
         videoRef.current.play();
@@ -22,16 +23,18 @@ export default function ProductButton(product: { product: any[] }) {
   };
 
   return (
-    <div className="h-full w-full cursor-pointer bg-background-sand transition-colors">
+    <Link
+      href={"/product/" + productItem.handle}
+      className="h-full w-full cursor-pointer bg-background-sand transition-colors"
+    >
       <div
         className="relative aspect-[29/27] w-full overflow-hidden md:aspect-[32/34]"
         onMouseEnter={() => productHoverToggle(true)}
         onMouseLeave={() => productHoverToggle(false)}
       >
-        {productItem.images.edges.map((node: any, index: number) => (
+        {productItem.featuredImage && (
           <RenderImage
-            key={index}
-            src={node.node.url}
+            src={productItem.featuredImage.url}
             alt={"product image"}
             width={500}
             height={500}
@@ -40,7 +43,7 @@ export default function ProductButton(product: { product: any[] }) {
             }`}
             imageClassName="object-cover w-full h-full"
           />
-        ))}
+        )}
         <video
           autoPlay
           muted
@@ -51,7 +54,7 @@ export default function ProductButton(product: { product: any[] }) {
         >
           <source
             src={`${
-              productItem.media.edges[1]
+              productItem.media.edges[1]?.node?.sources !== undefined
                 ? productItem.media.edges[1].node.sources[0].url
                 : ""
             }`}
@@ -78,6 +81,6 @@ export default function ProductButton(product: { product: any[] }) {
           Add
         </button>
       </div>
-    </div>
+    </Link>
   );
 }
