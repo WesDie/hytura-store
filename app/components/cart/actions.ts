@@ -84,7 +84,7 @@ export async function updateItemQuantity(payload: {
         quantity,
       },
     ]);
-    console.log("revalidating");
+
     revalidateTag(TAGS.cart);
   } catch (e) {
     return "Error updating item quantity";

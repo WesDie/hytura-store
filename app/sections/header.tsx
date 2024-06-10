@@ -53,7 +53,6 @@ export default function Header() {
     if (cartDrawer) {
       cartDrawer.ariaHidden =
         cartDrawer.ariaHidden === "true" ? "false" : "true";
-      console.log(cartDrawer.getAttribute("aria-hidden"));
     }
   }
 

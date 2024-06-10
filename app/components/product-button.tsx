@@ -10,7 +10,7 @@ export default function ProductButton(product: { product: any[] }) {
   const videoRef = useRef(null);
 
   const productHoverToggle = (hover) => {
-    if (product.product.media.nodes[1]) {
+    if (product.product.media.edges[1]) {
       setShowSecondProductImage(hover);
       if (hover) {
         videoRef.current.play();
@@ -28,10 +28,10 @@ export default function ProductButton(product: { product: any[] }) {
         onMouseEnter={() => productHoverToggle(true)}
         onMouseLeave={() => productHoverToggle(false)}
       >
-        {productItem.images.nodes.map((node: any) => (
+        {productItem.images.edges.map((node: any, index: number) => (
           <RenderImage
-            key={node.id}
-            src={node.url}
+            key={index}
+            src={node.node.url}
             alt={"product image"}
             width={500}
             height={500}
@@ -51,8 +51,8 @@ export default function ProductButton(product: { product: any[] }) {
         >
           <source
             src={`${
-              product.product.media.nodes[1]
-                ? product.product.media.nodes[1].sources[0].url
+              productItem.media.edges[1]
+                ? productItem.media.edges[1].node.sources[0].url
                 : ""
             }`}
             className="h-full w-full object-cover"
@@ -73,7 +73,7 @@ export default function ProductButton(product: { product: any[] }) {
         </div>
         <button
           className="text-body-sm my-auto h-[35px] border border-solid border-stroke-black bg-background-black px-2x text-text-white transition-colors hover:bg-transparent hover:text-text-black"
-          onClick={() => addItem(productItem.variants.nodes[0].id)}
+          onClick={() => addItem(productItem.variants.edges[0].node.id)}
         >
           Add
         </button>

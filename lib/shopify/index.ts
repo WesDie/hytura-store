@@ -1,4 +1,14 @@
 import { TAGS } from "@/lib/constants";
+import { getCartQuery } from "./queries/cart";
+import { getAllProductsQuery } from "./queries/product";
+import { getAllBlogsQuery, getSingleArticleQuery } from "./queries/blog";
+import {
+  createCartMutation,
+  updateCartMutation,
+  addToCartMutation,
+  removeFromCartMutation,
+} from "./mutations/cart";
+import { getAllCollectionsQuery } from "./queries/collection";
 
 export async function shopifyFetch({
   cache = "no-store",
@@ -56,91 +66,21 @@ export async function shopifyFetch({
 
 export async function getAllProducts() {
   return shopifyFetch({
-    query: `{
-      products(first: 10, sortKey: TITLE) {
-        edges {
-          node {
-            id
-            handle
-            title
-            priceRange {
-              minVariantPrice {
-                amount
-                currencyCode
-              }
-            }
-            images(first: 10) {
-              nodes {
-                id
-                url
-              }
-            }
-            variants(first: 1) {
-              nodes {
-                id
-              }
-            }
-            media(first: 10) {
-              nodes {
-                ... on Video {
-                  id
-                  sources {
-                    url
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }`,
+    query: getAllProductsQuery,
     variables: {},
   });
 }
 
 export async function getAllBlogsData() {
   return shopifyFetch({
-    query: `{
-      blogs(first: 10) {
-        nodes {
-          articles(first: 10) {
-            nodes {
-              id
-              handle
-              image {
-                url
-              }
-              title
-              content(truncateAt: 150)
-              publishedAt
-            }
-          }
-          title
-          id
-        }
-      }
-    }`,
+    query: getAllBlogsQuery,
     variables: {},
   });
 }
 
 export async function getSingleArticleData(id: string) {
   return shopifyFetch({
-    query: `query ($id: ID!) {  
-      article(id: $id) {
-        handle
-        content
-        excerpt
-        author {
-          name
-        }
-        image {
-          url
-        }
-        publishedAt
-        title
-      }
-    }`,
+    query: getSingleArticleQuery,
     variables: {
       id,
     },
@@ -149,158 +89,14 @@ export async function getSingleArticleData(id: string) {
 
 export async function getAllCollections() {
   return shopifyFetch({
-    query: `{
-      collections(first: 10, sortKey: TITLE) {
-        nodes {
-          handle
-          id
-          title
-          description
-          products(first: 10) {
-            nodes {
-              id
-              handle
-              title
-              priceRange {
-                minVariantPrice {
-                  amount
-                  currencyCode
-                }
-              }
-              images(first: 10) {
-                nodes {
-                  id
-                  url
-                }
-              }
-              media(first: 10) {
-                nodes {
-                  ... on Video {
-                    id
-                    sources {
-                      url
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }`,
+    query: getAllCollectionsQuery,
     variables: {},
   });
 }
 
 export async function getCart(id: string) {
   return shopifyFetch({
-    query: `query ($id: ID!) {
-      cart(id: $id) {
-        id
-        checkoutUrl
-        cost {
-          subtotalAmount {
-            amount
-            currencyCode
-          }
-          totalAmount {
-            amount
-            currencyCode
-          }
-          totalTaxAmount {
-            amount
-            currencyCode
-          }
-        }
-        lines(first: 100) {
-          edges {
-            node {
-              id
-              quantity
-              cost {
-                totalAmount {
-                  amount
-                  currencyCode
-                }
-              }
-              merchandise {
-                ... on ProductVariant {
-                  id
-                  title
-                  selectedOptions {
-                    name
-                    value
-                  }
-                  product {
-                    id
-                    handle
-                    availableForSale
-                    title
-                    description
-                    descriptionHtml
-                    options {
-                      id
-                      name
-                      values
-                    }
-                    priceRange {
-                      maxVariantPrice {
-                        amount
-                        currencyCode
-                      }
-                      minVariantPrice {
-                        amount
-                        currencyCode
-                      }
-                    }
-                    variants(first: 250) {
-                      edges {
-                        node {
-                          id
-                          title
-                          availableForSale
-                          selectedOptions {
-                            name
-                            value
-                          }
-                          price {
-                            amount
-                            currencyCode
-                          }
-                        }
-                      }
-                    }
-                    featuredImage {
-                      url
-                      altText
-                      width
-                      height
-                    }
-                    images(first: 20) {
-                      edges {
-                        node {
-                          url
-                          altText
-                          width
-                          height
-                        }
-                      }
-                    }
-                    seo {
-                      description
-                      title
-                    }
-                    tags
-                    updatedAt
-                  }
-                }
-              }
-            }
-          }
-        }
-        totalQuantity
-      }
-    }`,
+    query: getCartQuery,
     variables: {
       id,
     },
@@ -310,15 +106,7 @@ export async function getCart(id: string) {
 
 export async function createCart(itemId: string, quantity: string) {
   return shopifyFetch({
-    query: `
-      mutation createCart($lineItems: [CartLineInput!]) {
-        cartCreate(input: { lines: $lineItems }) {
-          cart {
-            id
-          }
-        }
-      }
-    `,
+    query: createCartMutation,
     variables: {
       cartInput: {
         lines: [
@@ -337,26 +125,7 @@ export async function updateCart(
   lines: { id: string; merchandiseId: string; quantity: number }[],
 ) {
   return shopifyFetch({
-    query: `
-      mutation editCartItems($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
-        cartLinesUpdate(cartId: $cartId, lines: $lines) {
-          cart {
-            id
-            totalQuantity
-            estimatedCost {
-              totalAmount {
-                amount
-              }
-            }
-            lines(first: 10) {
-              nodes {
-                id
-              }
-            }
-          }
-        }
-      }
-    `,
+    query: updateCartMutation,
     variables: {
       cartId,
       lines,
@@ -369,26 +138,7 @@ export async function addToCart(
   lines: { merchandiseId: string; quantity: number }[],
 ) {
   return shopifyFetch({
-    query: `
-      mutation addCart($id: ID!, $lineItems: [CartLineInput!]!) {
-        cartLinesAdd(cartId: $id, lines: $lineItems) {
-          cart {
-            id
-            totalQuantity
-            estimatedCost {
-              totalAmount {
-                amount
-              }
-            }
-            lines(first: 10) {
-              nodes {
-                id
-              }
-            }
-          }
-        }
-      }
-    `,
+    query: addToCartMutation,
     variables: {
       id: cartId,
       lineItems: lines,
@@ -398,26 +148,7 @@ export async function addToCart(
 
 export async function removeFromCart(cartId: string, lineIds: string[]) {
   return shopifyFetch({
-    query: `
-      mutation removeFromCart($cartId: ID!, $lineIds: [ID!]!) {
-        cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
-          cart {
-            id
-            totalQuantity
-            estimatedCost {
-              totalAmount {
-                amount
-              }
-            }
-            lines(first: 10) {
-              nodes {
-                id
-              }
-            }
-          }
-        }
-      }
-    `,
+    query: removeFromCartMutation,
     variables: {
       cartId,
       lineIds,

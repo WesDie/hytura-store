@@ -13,10 +13,19 @@ export default function CartHeader(cartData: any) {
   }
 
   useEffect(() => {
+    let cartTotalCount = 0;
+
+    cart.map((item: any) => {
+      cartTotalCount += item.node.quantity;
+    });
+
     const cartCounterElement = document.getElementById("cart-counter");
     if (cartCounterElement) {
       cartCounterElement.innerHTML =
-        cartCounterElement?.innerHTML.split(" ")[0] + " (" + cart.length + ")";
+        cartCounterElement?.innerHTML.split(" ")[0] +
+        " (" +
+        cartTotalCount +
+        ")";
     }
   });
 

@@ -15,7 +15,10 @@ export default async function Journal({
         return {
           id: article.id.split("/").pop(),
           title: article.title,
-          content: article.content,
+          content:
+            article.content.length > 150
+              ? article.content.substring(0, 150).concat("...")
+              : article.content,
           image: article.image.url,
           handle: article.handle,
           publishedAt: article.publishedAt,
