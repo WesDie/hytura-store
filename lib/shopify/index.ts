@@ -36,6 +36,7 @@ import {
   Article,
   Blog,
 } from "./types";
+import { getPageQuery } from "./queries/page";
 
 export async function shopifyFetch<T>({
   cache = "no-store",
@@ -248,6 +249,17 @@ export async function getSingleProductData(handle: string): Promise<Product> {
   });
 
   return reshapeProduct(res.body.data.product);
+}
+
+export async function getPage(handle: string): Promise<Page> {
+  const res = await shopifyFetch<ShopifyPageOperation>({
+    query: getPageQuery,
+    variables: {
+      handle,
+    },
+  });
+
+  return res.body.data.pageByHandle;
 }
 
 export async function getAllCollections(): Promise<Collection[]> {

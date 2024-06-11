@@ -26,7 +26,7 @@ export default function ProductButton({ product }: { product: Product }) {
     <div className="h-full w-full bg-background-sand transition-colors">
       <Link
         href={"/product/" + product.handle}
-        className="relative flex aspect-[29/27] h-full w-full cursor-pointer overflow-hidden md:aspect-[32/34]"
+        className="relative flex aspect-[29/27] w-full cursor-pointer overflow-hidden md:aspect-[32/34]"
         onMouseEnter={() => productHoverToggle(true)}
         onMouseLeave={() => productHoverToggle(false)}
       >

@@ -10,19 +10,15 @@ export default async function Footer() {
       links: [
         {
           title: "All products",
-          href: "/",
+          href: "/collection/all",
         },
         {
-          title: "The gardener",
-          href: "/",
+          title: "Home page",
+          href: "/collection/home%20page",
         },
         {
-          title: "Accesories",
-          href: "/",
-        },
-        {
-          title: "Our values",
-          href: "/",
+          title: "Sprays",
+          href: "/collection/sprays",
         },
       ],
     },
@@ -31,19 +27,19 @@ export default async function Footer() {
       links: [
         {
           title: "Shipping & returns",
-          href: "/",
+          href: "/page/shipping-returns",
         },
         {
           title: "Contact us",
-          href: "/",
+          href: "/page/Contact%20us",
         },
         {
           title: "FAQ",
-          href: "/",
+          href: "/page/faq",
         },
         {
-          title: "Blog",
-          href: "/",
+          title: "Journal",
+          href: "/journal/news",
         },
       ],
     },
@@ -52,11 +48,7 @@ export default async function Footer() {
       links: [
         {
           title: "About",
-          href: "/",
-        },
-        {
-          title: "Contact",
-          href: "/",
+          href: "/about",
         },
       ],
     },
@@ -64,12 +56,12 @@ export default async function Footer() {
 
   return (
     <footer className="flex flex-col">
-      <div className="flex flex-col-reverse md:flex-row justify-between px-2x py-5x md:px-3x md:py-8x gap-3x border-b border-solid border-stroke-gray">
-        <div className="grid-cols-2 w-full md:w-fit grid md:flex gap-3x md:gap-2x">
+      <div className="flex flex-col-reverse justify-between gap-3x border-b border-solid border-stroke-gray px-2x py-5x md:flex-row md:px-3x md:py-8x">
+        <div className="grid w-full grid-cols-2 gap-3x md:flex md:w-fit md:gap-2x">
           {footerLinks.map((section) => (
             <div
               key={section.title}
-              className="w-full md:w-fit md:min-w-[190px] flex flex-col gap-2x"
+              className="flex w-full flex-col gap-2x md:w-fit md:min-w-[190px]"
             >
               <h1 className="text-heading-2xs md:text-heading-xs">
                 {section.title}
@@ -89,29 +81,29 @@ export default async function Footer() {
           ))}
         </div>
         <div className="flex flex-col gap-1x">
-          <div className="flex flex-col gap-2x w-full">
+          <div className="flex w-full flex-col gap-2x">
             <label className="text-heading-2xs md:text-heading-xs">
               Sign up for our newsletter
             </label>
-            <div className="flex gap-1x w-full">
+            <div className="flex w-full gap-1x">
               <input
-                className="w-full text-body-sm appearance-none border border-solid text-text-black px-2x py-1x md:w-[278px] outline-none border-stroke-black focus:border-stroke-black placeholder-shown:border-stroke-light-gray transition-colors bg-transparent"
+                className="text-body-sm w-full appearance-none border border-solid border-stroke-black bg-transparent px-2x py-1x text-text-black outline-none transition-colors placeholder-shown:border-stroke-light-gray focus:border-stroke-black md:w-[278px]"
                 placeholder="Email"
               />
               <button className="button-primary min-w-max">Sign up</button>
             </div>
           </div>
-          <p className="text-body-xs text-text-light-gray w-full md:max-w-[380px]">
+          <p className="text-body-xs w-full text-text-light-gray md:max-w-[380px]">
             Sign up for the latest news about deals, announcements or products
             to stay up to date
           </p>
         </div>
       </div>
-      <div className="flex justify-between p-2x md:py-3x md:px-4x">
+      <div className="flex justify-between p-2x md:px-4x md:py-3x">
         <p className="text-heading-4xs md:text-heading-3xs text-text-black">
           © Hytura 2024
         </p>
-        <p className="text-heading-3xs text-text-light-gray hidden md:block">
+        <p className="text-heading-3xs hidden text-text-light-gray md:block">
           Made by{" "}
           <Link href={"https://www.wesdieleman.com"} className="underline">
             Wes Dieleman
