@@ -4,14 +4,14 @@ import RenderImage from "./render-Image";
 import { useState, useRef } from "react";
 import { addItem } from "./cart/actions";
 import Link from "next/link";
+import { Product } from "lib/shopify/types";
 
-export default function ProductButton(product: { product: any[] }) {
-  const productItem = product.product;
+export default function ProductButton({ product }: { product: Product }) {
   const [showSecondProductImage, setShowSecondProductImage] = useState(false);
   const videoRef = useRef(null);
 
   const productHoverToggle = (hover) => {
-    if (productItem.media.edges[1]?.node?.sources) {
+    if (product.media[1]?.sources) {
       setShowSecondProductImage(hover);
       if (hover) {
         videoRef.current.play();
@@ -23,18 +23,16 @@ export default function ProductButton(product: { product: any[] }) {
   };
 
   return (
-    <Link
-      href={"/product/" + productItem.handle}
-      className="h-full w-full cursor-pointer bg-background-sand transition-colors"
-    >
-      <div
-        className="relative aspect-[29/27] w-full overflow-hidden md:aspect-[32/34]"
+    <div className="h-full w-full bg-background-sand transition-colors">
+      <Link
+        href={"/product/" + product.handle}
+        className="relative flex aspect-[29/27] h-full w-full cursor-pointer overflow-hidden md:aspect-[32/34]"
         onMouseEnter={() => productHoverToggle(true)}
         onMouseLeave={() => productHoverToggle(false)}
       >
-        {productItem.featuredImage && (
+        {product.featuredImage && (
           <RenderImage
-            src={productItem.featuredImage.url}
+            src={product.featuredImage.url}
             alt={"product image"}
             width={500}
             height={500}
@@ -53,34 +51,33 @@ export default function ProductButton(product: { product: any[] }) {
           }`}
         >
           <source
-            src={`${
-              productItem.media.edges[1]?.node?.sources !== undefined
-                ? productItem.media.edges[1].node.sources[0].url
-                : ""
-            }`}
+            src={`${product.media[1]?.sources !== undefined ? product.media[1].sources[0].url : ""}`}
             className="h-full w-full object-cover"
           />
         </video>
-      </div>
+      </Link>
       <div className="flex justify-between p-2x">
-        <div className="flex flex-col gap-[4px]">
+        <Link
+          className="flex cursor-pointer flex-col gap-[4px]"
+          href={"/product/" + product.handle}
+        >
           <div className="flex gap-1x">
-            <h3 className="text-heading-2xs">{productItem.title}</h3>
+            <h3 className="text-heading-2xs">{product.title}</h3>
             <p className="text-body-sm mt-auto leading-[21px] text-text-light-gray">
-              € {productItem.priceRange.minVariantPrice.amount}
+              € {product.priceRange.minVariantPrice.amount}
             </p>
           </div>
           <p className="text-body-xs text-text-light-gray">
             Spray | Bottle | Instructions
           </p>
-        </div>
+        </Link>
         <button
           className="text-body-sm my-auto h-[35px] border border-solid border-stroke-black bg-background-black px-2x text-text-white transition-colors hover:bg-transparent hover:text-text-black"
-          onClick={() => addItem(productItem.variants.edges[0].node.id)}
+          onClick={() => addItem(product.variants[0].id)}
         >
           Add
         </button>
       </div>
-    </Link>
+    </div>
   );
 }

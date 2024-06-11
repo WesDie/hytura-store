@@ -8,8 +8,10 @@ const collectionFragment = `
     title
     updatedAt
     products(first: 10) {
-      nodes {
-        ...product
+      edges{
+        node {
+          ...product
+        }
       }
     }
     seo {

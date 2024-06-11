@@ -1,10 +1,9 @@
 "use client";
+import { Cart } from "@/lib/shopify/types";
 import Link from "next/link";
 
-export default function CartSummary(cartData: any) {
-  const cart = cartData.cartData.cart;
-
-  if (!cart.lines.edges.length) return null;
+export default function CartSummary({ cart }: { cart: Cart }) {
+  if (!cart.lines.length) return null;
 
   return (
     <div className="absolute bottom-0 left-0 right-0 flex flex-col gap-1x border-t border-stroke-gray px-3x py-2x">

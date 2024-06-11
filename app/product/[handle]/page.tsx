@@ -7,14 +7,13 @@ export default async function Product({
 }: {
   params: { handle: string };
 }) {
-  const response = await getSingleProductData(params.handle);
-  const product = response.body.data.product;
+  const product = await getSingleProductData(params.handle);
 
   return (
     <main>
       <div className="relative flex h-full border-b border-stroke-gray">
         <ProductMedia product={product} />
-        <ProductDetails productData={product} />
+        <ProductDetails product={product} />
       </div>
       <ProductSlider />
     </main>

@@ -6,12 +6,13 @@ import Link from "next/link";
 
 import { useRouter } from "next/navigation";
 import { notFound } from "next/navigation";
+import { Article, Blog } from "@/lib/shopify/types";
 
-export default function Blog({
+export default function MainBlog({
   blogData,
   currentBlog,
 }: {
-  blogData: any;
+  blogData: Blog[];
   currentBlog: string;
 }) {
   const router = useRouter();
@@ -19,11 +20,11 @@ export default function Blog({
     currentBlog[0].toUpperCase() + currentBlog.slice(1).toLowerCase(),
   );
   const [filteredBlog, setfilteredBlog] = useState(
-    blogData.filter((blog: any) => blog.title === blogName),
+    blogData.filter((blog: Blog) => blog.title === blogName),
   );
 
   const changeCurrentBlog = (title: string) => () => {
-    setfilteredBlog(blogData.filter((blog: any) => blog.title === title));
+    setfilteredBlog(blogData.filter((blog: Blog) => blog.title === title));
     setBlogName(title);
     router.push(`/journal/${title.toLowerCase()}`);
   };
@@ -38,7 +39,7 @@ export default function Blog({
           <h1 className="text-heading-lg md:text-heading-xl">{blogName}</h1>
         </div>
         <div className="flex gap-2x border-y border-solid border-stroke-gray p-1x px-2x py-2x md:px-4x">
-          {blogData.map((blog: any, index: number) => (
+          {blogData.map((blog: Blog, index: number) => (
             <div
               key={index}
               onClick={changeCurrentBlog(blog.title)}
@@ -50,11 +51,11 @@ export default function Blog({
         </div>
       </div>
       <div className="grid grid-cols-1 gap-2x p-2x md:grid-cols-3 md:p-3x">
-        {filteredBlog[0].articles.map((article: any, index: number) => (
+        {filteredBlog[0].articles.map((article: Article, index: number) => (
           <div key={index} className="flex w-full flex-col gap-2x pb-3x">
-            <Link href={`/journal/article/${article.id}`}>
+            <Link href={`/journal/article/${article.id.split("/").pop()}`}>
               <RenderImage
-                src={article.image}
+                src={article.image.url}
                 alt="Article Image"
                 width={336}
                 height={201}
@@ -62,9 +63,16 @@ export default function Blog({
                 imageClassName="object-cover w-full h-full"
               />
             </Link>
-            <Link href={"/"} className="flex flex-col gap-1x">
+            <Link
+              href={`/journal/article/${article.id.split("/").pop()}`}
+              className="flex flex-col gap-1x"
+            >
               <h2 className="text-heading-xs">{article.title}</h2>
-              <p className="text-body-xs">{article.content}</p>
+              <p className="text-body-xs">
+                {article.content.length > 150
+                  ? article.content.substring(0, 150).concat("...")
+                  : article.content}
+              </p>
             </Link>
           </div>
         ))}

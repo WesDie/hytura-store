@@ -11,6 +11,7 @@ import {
 } from "@/lib/shopify";
 import { TAGS } from "@/lib/constants";
 import { revalidateTag } from "next/cache";
+import { Cart } from "@/lib/shopify/types";
 
 export async function addItem(selectedVariantId: string, quantity: number = 1) {
   let cartId = cookies().get("cartId")?.value;
@@ -22,9 +23,9 @@ export async function addItem(selectedVariantId: string, quantity: number = 1) {
 
   if (!cartId || !cart) {
     cart = await createCart(selectedVariantId, 1);
-    cartId = cart.body.data.cartCreate.cart.id;
+    cartId = cart.id;
     if (cartId) {
-      cookies().set("cartId", cartId as string);
+      cookies().set("cartId", cartId);
     }
   }
 
@@ -91,12 +92,12 @@ export async function updateItemQuantity(payload: {
   }
 }
 
-export async function getCartData() {
+export async function getCartData(): Promise<Cart> {
   const cartId = cookies().get("cartId")?.value;
   if (!cartId) {
     return [];
   }
 
   const cart = await getCart(cartId);
-  return cart.body.data;
+  return cart;
 }

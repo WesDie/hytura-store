@@ -2,9 +2,10 @@
 
 import RenderImage from "./render-Image";
 import { removeItem, updateItemQuantity } from "./cart/actions";
+import { CartItem } from "@/lib/shopify/types";
 
-export default function CartItem(itemData: any) {
-  const item = itemData.itemData.node;
+export default function CartItemProduct(item: CartItem) {
+  console.log(item);
   const product = item.merchandise.product;
 
   const payloadPlus = {

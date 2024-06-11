@@ -1,15 +1,14 @@
+import { Image, Product } from "@/lib/shopify/types";
 import RenderImage from "./render-Image";
 
-export default function ProductMedia(product: any) {
-  const productImages = product.product.images.edges;
-
+export default function ProductMedia({ product }: { product: Product }) {
   return (
     <div className="flex w-full flex-col border-r border-stroke-gray">
       <div className="flex">
-        {productImages.slice(0, 1).map((node: any, index: number) => (
+        {product.images.slice(0, 1).map((image: Image, index: number) => (
           <RenderImage
             key={index}
-            src={node.node.url}
+            src={image.url}
             alt={"product image"}
             width={500}
             height={500}
@@ -18,10 +17,10 @@ export default function ProductMedia(product: any) {
           />
         ))}
         <div className="flex w-full flex-col">
-          {productImages.slice(1, 3).map((node: any, index: number) => (
+          {product.images.slice(1, 3).map((image: Image, index: number) => (
             <RenderImage
               key={index}
-              src={node.node.url}
+              src={image.url}
               alt={"product image"}
               width={500}
               height={500}
@@ -31,10 +30,10 @@ export default function ProductMedia(product: any) {
           ))}
         </div>
       </div>
-      {productImages.slice(3).map((node: any, index: number) => (
+      {product.images.slice(3).map((image: Image, index: number) => (
         <RenderImage
           key={index}
-          src={node.node.url}
+          src={image.url}
           alt={"product image"}
           width={500}
           height={500}

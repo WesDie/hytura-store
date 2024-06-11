@@ -4,8 +4,10 @@ import seoFragment from "./seo";
 const blogFragment = `
   fragment blog on Blog {
     articles(first: 10) {
-      nodes {
-        ...article
+      edges {
+        node {
+          ...article
+        }
       }
     }
     id

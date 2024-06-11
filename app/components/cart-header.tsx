@@ -1,8 +1,8 @@
 "use client";
+import { Cart, CartItem } from "@/lib/shopify/types";
 import { useEffect, useState } from "react";
 
-export default function CartHeader(cartData: any) {
-  const cart = cartData.cartData;
+export default function CartHeader({ cart }: { cart: Cart }) {
   const [cartTotalCount, setCartTotalCount] = useState(0);
 
   function toggleCart() {
@@ -15,8 +15,8 @@ export default function CartHeader(cartData: any) {
 
   useEffect(() => {
     let cartCount = 0;
-    cart.map((item: any) => {
-      cartCount += item.node.quantity;
+    cart.lines.map((item: CartItem) => {
+      cartCount += item.quantity;
     });
     setCartTotalCount(cartCount);
 

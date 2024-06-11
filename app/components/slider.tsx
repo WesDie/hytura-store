@@ -1,13 +1,12 @@
 // @ts-nocheck
 "use client";
 import { useState } from "react";
-
+import { Product } from "lib/shopify/types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-
 import ProductButton from "./product-button";
 
-export default function Slider(products: { products: any[] }) {
+export default function Slider({ products }: { products: Product[] }) {
   const [swiper, setSwiper] = useState(null);
 
   const nexto = () => {
@@ -20,7 +19,7 @@ export default function Slider(products: { products: any[] }) {
 
   return (
     <div>
-      <div className="w-full justify-between px-2x md:px-4x py-2x md:pt-3x md:pb-2x flex">
+      <div className="flex w-full justify-between px-2x py-2x md:px-4x md:pb-2x md:pt-3x">
         <h1 className="text-heading-xs md:text-heading-md">Our products</h1>
         <div className="flex gap-2x">
           <button onClick={prevto} className="rotate-180">
@@ -66,12 +65,12 @@ export default function Slider(products: { products: any[] }) {
           },
         }}
         onSwiper={setSwiper}
-        className=" border-y border-stroke-gray border-solid"
+        className="border-y border-solid border-stroke-gray"
       >
-        {products.products.map((product: any) => (
+        {products.map((product: Product) => (
           <SwiperSlide
             key={product.id}
-            className="flex flex-col border-r first-of-type:border-x border-solid border-stroke-gray"
+            className="flex flex-col border-r border-solid border-stroke-gray first-of-type:border-x"
           >
             <ProductButton product={product} />
           </SwiperSlide>

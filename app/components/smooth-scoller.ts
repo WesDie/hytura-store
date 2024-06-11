@@ -9,7 +9,7 @@ export default function SmoothScroller() {
       lerp: 0.1,
     });
 
-    function raf(time: any) {
+    function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }

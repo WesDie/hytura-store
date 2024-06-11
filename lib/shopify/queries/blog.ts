@@ -4,8 +4,10 @@ import articleFragment from "../fragments/article";
 export const getAllBlogsQuery = `
   {
     blogs(first: 10) {
-      nodes {
-        ...blog
+      edges {
+        node {
+          ...blog
+        }
       }
     }
   }

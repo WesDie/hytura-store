@@ -2,12 +2,10 @@
 
 import { useState } from "react";
 import { addItem } from "./cart/actions";
+import { Product, ProductVariant } from "@/lib/shopify/types";
 
-export default function ProductDetails(productData: any) {
-  const product = productData.productData;
-  const [selectedVariant, setSelectedVariant] = useState(
-    product.variants.edges[0].node,
-  );
+export default function ProductDetails({ product }: { product: Product }) {
+  const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
   const [quantity, setQuantity] = useState(1);
 
   return (
@@ -22,13 +20,13 @@ export default function ProductDetails(productData: any) {
           <div className="flex flex-col gap-1x">
             <p className="text-body-sm">Size:</p>
             <div className="flex gap-1x">
-              {product.variants.edges.map((variant: any) => (
+              {product.variants.map((variant: ProductVariant) => (
                 <button
-                  key={variant.node.id}
-                  className={`${variant.node.id === selectedVariant.id ? "button-primary pointer-events-none" : "button-secondary"}`}
-                  onClick={() => setSelectedVariant(variant.node)}
+                  key={variant.id}
+                  className={`${variant.id === selectedVariant.id ? "button-primary pointer-events-none" : "button-secondary"}`}
+                  onClick={() => setSelectedVariant(variant)}
                 >
-                  {variant.node.title}
+                  {variant.title}
                 </button>
               ))}
             </div>

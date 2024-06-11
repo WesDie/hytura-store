@@ -4,12 +4,13 @@ import { useRouter } from "next/navigation";
 import ProductButton from "../components/product-button";
 
 import { notFound } from "next/navigation";
+import { Collection, Product } from "@/lib/shopify/types";
 
-export default function Collection({
-  collectionData,
+export default function MainCollection({
+  collections,
   currentCollection,
 }: {
-  collectionData: any;
+  collections: Collection[];
   currentCollection: string;
 }) {
   const router = useRouter();
@@ -18,14 +19,16 @@ export default function Collection({
       currentCollection.slice(1).toLowerCase(),
   );
   const [filteredCollection, setfilteredCollection] = useState(
-    collectionData.filter(
-      (collection: any) => collection.title === collectionName,
+    collections.filter(
+      (collection: Collection) => collection.title === collectionName,
     ),
   );
 
   const changeCurrentCollection = (title: string) => () => {
     setfilteredCollection(
-      collectionData.filter((collection: any) => collection.title === title),
+      collections.filter(
+        (collection: Collection) => collection.title === title,
+      ),
     );
     setCollectionName(title);
     router.push(`/collection/${title.toLowerCase()}`);
@@ -52,7 +55,7 @@ export default function Collection({
           )}
         </div>
         <div className="flex gap-2x border-y border-solid border-stroke-gray p-1x px-2x py-2x md:px-4x">
-          {collectionData.map((collection: any, index: number) => (
+          {collections.map((collection: Collection, index: number) => (
             <div
               key={index}
               onClick={changeCurrentCollection(collection.title)}
@@ -64,14 +67,16 @@ export default function Collection({
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-4">
-        {filteredCollection[0].products.map((product: any, index: number) => (
-          <div
-            key={index}
-            className="h-full w-full border-b border-r border-stroke-gray"
-          >
-            <ProductButton product={product.product} />
-          </div>
-        ))}
+        {filteredCollection[0].products.map(
+          (product: Product, index: number) => (
+            <div
+              key={index}
+              className="h-full w-full border-b border-r border-stroke-gray"
+            >
+              <ProductButton product={product} />
+            </div>
+          ),
+        )}
         {filteredCollection[0].products.length % 4 !== 0 &&
           Array.from({
             length: 4 - (filteredCollection[0].products.length % 4),

@@ -1,7 +1,8 @@
 "use client";
 import RenderImage from "../components/render-Image";
+import { Article } from "@/lib/shopify/types";
 
-export default function Article({ article }: { article: any }) {
+export default function ArticleDetails({ article }: { article: Article }) {
   const authorInitials = `${article.author.name.charAt(0)}${article.author.name.split(" ")[1].charAt(0)}`;
 
   return (
