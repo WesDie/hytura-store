@@ -10,6 +10,7 @@ import SmoothScroller from "./components/smooth-scoller";
 import Header from "./sections/header";
 import Footer from "./sections/footer";
 import CartDrawer from "./components/cart-drawer";
+import AccountDrawer from "./components/account-drawer";
 
 export const viewport: Viewport = {
   themeColor: "#FBF9EE",
@@ -45,6 +46,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <CartDrawer />
+        <AccountDrawer />
       </body>
     </html>
   );

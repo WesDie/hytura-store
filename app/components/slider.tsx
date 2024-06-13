@@ -6,7 +6,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import ProductButton from "./product-button";
 
-export default function Slider({ products }: { products: Product[] }) {
+export default function Slider({
+  products,
+  text,
+}: {
+  text: string;
+  products?: Product[];
+}) {
   const [swiper, setSwiper] = useState(null);
 
   const nexto = () => {
@@ -20,7 +26,7 @@ export default function Slider({ products }: { products: Product[] }) {
   return (
     <div>
       <div className="flex w-full justify-between px-2x py-2x md:px-4x md:pb-2x md:pt-3x">
-        <h1 className="text-heading-xs md:text-heading-md">Our products</h1>
+        <h1 className="text-heading-xs md:text-heading-md">{text}</h1>
         <div className="flex gap-2x">
           <button onClick={prevto} className="rotate-180">
             <svg
@@ -67,14 +73,15 @@ export default function Slider({ products }: { products: Product[] }) {
         onSwiper={setSwiper}
         className="border-y border-solid border-stroke-gray"
       >
-        {products.map((product: Product) => (
-          <SwiperSlide
-            key={product.id}
-            className="flex flex-col border-r border-solid border-stroke-gray first-of-type:border-x"
-          >
-            <ProductButton product={product} />
-          </SwiperSlide>
-        ))}
+        {products &&
+          products.map((product: Product) => (
+            <SwiperSlide
+              key={product.id}
+              className="flex flex-col border-r border-solid border-stroke-gray first-of-type:border-x"
+            >
+              <ProductButton product={product} />
+            </SwiperSlide>
+          ))}
       </Swiper>
     </div>
   );

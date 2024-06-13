@@ -56,6 +56,16 @@ export default function Header() {
     }
   }
 
+  function toggleAccountDrawer() {
+    const accountDrawer = document.getElementById(
+      "account-drawer",
+    ) as HTMLElement;
+    if (accountDrawer) {
+      accountDrawer.ariaHidden =
+        accountDrawer.ariaHidden === "true" ? "false" : "true";
+    }
+  }
+
   return (
     <>
       <div className="h-[86px]" id="empty-header-height"></div>
@@ -112,7 +122,9 @@ export default function Header() {
         </div>
         <div className="z-[11] hidden w-full justify-end gap-2x py-2x pr-2x md:flex md:pr-3x">
           <button className={linkClass}>EN</button>
-          <button className={linkClass}>Login</button>
+          <button className={linkClass} onClick={() => toggleAccountDrawer()}>
+            Login
+          </button>
           <button
             className={linkClass}
             onClick={() => toggleCart()}

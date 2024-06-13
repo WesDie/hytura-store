@@ -6,7 +6,7 @@ export default async function ProductSlider() {
 
   return (
     <section className="w-full">
-      <Slider products={products} />
+      <Slider products={products} text="Our products" />
     </section>
   );
 }

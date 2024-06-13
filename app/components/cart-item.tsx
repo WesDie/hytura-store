@@ -5,7 +5,6 @@ import { removeItem, updateItemQuantity } from "./cart/actions";
 import { CartItem } from "@/lib/shopify/types";
 
 export default function CartItemProduct(item: CartItem) {
-  console.log(item);
   const product = item.merchandise.product;
 
   const payloadPlus = {
