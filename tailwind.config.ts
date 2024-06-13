@@ -18,11 +18,13 @@ const config: Config = {
           black: "#1F1F1F",
           "light-gray": "#B6B6B6",
           white: "#FFFFFF",
+          red: "#AF4545",
         },
         text: {
           black: "#1F1F1F",
           white: "#FFFFFF",
           "light-gray": "#878787",
+          red: "#AF4545",
         },
         background: {
           white: "#FFFFFF",

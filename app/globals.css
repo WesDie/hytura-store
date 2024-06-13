@@ -73,7 +73,7 @@
       @apply text-body-md w-full appearance-none border border-stroke-black bg-transparent px-2x py-1x transition-colors duration-300 placeholder-shown:border-stroke-gray focus:outline-none;
     }
     input:is([aria-invalid="true"]) {
-      @apply border-red-400;
+      @apply border-stroke-red;
     }
   }
 

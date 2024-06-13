@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import RenderImage from "../components/render-Image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
+  const router = useRouter();
 
-export default function Header() {
   const [isTop, setIsTop] = useState(false);
   const [isShopDropdownActive, setIsShopDropdownActive] = useState(false);
   const linkClass =
@@ -57,12 +59,16 @@ export default function Header() {
   }
 
   function toggleAccountDrawer() {
-    const accountDrawer = document.getElementById(
-      "account-drawer",
-    ) as HTMLElement;
-    if (accountDrawer) {
-      accountDrawer.ariaHidden =
-        accountDrawer.ariaHidden === "true" ? "false" : "true";
+    if (isLoggedIn) {
+      const accountDrawer = document.getElementById(
+        "account-drawer",
+      ) as HTMLElement;
+      if (accountDrawer) {
+        accountDrawer.ariaHidden =
+          accountDrawer.ariaHidden === "true" ? "false" : "true";
+      }
+    } else {
+      router.push("/account");
     }
   }
 
@@ -123,7 +129,7 @@ export default function Header() {
         <div className="z-[11] hidden w-full justify-end gap-2x py-2x pr-2x md:flex md:pr-3x">
           <button className={linkClass}>EN</button>
           <button className={linkClass} onClick={() => toggleAccountDrawer()}>
-            Login
+            {isLoggedIn ? "Login" : "Account"}
           </button>
           <button
             className={linkClass}

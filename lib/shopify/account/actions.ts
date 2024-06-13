@@ -1,5 +1,8 @@
 "use server";
 
+import { cookies } from "next/headers";
+import { createCustomerToken } from "..";
+
 export async function shopifyCreateCustomer(
   prevState: any,
   formData: FormData,
@@ -73,4 +76,41 @@ export async function shopifyCreateCustomer(
       error: error,
     };
   }
+}
+
+export async function shopifyLoginCustomer(
+  prevState: any,
+  formData: FormData,
+): Promise<{ message: any }> {
+  const errors: any = {};
+  const requiredFields = ["email", "password"];
+  requiredFields.forEach((field) => {
+    if (formData.get(field) === "") {
+      errors[field] = [`is required`];
+    }
+  });
+
+  if (Object.keys(errors).length > 0) {
+    return { message: errors };
+  }
+
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+
+  if (email !== null && password !== null) {
+    const res = await createCustomerToken(email, password);
+
+    if (res.customerAccessToken?.accessToken) {
+      cookies().set("customerAccessToken", res.customerAccessToken.accessToken);
+      return { message: "Logged in successfully" };
+    } else if (res.customerUserErrors) {
+      if (res.customerUserErrors[0].message === "Unidentified customer") {
+        return { message: { base: ["Invalid email or password"] } };
+      }
+
+      return { message: res.customerUserErrors[0].message };
+    }
+  }
+
+  return { message: "Somthing went wrong" };
 }

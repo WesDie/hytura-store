@@ -35,8 +35,11 @@ import {
   ShopifyBlog,
   Article,
   Blog,
+  ShopifyGetAccountTokenOperation,
+  CustomerAccessToken,
 } from "./types";
 import { getPageQuery } from "./queries/page";
+import { createCustomerAccessTokenMutation } from "./mutations/account";
 
 export async function shopifyFetch<T>({
   cache = "no-store",
@@ -346,4 +349,19 @@ export async function removeFromCart(
   });
 
   return reshapeCart(res.body.data.cartLinesRemove.cart);
+}
+
+export async function createCustomerToken(
+  email: string,
+  password: string,
+): Promise<CustomerAccessToken> {
+  const res = await shopifyFetch<ShopifyGetAccountTokenOperation>({
+    query: createCustomerAccessTokenMutation,
+    variables: {
+      email,
+      password,
+    },
+  });
+
+  return res.body.data.customerAccessTokenCreate;
 }

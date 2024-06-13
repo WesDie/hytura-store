@@ -12,12 +12,19 @@ export default function Register() {
   const { pending } = useFormStatus();
 
   return (
-    <div className="flex h-full flex-col gap-1x px-3x py-4x">
+    <div className="flex h-full flex-col gap-1x px-3x py-4x pb-0">
       <h3 className="text-heading-xs">Register</h3>
       <form action={formAction} className="flex flex-col gap-2x">
-        <p className="text-body-sm text-red-400">{state.message?.base}</p>
+        <p className="text-body-sm text-text-red">{state.message?.base}</p>
         <div className="input">
-          <label htmlFor="first_name">First Name</label>
+          <div className="flex justify-between">
+            <label htmlFor="first_name">First Name</label>
+            {state.message.first_name && (
+              <p className="text-body-sm text-text-red">
+                * First name {state.message.first_name}
+              </p>
+            )}
+          </div>
           <input
             type="text"
             id="first_name"
@@ -25,14 +32,16 @@ export default function Register() {
             placeholder="First name"
             aria-invalid={state.message.first_name ? "true" : "false"}
           />
-          {state.message.first_name && (
-            <p className="text-body-sm text-red-400">
-              First name {state.message.first_name}
-            </p>
-          )}
         </div>
         <div className="input">
-          <label htmlFor="last_name">First Name</label>
+          <div className="flex justify-between">
+            <label htmlFor="last_name">First Name</label>
+            {state.message.last_name && (
+              <p className="text-body-sm text-text-red">
+                * Last name {state.message.last_name}
+              </p>
+            )}
+          </div>
           <input
             type="text"
             id="last_name"
@@ -40,14 +49,16 @@ export default function Register() {
             placeholder="Last name"
             aria-invalid={state.message.last_name ? "true" : "false"}
           />
-          {state.message.last_name && (
-            <p className="text-body-sm text-red-400">
-              Last name {state.message.last_name}
-            </p>
-          )}
         </div>
         <div className="input">
-          <label htmlFor="email">Email</label>
+          <div className="flex justify-between">
+            <label htmlFor="email">Email</label>
+            {state.message.email && (
+              <p className="text-body-sm text-text-red">
+                * Email {state.message.email}
+              </p>
+            )}
+          </div>
           <input
             type="text"
             id="email"
@@ -55,26 +66,23 @@ export default function Register() {
             placeholder="Email"
             aria-invalid={state.message.email ? "true" : "false"}
           />
-          {state.message.email && (
-            <p className="text-body-sm text-red-400">
-              Email {state.message.email}
-            </p>
-          )}
         </div>
         <div className="input">
-          <label htmlFor="password">Password</label>
+          <div className="flex justify-between">
+            <label htmlFor="password">Password</label>
+            {state.message.password && (
+              <p className="text-body-sm text-text-red">
+                * Password {state.message.password}
+              </p>
+            )}
+          </div>
           <input
-            type="text"
+            type="password"
             id="password"
             name="password"
             placeholder="Password"
             aria-invalid={state.message.password ? "true" : "false"}
           />
-          {state.message.password && (
-            <p className="text-body-sm text-red-400">
-              Password {state.message.password}
-            </p>
-          )}
         </div>
         <div className="checkbox">
           <input type="checkbox" id="accepts_terms" name="accpets_terms" />

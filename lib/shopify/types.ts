@@ -79,6 +79,15 @@ export type Page = {
   updatedAt: string;
 };
 
+export type CustomerAccessToken = {
+  customerAccessToken: {
+    accessToken: string;
+  };
+  customerUserErrors: {
+    message: string;
+  }[];
+};
+
 export type Product = Omit<ShopifyProduct, "variants" | "images" | "media"> & {
   variants: ProductVariant[];
   images: Image[];
@@ -236,6 +245,23 @@ export type ShopifyUpdateCartOperation = {
       merchandiseId: string;
       quantity: number;
     }[];
+  };
+};
+
+export type ShopifyGetAccountTokenOperation = {
+  data: {
+    customerAccessTokenCreate: {
+      customerAccessToken: {
+        accessToken: string;
+      };
+      customerUserErrors: {
+        message: string;
+      }[];
+    };
+  };
+  variables: {
+    email: string;
+    password: string;
   };
 };
 

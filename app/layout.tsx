@@ -11,6 +11,7 @@ import Header from "./sections/header";
 import Footer from "./sections/footer";
 import CartDrawer from "./components/cart-drawer";
 import AccountDrawer from "./components/account-drawer";
+import { cookies } from "next/headers";
 
 export const viewport: Viewport = {
   themeColor: "#FBF9EE",
@@ -42,7 +43,9 @@ export default function RootLayout({
         className={`${generalSans.variable} ${kaiseiTokumin.variable} bg-background-sand`}
       >
         <SmoothScroller />
-        <Header />
+        <Header
+          isLoggedIn={cookies().get("customerAccessToken") ? false : true}
+        />
         {children}
         <Footer />
         <CartDrawer />
