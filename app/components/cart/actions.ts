@@ -8,6 +8,7 @@ import {
   addToCart,
   removeFromCart,
   updateCart,
+  createCartWithAccount,
 } from "@/lib/shopify";
 import { TAGS } from "@/lib/constants";
 import { revalidateTag } from "next/cache";
@@ -15,6 +16,8 @@ import { Cart } from "@/lib/shopify/types";
 
 export async function addItem(selectedVariantId: string, quantity: number = 1) {
   let cartId = cookies().get("cartId")?.value;
+  let accountToken = cookies().get("customerAccessToken")?.value;
+
   let cart;
 
   if (cartId) {
@@ -22,7 +25,11 @@ export async function addItem(selectedVariantId: string, quantity: number = 1) {
   }
 
   if (!cartId || !cart) {
-    cart = await createCart(selectedVariantId, 1);
+    if (!accountToken) {
+      cart = await createCart(selectedVariantId, 1);
+    } else {
+      cart = await createCartWithAccount(selectedVariantId, 1, accountToken);
+    }
     cartId = cart.id;
     if (cartId) {
       cookies().set("cartId", cartId);

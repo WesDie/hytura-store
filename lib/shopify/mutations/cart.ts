@@ -2,7 +2,18 @@ import cartFragment from "../fragments/cart";
 
 export const createCartMutation = `
   mutation createCart($lineItems: [CartLineInput!]) {
-    cartCreate(input: { lines: $lineItems }) {
+    cartCreate (input: {lines : $lineItems}) {
+      cart {
+        ...cart
+      }
+    }
+  }
+  ${cartFragment}
+`;
+
+export const createCartWithAccountMutation = `
+  mutation createCart($lineItems: [CartLineInput!], $customerAccessToken: String!) {
+    cartCreate (input: {lines : $lineItems, buyerIdentity: {customerAccessToken: $customerAccessToken}}) {
       cart {
         ...cart
       }

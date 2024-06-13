@@ -1,6 +1,7 @@
 "use client";
 import { Cart } from "@/lib/shopify/types";
 import Link from "next/link";
+import { ToggleCart } from "../sections/header";
 
 export default function CartSummary({ cart }: { cart: Cart }) {
   if (!cart.lines.length) return null;
@@ -13,7 +14,9 @@ export default function CartSummary({ cart }: { cart: Cart }) {
       <Link href={cart.checkoutUrl} className="button-primary text-center">
         Checkout - € {cart.cost.totalAmount.amount}
       </Link>
-      <button className="text-link-xs">Continue shopping</button>
+      <button className="text-link-xs" onClick={() => ToggleCart()}>
+        Continue shopping
+      </button>
     </div>
   );
 }

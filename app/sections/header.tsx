@@ -3,10 +3,25 @@
 import { useEffect, useState } from "react";
 import RenderImage from "../components/render-Image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
-  const router = useRouter();
 
+export function ToggleCart() {
+  const cartDrawer = document.getElementById("cart-drawer") as HTMLElement;
+  if (cartDrawer) {
+    cartDrawer.ariaHidden = cartDrawer.ariaHidden === "true" ? "false" : "true";
+  }
+}
+
+export function ToggleAccountDrawer() {
+  const accountDrawer = document.getElementById(
+    "account-drawer",
+  ) as HTMLElement;
+  if (accountDrawer) {
+    accountDrawer.ariaHidden =
+      accountDrawer.ariaHidden === "true" ? "false" : "true";
+  }
+}
+
+export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
   const [isTop, setIsTop] = useState(false);
   const [isShopDropdownActive, setIsShopDropdownActive] = useState(false);
   const linkClass =
@@ -49,28 +64,6 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
       }
     };
   });
-
-  function toggleCart() {
-    const cartDrawer = document.getElementById("cart-drawer") as HTMLElement;
-    if (cartDrawer) {
-      cartDrawer.ariaHidden =
-        cartDrawer.ariaHidden === "true" ? "false" : "true";
-    }
-  }
-
-  function toggleAccountDrawer() {
-    if (isLoggedIn) {
-      const accountDrawer = document.getElementById(
-        "account-drawer",
-      ) as HTMLElement;
-      if (accountDrawer) {
-        accountDrawer.ariaHidden =
-          accountDrawer.ariaHidden === "true" ? "false" : "true";
-      }
-    } else {
-      router.push("/account");
-    }
-  }
 
   return (
     <>
@@ -128,19 +121,25 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
         </div>
         <div className="z-[11] hidden w-full justify-end gap-2x py-2x pr-2x md:flex md:pr-3x">
           <button className={linkClass}>EN</button>
-          <button className={linkClass} onClick={() => toggleAccountDrawer()}>
-            {isLoggedIn ? "Login" : "Account"}
-          </button>
+          {isLoggedIn ? (
+            <button className={linkClass} onClick={() => ToggleAccountDrawer()}>
+              Login
+            </button>
+          ) : (
+            <Link href={"/account"} className={linkClass}>
+              Account
+            </Link>
+          )}
           <button
             className={linkClass}
-            onClick={() => toggleCart()}
+            onClick={() => ToggleCart()}
             id="cart-counter"
           >
             Cart (0)
           </button>
         </div>
         <div className="z-[11] flex gap-2x py-2x pr-2x md:hidden">
-          <button onClick={() => toggleCart()}>
+          <button onClick={() => ToggleCart()}>
             <svg
               width="17"
               height="20"

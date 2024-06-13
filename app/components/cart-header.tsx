@@ -1,17 +1,10 @@
 "use client";
 import { Cart, CartItem } from "@/lib/shopify/types";
 import { useEffect, useState } from "react";
+import { ToggleCart } from "../sections/header";
 
 export default function CartHeader({ cart }: { cart: Cart }) {
   const [cartTotalCount, setCartTotalCount] = useState(0);
-
-  function toggleCart() {
-    const cartDrawer = document.getElementById("cart-drawer") as HTMLElement;
-    if (cartDrawer) {
-      cartDrawer.ariaHidden =
-        cartDrawer.ariaHidden === "true" ? "false" : "true";
-    }
-  }
 
   useEffect(() => {
     let cartCount = 0;
@@ -33,7 +26,7 @@ export default function CartHeader({ cart }: { cart: Cart }) {
   return (
     <div className="flex justify-between border-b border-stroke-gray px-2x py-2x md:px-4x">
       <p className="text-heading-3xs">Cart ({cartTotalCount})</p>
-      <button className="text-link-sm" onClick={() => toggleCart()}>
+      <button className="text-link-sm" onClick={() => ToggleCart()}>
         Close
       </button>
     </div>

@@ -7,6 +7,7 @@ import {
   updateCartMutation,
   addToCartMutation,
   removeFromCartMutation,
+  createCartWithAccountMutation,
 } from "./mutations/cart";
 import { getAllCollectionsQuery } from "./queries/collection";
 import {
@@ -293,7 +294,30 @@ export async function createCart(
     query: createCartMutation,
     variables: {
       cartInput: {
-        lines: [
+        lineItems: [
+          {
+            quantity: parseInt(quantity),
+            merchandiseId: itemId,
+          },
+        ],
+      },
+    },
+  });
+
+  return reshapeCart(res.body.data.cartCreate.cart);
+}
+
+export async function createCartWithAccount(
+  itemId: string,
+  quantity: string,
+  accountToken: string,
+): Promise<Cart> {
+  const res = await shopifyFetch<ShopifyCreateCartOperation>({
+    query: createCartWithAccountMutation,
+    variables: {
+      customerAccessToken: accountToken,
+      cartInput: {
+        lineItems: [
           {
             quantity: parseInt(quantity),
             merchandiseId: itemId,

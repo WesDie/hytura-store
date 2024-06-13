@@ -10,15 +10,15 @@ export default async function CartDrawer() {
 
   return (
     <div
-      className="fixed inset-0 z-50 aria-hidden:hidden"
+      className="group fixed inset-0 z-50 aria-hidden:pointer-events-none"
       aria-hidden="true"
       id="cart-drawer"
     >
       <div
-        className="fixed inset-0 bg-black opacity-30"
+        className="fixed inset-0 bg-black opacity-30 transition-opacity group-aria-hidden:opacity-0"
         id="cart-drawer-toggle"
       ></div>
-      <div className="fixed bottom-0 right-0 top-0 flex w-full flex-col bg-background-sand md:w-[420px]">
+      <div className="fixed bottom-0 right-0 top-0 flex w-full flex-col bg-background-sand transition-transform duration-300 group-aria-hidden:translate-x-[100%] md:w-[420px]">
         <CartHeader cart={cart} />
         {cart.lines.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center gap-1x">
