@@ -3,25 +3,12 @@
 import { useEffect, useState } from "react";
 import RenderImage from "../components/render-Image";
 import Link from "next/link";
-
-export function ToggleCart() {
-  const cartDrawer = document.getElementById("cart-drawer") as HTMLElement;
-  if (cartDrawer) {
-    cartDrawer.ariaHidden = cartDrawer.ariaHidden === "true" ? "false" : "true";
-  }
-}
-
-export function ToggleAccountDrawer() {
-  const accountDrawer = document.getElementById(
-    "account-drawer",
-  ) as HTMLElement;
-  if (accountDrawer) {
-    accountDrawer.ariaHidden =
-      accountDrawer.ariaHidden === "true" ? "false" : "true";
-  }
-}
+import { useCartDrawer } from "../context/cart-drawer-context";
+import { useAccountDrawer } from "../context/account-drawer-context";
 
 export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
+  const { setIsCartOpen } = useCartDrawer();
+  const { setIsAccountOpen } = useAccountDrawer();
   const [isTop, setIsTop] = useState(false);
   const [isShopDropdownActive, setIsShopDropdownActive] = useState(false);
   const linkClass =
@@ -122,7 +109,10 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
         <div className="z-[11] hidden w-full justify-end gap-2x py-2x pr-2x md:flex md:pr-3x">
           <button className={linkClass}>EN</button>
           {isLoggedIn ? (
-            <button className={linkClass} onClick={() => ToggleAccountDrawer()}>
+            <button
+              className={linkClass}
+              onClick={() => setIsAccountOpen(true)}
+            >
               Login
             </button>
           ) : (
@@ -132,21 +122,24 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
           )}
           <button
             className={linkClass}
-            onClick={() => ToggleCart()}
-            id="cart-counter"
+            onClick={() => setIsCartOpen(true)}
+            id="cart-toggle"
           >
             Cart (0)
           </button>
         </div>
-        <div className="z-[11] flex gap-2x py-2x pr-2x md:hidden">
-          <button onClick={() => ToggleCart()}>
+        <div className="z-[11] my-auto flex pr-1x md:hidden">
+          <button
+            onClick={() => setIsCartOpen(true)}
+            className="flex h-4x w-4x"
+          >
             <svg
               width="17"
               height="20"
               viewBox="0 0 17 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="my-auto"
+              className="m-auto"
             >
               <g clipPath="url(#clip0_179_843)">
                 <path
@@ -162,25 +155,27 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
               </defs>
             </svg>
           </button>
-          <svg
-            width="20"
-            height="16"
-            viewBox="0 0 20 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="my-auto"
-          >
-            <g clipPath="url(#clip0_179_847)">
-              <path d="M1 1H19" stroke="black" strokeLinecap="square" />
-              <path d="M1 8H19" stroke="black" strokeLinecap="square" />
-              <path d="M1 15H19" stroke="black" strokeLinecap="square" />
-            </g>
-            <defs>
-              <clipPath id="clip0_179_847">
-                <rect width="20" height="16" fill="white" />
-              </clipPath>
-            </defs>
-          </svg>
+          <button className="flex h-4x w-4x">
+            <svg
+              width="20"
+              height="16"
+              viewBox="0 0 20 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="m-auto"
+            >
+              <g clipPath="url(#clip0_179_847)">
+                <path d="M1 1H19" stroke="black" strokeLinecap="square" />
+                <path d="M1 8H19" stroke="black" strokeLinecap="square" />
+                <path d="M1 15H19" stroke="black" strokeLinecap="square" />
+              </g>
+              <defs>
+                <clipPath id="clip0_179_847">
+                  <rect width="20" height="16" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+          </button>
         </div>
         <div
           id="shop-dropdown-header"

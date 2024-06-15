@@ -6,12 +6,12 @@ import localFont from "next/font/local";
 import type { Viewport } from "next";
 
 import SmoothScroller from "./components/smooth-scoller";
-
 import Header from "./sections/header";
 import Footer from "./sections/footer";
-import CartDrawer from "./components/cart-drawer";
-import AccountDrawer from "./components/account-drawer";
+import Account from "./components/account/account";
 import { cookies } from "next/headers";
+import Provider from "./context/Provider";
+import Cart from "./components/cart/cart";
 
 export const viewport: Viewport = {
   themeColor: "#FBF9EE",
@@ -42,14 +42,16 @@ export default function RootLayout({
       <body
         className={`${generalSans.variable} ${kaiseiTokumin.variable} bg-background-sand`}
       >
-        <SmoothScroller />
-        <Header
-          isLoggedIn={cookies().get("customerAccessToken") ? false : true}
-        />
-        {children}
-        <Footer />
-        <CartDrawer />
-        <AccountDrawer />
+        <Provider>
+          <SmoothScroller />
+          <Header
+            isLoggedIn={cookies().get("customerAccessToken") ? false : true}
+          />
+          {children}
+          <Footer />
+          <Cart />
+          <Account />
+        </Provider>
       </body>
     </html>
   );

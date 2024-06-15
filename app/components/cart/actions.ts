@@ -94,6 +94,7 @@ export async function updateItemQuantity(payload: {
     ]);
 
     revalidateTag(TAGS.cart);
+    return "Item quantity updated";
   } catch (e) {
     return "Error updating item quantity";
   }

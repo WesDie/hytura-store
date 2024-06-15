@@ -5,10 +5,13 @@ import { useState, useRef } from "react";
 import { addItem } from "./cart/actions";
 import Link from "next/link";
 import { Product } from "lib/shopify/types";
+import { useCartDrawer } from "../context/cart-drawer-context";
 
 export default function ProductButton({ product }: { product: Product }) {
   const [showSecondProductImage, setShowSecondProductImage] = useState(false);
   const videoRef = useRef(null);
+  const buyBtn = useRef(null);
+  const { setIsCartOpen } = useCartDrawer();
 
   const productHoverToggle = (hover) => {
     if (product.media[1]?.sources) {
@@ -20,6 +23,13 @@ export default function ProductButton({ product }: { product: Product }) {
         videoRef.current.pause();
       }
     }
+  };
+
+  const quickAdd = async () => {
+    buyBtn.current.disabled = true;
+    await addItem(product.variants[0].id);
+    buyBtn.current.disabled = false;
+    setIsCartOpen(true);
   };
 
   return (
@@ -72,8 +82,9 @@ export default function ProductButton({ product }: { product: Product }) {
           </p>
         </Link>
         <button
-          className="text-body-sm my-auto h-[35px] border border-solid border-stroke-black bg-background-black px-2x text-text-white transition-colors hover:bg-transparent hover:text-text-black"
-          onClick={() => addItem(product.variants[0].id)}
+          className="text-body-sm my-auto h-[35px] border border-solid border-stroke-black bg-background-black px-2x text-text-white transition-colors hover:bg-transparent hover:text-text-black disabled:opacity-50"
+          onClick={() => quickAdd()}
+          ref={buyBtn}
         >
           Add
         </button>
