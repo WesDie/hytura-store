@@ -56,7 +56,7 @@ export default function ProductButton({ product }: { product: Product }) {
           autoPlay
           muted
           ref={videoRef}
-          className={`absolute inset-0 hidden h-full ${
+          className={`pointer-events-none absolute inset-0 hidden h-full ${
             showSecondProductImage ? "md:block" : ""
           }`}
         >
@@ -82,8 +82,9 @@ export default function ProductButton({ product }: { product: Product }) {
           </p>
         </Link>
         <button
-          className="text-body-sm my-auto h-[35px] border border-solid border-stroke-black bg-background-black px-2x text-text-white transition-colors hover:bg-transparent hover:text-text-black disabled:opacity-50"
+          className="button-primary h-fit"
           onClick={() => quickAdd()}
+          {...(product.variants[0].availableForSale ? {} : { disabled: true })}
           ref={buyBtn}
         >
           Add

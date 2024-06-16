@@ -3,12 +3,17 @@
 import { useEffect, useState } from "react";
 import RenderImage from "../components/render-Image";
 import Link from "next/link";
-import { useCartDrawer } from "../context/cart-drawer-context";
+import { useCartDrawer, useCartCount } from "../context/cart-drawer-context";
 import { useAccountDrawer } from "../context/account-drawer-context";
+import { useMobileNavigation } from "../context/mobile-navigation-context";
 
 export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
   const { setIsCartOpen } = useCartDrawer();
   const { setIsAccountOpen } = useAccountDrawer();
+  const { cartCount } = useCartCount();
+  const { setIsMobileNavigationOpen, isMobileNavigationOpen } =
+    useMobileNavigation();
+
   const [isTop, setIsTop] = useState(false);
   const [isShopDropdownActive, setIsShopDropdownActive] = useState(false);
   const linkClass =
@@ -125,10 +130,10 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
             onClick={() => setIsCartOpen(true)}
             id="cart-toggle"
           >
-            Cart (0)
+            Cart ({cartCount})
           </button>
         </div>
-        <div className="z-[11] my-auto flex pr-1x md:hidden">
+        <div className="relative z-[11] my-auto mr-1x flex md:hidden">
           <button
             onClick={() => setIsCartOpen(true)}
             className="flex h-4x w-4x"
@@ -155,7 +160,10 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
               </defs>
             </svg>
           </button>
-          <button className="flex h-4x w-4x">
+          <button
+            className={`flex h-4x w-4x transition-opacity ${isMobileNavigationOpen ? "pointer-events-none opacity-0" : ""}`}
+            onClick={() => setIsMobileNavigationOpen(true)}
+          >
             <svg
               width="20"
               height="16"
@@ -174,6 +182,24 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
                   <rect width="20" height="16" fill="white" />
                 </clipPath>
               </defs>
+            </svg>
+          </button>
+          <button
+            className={`absolute right-0 flex h-4x w-4x transition-opacity ${isMobileNavigationOpen ? "" : "pointer-events-none opacity-0"}`}
+            onClick={() => setIsMobileNavigationOpen(false)}
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="m-auto"
+            >
+              <path
+                d="M4.01015 21L3 19.9899L10.9899 12L3 4.01015L4.01015 3L12 10.9899L19.9899 3L21 4.01015L13.0101 12L21 19.9899L19.9899 21L12 13.0101L4.01015 21Z"
+                fill="black"
+              />
             </svg>
           </button>
         </div>

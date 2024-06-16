@@ -49,8 +49,9 @@
   }
 
   .button-primary {
-    @apply text-body-sm border border-background-black bg-background-black px-2x pb-[9px] pt-[7px] text-text-white transition-all hover:bg-black;
+    @apply text-body-sm border border-background-black bg-background-black px-2x pb-[9px] pt-[7px] text-text-white transition-all hover:bg-black disabled:pointer-events-none disabled:opacity-50;
   }
+
   .button-secondary {
     @apply text-body-sm border border-solid border-background-black px-2x pb-[9px] pt-[7px] text-text-black transition-all hover:bg-background-black hover:text-text-white;
 
