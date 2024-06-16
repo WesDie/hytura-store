@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useCartDrawer, useCartCount } from "../context/cart-drawer-context";
 import { useAccountDrawer } from "../context/account-drawer-context";
 import { useMobileNavigation } from "../context/mobile-navigation-context";
+import MobileNavigation from "../components/mobile-navigation";
 
 export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
   const { setIsCartOpen } = useCartDrawer();
@@ -256,6 +257,7 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
           />
         </div>
       </header>
+      {isMobileNavigationOpen && <MobileNavigation isLoggedIn={isLoggedIn} />}
     </>
   );
 }

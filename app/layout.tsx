@@ -12,6 +12,7 @@ import Account from "./components/account/account";
 import { cookies } from "next/headers";
 import Provider from "./context/Provider";
 import Cart from "./components/cart/cart";
+import MobileNavigation from "./components/mobile-navigation";
 
 export const viewport: Viewport = {
   themeColor: "#FBF9EE",
@@ -37,6 +38,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isLoggedIn = cookies().get("customerAccessToken") ? false : true;
   return (
     <html lang="en">
       <body
@@ -44,9 +46,7 @@ export default function RootLayout({
       >
         <Provider>
           <SmoothScroller />
-          <Header
-            isLoggedIn={cookies().get("customerAccessToken") ? false : true}
-          />
+          <Header isLoggedIn={isLoggedIn} />
           {children}
           <Footer />
           <Cart />
