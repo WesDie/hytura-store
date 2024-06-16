@@ -1,12 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { addItem } from "./cart/actions";
 import { Product, ProductVariant } from "@/lib/shopify/types";
+import { useCartDrawer } from "../context/cart-drawer-context";
 
 export default function ProductDetails({ product }: { product: Product }) {
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
   const [quantity, setQuantity] = useState(1);
+  const buyBtn = useRef<HTMLButtonElement | null>(null);
+  const { setIsCartOpen } = useCartDrawer();
+
+  const addToCart = async () => {
+    if (!buyBtn.current) return;
+    buyBtn.current.disabled = true;
+    const res = await addItem(selectedVariant.id, quantity);
+    console.log(res);
+    buyBtn.current.disabled = false;
+    setIsCartOpen(true);
+  };
+
+  const handleQuantityChange = (newQuantity: number) => {
+    if (newQuantity > 99) {
+      setQuantity(99);
+    } else {
+      setQuantity(newQuantity);
+    }
+  };
 
   return (
     <div className="sticky top-[53px] flex h-fit w-[50%] flex-col py-2x">
@@ -35,16 +55,20 @@ export default function ProductDetails({ product }: { product: Product }) {
         <div className="flex w-full gap-1x">
           <div className="flex w-[80px] border border-stroke-gray py-[2px]">
             <button
-              onClick={() => setQuantity(quantity <= 1 ? 1 : quantity - 1)}
+              onClick={() =>
+                handleQuantityChange(quantity <= 1 ? 1 : quantity - 1)
+              }
               className="text-body-sm w-full"
             >
               -
             </button>
-            <span className="text-body-sm my-auto h-fit w-full text-center">
-              {quantity}
-            </span>
+            <input
+              className="text-body-sm my-auto h-fit w-full bg-transparent text-center focus:outline-none"
+              onChange={(e) => handleQuantityChange(Number(e.target.value))}
+              value={quantity}
+            />
             <button
-              onClick={() => setQuantity(quantity + 1)}
+              onClick={() => handleQuantityChange(quantity + 1)}
               className="text-body-sm w-full"
             >
               +
@@ -52,7 +76,8 @@ export default function ProductDetails({ product }: { product: Product }) {
           </div>
           <button
             className="button-primary w-full"
-            onClick={() => addItem(selectedVariant.id, quantity)}
+            ref={buyBtn}
+            onClick={() => addToCart()}
           >
             Add to cart
           </button>

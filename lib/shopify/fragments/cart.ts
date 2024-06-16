@@ -37,6 +37,9 @@ const cartFragment = `
                 name
                 value
               }
+              price {
+                amount
+              }
               product {
                 ...product
               }

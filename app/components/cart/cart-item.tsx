@@ -12,9 +12,13 @@ export default function CartItemProduct(item: CartItem) {
   const quantityRef = useRef(item.quantity);
   const debounceTimeoutRef = useRef<null | NodeJS.Timeout>(null);
 
-  const updateQuantity = (amount: number) => {
-    const newQuantity = quantityRef.current + amount;
-    if (newQuantity >= 0) {
+  const updateQuantity = (amount: number, newValue?: number) => {
+    let newQuantity = quantityRef.current + amount;
+    if (newValue) {
+      newQuantity = newValue;
+    }
+
+    if (newQuantity >= 0 && newQuantity <= 99) {
       quantityRef.current = newQuantity;
       setLocalQuantity(newQuantity);
 
@@ -22,14 +26,27 @@ export default function CartItemProduct(item: CartItem) {
         clearTimeout(debounceTimeoutRef.current);
       }
 
+      if (newQuantity === 0) {
+        remove();
+        return;
+      }
+
       debounceTimeoutRef.current = setTimeout(async () => {
         setIsLoading(true);
-        await updateItemQuantity({
+        const res = await updateItemQuantity({
           lineId: item.id,
           variantId: item.merchandise.id,
           quantity: newQuantity,
         });
-        setIsLoading(false);
+
+        if (typeof res !== "string") {
+          setLocalQuantity(res.quantity);
+          quantityRef.current = res.quantity;
+        }
+
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 100);
         debounceTimeoutRef.current = null;
       }, 300);
     }
@@ -39,6 +56,14 @@ export default function CartItemProduct(item: CartItem) {
     setIsLoading(true);
     await removeItem(item.id);
     setIsLoading(false);
+  };
+
+  const handleQuantityChange = (newQuantity: number) => {
+    if (newQuantity > 99) {
+      updateQuantity(0, 99);
+    } else {
+      updateQuantity(0, newQuantity);
+    }
   };
 
   useEffect(() => {
@@ -68,7 +93,10 @@ export default function CartItemProduct(item: CartItem) {
             {product.title} - {item.merchandise.title}
           </h3>
           <p className="text-body-sm text-text-light-gray">
-            € {item.cost.totalAmount.amount}
+            €{" "}
+            {(
+              Number(item.merchandise.price.amount) * Number(localQuantity)
+            ).toFixed(2)}
           </p>
         </div>
         <div className="flex w-full justify-between">
@@ -79,9 +107,12 @@ export default function CartItemProduct(item: CartItem) {
             >
               -
             </button>
-            <span className="text-body-sm w-full text-center">
-              {localQuantity}
-            </span>
+            <input
+              onChange={(e) => handleQuantityChange(Number(e.target.value))}
+              className="text-body-sm w-full bg-transparent text-center focus-within:outline-none"
+              {...(isLoading && { disabled: true })}
+              value={localQuantity}
+            />
             <button
               onClick={() => updateQuantity(1)}
               className="text-body-sm w-full select-none"

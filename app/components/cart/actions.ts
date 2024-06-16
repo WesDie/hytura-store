@@ -12,7 +12,7 @@ import {
 } from "@/lib/shopify";
 import { TAGS } from "@/lib/constants";
 import { revalidateTag } from "next/cache";
-import { Cart } from "@/lib/shopify/types";
+import { Cart, CartItem } from "@/lib/shopify/types";
 
 export async function addItem(selectedVariantId: string, quantity: number = 1) {
   let cartId = cookies().get("cartId")?.value;
@@ -69,7 +69,7 @@ export async function updateItemQuantity(payload: {
   lineId: string;
   variantId: string;
   quantity: number;
-}) {
+}): Promise<CartItem | string> {
   const cartId = cookies().get("cartId")?.value;
 
   if (!cartId) {
@@ -85,7 +85,7 @@ export async function updateItemQuantity(payload: {
       return;
     }
 
-    await updateCart(cartId, [
+    const res = await updateCart(cartId, [
       {
         id: lineId,
         merchandiseId: variantId,
@@ -94,7 +94,7 @@ export async function updateItemQuantity(payload: {
     ]);
 
     revalidateTag(TAGS.cart);
-    return "Item quantity updated";
+    return res.lines.find((line) => line.id === lineId);
   } catch (e) {
     return "Error updating item quantity";
   }
