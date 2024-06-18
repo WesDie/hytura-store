@@ -91,6 +91,20 @@ export type CustomerAccessToken = {
   }[];
 };
 
+export type Customer = {
+  firstName: string;
+  createdAt: string;
+  acceptsMarketing: boolean;
+  displayName: string;
+  email: string;
+  id: string;
+  lastName: string;
+  numberOfOrders: number;
+  updatedAt: string;
+  tags: string[];
+  phone: string;
+};
+
 export type Product = Omit<ShopifyProduct, "variants" | "images" | "media"> & {
   variants: ProductVariant[];
   images: Image[];
@@ -265,6 +279,15 @@ export type ShopifyGetAccountTokenOperation = {
   variables: {
     email: string;
     password: string;
+  };
+};
+
+export type ShopifyGetCustomerOperation = {
+  data: {
+    customer: Customer;
+  };
+  variables: {
+    customerAccessToken: string;
   };
 };
 

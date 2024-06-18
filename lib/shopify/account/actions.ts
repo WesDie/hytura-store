@@ -114,3 +114,7 @@ export async function shopifyLoginCustomer(
 
   return { message: "Somthing went wrong" };
 }
+
+export async function shopifyLogoutCustomer() {
+  cookies().delete("customerAccessToken");
+}
