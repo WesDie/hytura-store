@@ -56,7 +56,7 @@ export default async function Footer() {
 
   return (
     <footer className="flex flex-col">
-      <div className="flex flex-col-reverse justify-between gap-3x border-b border-solid border-stroke-gray px-2x py-5x md:flex-row md:px-3x md:py-8x">
+      <div className="flex flex-col-reverse justify-between gap-3x border-b border-solid border-stroke-gray px-2x py-5x md:gap-6x md:px-3x lg:flex-row lg:gap-3x lg:py-8x">
         <div className="grid w-full grid-cols-2 gap-3x md:flex md:w-fit md:gap-2x">
           {footerLinks.map((section) => (
             <div

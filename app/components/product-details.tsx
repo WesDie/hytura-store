@@ -23,7 +23,7 @@ export default function ProductDetails({ product }: { product: Product }) {
   const handleQuantityChange = (newQuantity: number) => {
     if (newQuantity > 99) {
       setQuantity(99);
-    } else {
+    } else if (newQuantity >= 1) {
       setQuantity(newQuantity);
     }
   };
