@@ -279,12 +279,6 @@ export type ShopifyPageOperation = {
   variables: { handle: string };
 };
 
-export type ShopifyPagesOperation = {
-  data: {
-    pages: Connection<Page>;
-  };
-};
-
 export type ShopifyProductOperation = {
   data: { product: ShopifyProduct };
   variables: {

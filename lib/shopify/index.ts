@@ -25,7 +25,6 @@ import {
   ShopifyCollectionsOperation,
   ShopifyCreateCartOperation,
   ShopifyPageOperation,
-  ShopifyPagesOperation,
   ShopifyProduct,
   ShopifyProductOperation,
   ShopifyProductsOperation,
@@ -120,7 +119,7 @@ const reshapeCollection = (collection: ShopifyCollection) => {
 
   return {
     ...rest,
-    products: removeEdgesAndNodes(products),
+    products: reshapeProducts(removeEdgesAndNodes(products)),
     path: `/search/${collection.handle}`,
   };
 };

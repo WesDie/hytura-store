@@ -1,3 +1,4 @@
+import ArticleSlider from "@/app/sections/article-slider";
 import ArticleDetails from "../../../sections/article";
 import { getSingleArticleData } from "@/lib/shopify";
 
@@ -9,6 +10,7 @@ export default async function Journal({ params }: { params: { id: string } }) {
   return (
     <main>
       <ArticleDetails article={article} />
+      <ArticleSlider />
     </main>
   );
 }

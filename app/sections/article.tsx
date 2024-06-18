@@ -43,7 +43,7 @@ export default function ArticleDetails({ article }: { article: Article }) {
           className="h-[250px] w-full overflow-hidden md:h-[500px]"
           imageClassName="w-full h-full object-cover"
         />
-        <div className="text-body-xs md:text-body-sm border-stroke-gray px-2x py-4x md:border-l">
+        <div className="text-body-xs md:text-body-sm border-stroke-gray px-3x py-4x md:border-l">
           {article.content}
         </div>
       </div>

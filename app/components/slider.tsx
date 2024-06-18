@@ -1,17 +1,30 @@
 // @ts-nocheck
 "use client";
 import { useState } from "react";
-import { Product } from "lib/shopify/types";
+import { Product, Article } from "@/lib/shopify/types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import ProductButton from "./product-button";
+import ArticleCard from "./article-card";
 
 export default function Slider({
   products,
   text,
+  articles,
+  spaceBetween,
+  sliderClass,
+  slidesMobile,
+  slidesTablet,
+  slidesDesktop,
 }: {
   text: string;
   products?: Product[];
+  articles?: Article[];
+  spaceBetween?: number;
+  sliderClass?: string;
+  slidesMobile?: number;
+  slidesTablet?: number;
+  slidesDesktop?: number;
 }) {
   const [swiper, setSwiper] = useState(null);
 
@@ -61,27 +74,41 @@ export default function Slider({
       <Swiper
         breakpoints={{
           0: {
-            slidesPerView: 1.2,
+            slidesPerView: slidesMobile || 1.2,
           },
           640: {
-            slidesPerView: 2.2,
+            slidesPerView: slidesTablet || 2.2,
           },
           1024: {
-            slidesPerView: 4.5,
+            slidesPerView: slidesDesktop || 4.5,
           },
         }}
         onSwiper={setSwiper}
+        spaceBetween={spaceBetween || 0}
         className="border-y border-solid border-stroke-gray"
+        wrapperClass={sliderClass}
       >
-        {products &&
-          products.map((product: Product) => (
-            <SwiperSlide
-              key={product.id}
-              className="flex flex-col border-r border-solid border-stroke-gray first-of-type:border-x"
-            >
-              <ProductButton product={product} />
-            </SwiperSlide>
-          ))}
+        {products
+          ? products.map((product: Product) => (
+              <SwiperSlide
+                key={product.id}
+                className="flex flex-col border-r border-solid border-stroke-gray first-of-type:border-x"
+              >
+                <ProductButton product={product} />
+              </SwiperSlide>
+            ))
+          : null}
+        {articles
+          ? articles.map((article: Article) => (
+              <SwiperSlide key={article.id}>
+                <ArticleCard article={article} />
+              </SwiperSlide>
+            ))
+          : Array.from(Array(10)).map((test: any, index: number) => (
+              <SwiperSlide key={index}>
+                {/* review content slide */}
+              </SwiperSlide>
+            ))}
       </Swiper>
     </div>
   );

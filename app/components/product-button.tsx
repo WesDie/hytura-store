@@ -1,20 +1,19 @@
-// @ts-nocheck
 "use client";
 import RenderImage from "./render-Image";
 import { useState, useRef } from "react";
 import { addItem } from "./cart/actions";
 import Link from "next/link";
-import { Product } from "lib/shopify/types";
+import { Product } from "@/lib/shopify/types";
 import { useCartDrawer } from "../context/cart-drawer-context";
 
 export default function ProductButton({ product }: { product: Product }) {
   const [showSecondProductImage, setShowSecondProductImage] = useState(false);
-  const videoRef = useRef(null);
-  const buyBtn = useRef(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const buyBtn = useRef<HTMLButtonElement | null>(null);
   const { setIsCartOpen } = useCartDrawer();
 
-  const productHoverToggle = (hover) => {
-    if (product.media[1]?.sources) {
+  const productHoverToggle = (hover: boolean) => {
+    if (product.media[1]?.sources && videoRef.current) {
       setShowSecondProductImage(hover);
       if (hover) {
         videoRef.current.play();
@@ -26,10 +25,12 @@ export default function ProductButton({ product }: { product: Product }) {
   };
 
   const quickAdd = async () => {
-    buyBtn.current.disabled = true;
-    await addItem(product.variants[0].id);
-    buyBtn.current.disabled = false;
-    setIsCartOpen(true);
+    if (buyBtn.current) {
+      buyBtn.current.disabled = true;
+      await addItem(product.variants[0].id);
+      buyBtn.current.disabled = false;
+      setIsCartOpen(true);
+    }
   };
 
   return (
