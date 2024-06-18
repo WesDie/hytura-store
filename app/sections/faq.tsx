@@ -60,19 +60,19 @@ export default function Faq({ direction }: { direction: "left" | "right" }) {
 
   return (
     <section
-      className={`w-full flex flex-col justify-between py-2x px-2x md:py-3x md:px-3x gap-3x border-b border-solid border-stroke-gray ${
+      className={`flex w-full flex-col justify-between gap-3x border-b border-solid border-stroke-gray px-2x py-2x md:px-4x md:py-3x ${
         direction === "left" ? "md:flex-row-reverse" : "md:flex-row"
       }`}
     >
       <h1 className="text-heading-sm md:text-heading-md">FAQ</h1>
-      <div className="w-full md:w-[650px] flex flex-col pb-3x md:pb-4x">
+      <div className="flex w-full flex-col pb-3x md:w-[650px] md:pb-4x">
         {faqItems.map(({ question, answer }, index) => (
           <div
             key={question}
-            className="py-2x border-b first-of-type:border-y border-solid border-stroke-gray overflow-hidden h-[55px] transition-all duration-300 ease-in-out"
+            className="h-[55px] overflow-hidden border-b border-solid border-stroke-gray py-2x transition-all duration-300 ease-in-out first-of-type:border-y"
           >
             <div
-              className="flex justify-between cursor-pointer group relative"
+              className="group relative flex cursor-pointer justify-between"
               onClick={openDropdown(index)}
               id={`dropdown-button-${index}`}
               aria-expanded="false"
@@ -99,7 +99,7 @@ export default function Faq({ direction }: { direction: "left" | "right" }) {
                 viewBox="0 0 16 17"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="opacity-0 transition-all duration-300 ease-in-out group-aria-expanded:opacity-100 absolute right-0"
+                className="absolute right-0 opacity-0 transition-all duration-300 ease-in-out group-aria-expanded:opacity-100"
               >
                 <path
                   d="M13.9999 8.50002C13.9999 8.63263 13.9472 8.7598 13.8534 8.85357C13.7597 8.94734 13.6325 9.00002 13.4999 9.00002H8.49988C8.49988 9.00002 8.13249 9.00002 7.99988 9.00002C7.86727 9.00002 8.15961 9.00002 7.99988 9.00002C7.84015 9.00002 7.99988 9.00002 7.49988 9.00002H2.49988C2.36727 9.00002 2.24009 8.94734 2.14632 8.85357C2.05256 8.7598 1.99988 8.63263 1.99988 8.50002C1.99988 8.36741 2.05256 8.24023 2.14632 8.14646C2.24009 8.0527 2.36727 8.00002 2.49988 8.00002H7.49988C7.49988 8.00002 7.85535 8.00003 7.99988 8.00003L8.49988 8L13.4999 8.00002C13.6325 8.00002 13.7597 8.0527 13.8534 8.14646C13.9472 8.24023 13.9999 8.36741 13.9999 8.50002Z"
@@ -107,7 +107,7 @@ export default function Faq({ direction }: { direction: "left" | "right" }) {
                 />
               </svg>
             </div>
-            <p className="text-body-sm mt-2x text-text-light-gray select-none">
+            <p className="text-body-sm mt-2x select-none text-text-light-gray">
               {answer}
             </p>
           </div>

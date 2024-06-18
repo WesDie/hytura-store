@@ -3,6 +3,7 @@ import ProductSlider from "./sections/product-slider";
 import TextImage from "./sections/text-and-image";
 import BaseText from "./sections/base-text";
 import Faq from "./sections/faq";
+import ReviewSlider from "./sections/review-slider";
 
 export default async function Home() {
   return (
@@ -35,6 +36,7 @@ export default async function Home() {
         imageSrc="/hero2.png"
       />
       <Faq direction="right" />
+      <ReviewSlider />
     </main>
   );
 }

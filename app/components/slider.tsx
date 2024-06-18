@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import ProductButton from "./product-button";
 import ArticleCard from "./article-card";
+import ReviewCard from "./review-card";
 
 export default function Slider({
   products,
@@ -106,7 +107,7 @@ export default function Slider({
             ))
           : Array.from(Array(10)).map((test: any, index: number) => (
               <SwiperSlide key={index}>
-                {/* review content slide */}
+                <ReviewCard />
               </SwiperSlide>
             ))}
       </Swiper>
