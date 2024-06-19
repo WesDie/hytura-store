@@ -10,3 +10,17 @@ export const createCustomerAccessTokenMutation = `
     }
   }
 `;
+
+export const sendCustomerPasswordResetEmail = `
+  mutation customerRecover($email: String!) {
+    customerRecover(email: $email) {
+      customerUserErrors {
+        message
+      }
+      userErrors {
+        field
+        message
+      }
+    } 
+  }
+`;

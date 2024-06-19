@@ -39,9 +39,13 @@ import {
   CustomerAccessToken,
   Customer,
   ShopifyGetCustomerOperation,
+  ShopifySendPasswordResetEmailOperation,
 } from "./types";
 import { getPageQuery } from "./queries/page";
-import { createCustomerAccessTokenMutation } from "./mutations/account";
+import {
+  createCustomerAccessTokenMutation,
+  sendCustomerPasswordResetEmail,
+} from "./mutations/account";
 import { getCustomerQuery } from "./queries/account";
 
 export async function shopifyFetch<T>({
@@ -401,4 +405,16 @@ export async function createCustomerToken(
   });
 
   return res.body.data.customerAccessTokenCreate;
+}
+
+export async function customerSendPasswordResetEmail(email: string) {
+  console.log(email);
+  const res = await shopifyFetch<ShopifySendPasswordResetEmailOperation>({
+    query: sendCustomerPasswordResetEmail,
+    variables: {
+      email,
+    },
+  });
+
+  return res.body.data.customerRecover;
 }

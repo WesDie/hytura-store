@@ -282,6 +282,23 @@ export type ShopifyGetAccountTokenOperation = {
   };
 };
 
+export type ShopifySendPasswordResetEmailOperation = {
+  data: {
+    customerRecover: {
+      customerUserErrors: {
+        message: string;
+      }[];
+      userErrors: {
+        field: string;
+        message: string;
+      }[];
+    };
+  };
+  variables: {
+    email: string;
+  };
+};
+
 export type ShopifyGetCustomerOperation = {
   data: {
     customer: Customer;

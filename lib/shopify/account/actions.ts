@@ -1,7 +1,10 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { createCustomerToken } from "..";
+import {
+  createCustomerToken,
+  customerSendPasswordResetEmail,
+} from "@/lib/shopify/index";
 
 export async function shopifyCreateCustomer(
   prevState: any,
@@ -113,6 +116,40 @@ export async function shopifyLoginCustomer(
   }
 
   return { message: "Somthing went wrong" };
+}
+
+export async function shopifySendPasswordResetEmail(
+  prevState: any,
+  formData: FormData,
+): Promise<{ message: any }> {
+  const errors: any = {};
+  const requiredFields = ["email", "password"];
+  requiredFields.forEach((field) => {
+    if (formData.get(field) === "") {
+      errors[field] = [`is required`];
+    }
+  });
+
+  if (Object.keys(errors).length > 0) {
+    return { message: errors };
+  }
+
+  const email = formData.get("email") as string;
+
+  if (email !== null) {
+    const res = await customerSendPasswordResetEmail(email);
+    console.log(res);
+
+    if (res.customerUserErrors) {
+      return { message: { error: res.customerUserErrors[0].message } };
+    } else if (res.userErrors) {
+      return { message: { error: res.userErrors[0].message } };
+    }
+
+    return { message: { succes: "Email sent successfully" } };
+  }
+
+  return { message: { error: "Somthing went wrong" } };
 }
 
 export async function shopifyLogoutCustomer() {
