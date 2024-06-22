@@ -5,7 +5,7 @@ import { useCartDrawer } from "../../context/cart-drawer-context";
 
 export default function CartSummary({ cart }: { cart: Cart }) {
   const { setIsCartOpen } = useCartDrawer();
-  if (!cart.lines.length) return null;
+  if (!cart?.lines?.length) return null;
 
   return (
     <div className="mt-auto flex flex-col gap-1x border-t border-stroke-gray bg-background-sand px-3x py-2x">

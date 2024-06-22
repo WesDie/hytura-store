@@ -14,13 +14,24 @@ export default function CartDrawer({ cart }: { cart: Cart }) {
 
   useEffect(() => {
     let cartCount = 0;
+    if (!cart?.id) return setCartCount(0);
+
     cart.lines.map((item: CartItem) => {
       cartCount += item.quantity;
     });
     setCartCount(cartCount);
   }, [cart, setCartCount]);
 
-  if (cart?.id === undefined) return null;
+  function EmptyCart(): JSX.Element {
+    return (
+      <div className="flex h-full flex-col items-center justify-center gap-1x">
+        <p className="text-heading-2xs">Your cart is empty</p>
+        <button className="text-link-xs" onClick={() => setIsCartOpen(false)}>
+          Continue shopping
+        </button>
+      </div>
+    );
+  }
 
   return (
     <Transiton
@@ -36,22 +47,16 @@ export default function CartDrawer({ cart }: { cart: Cart }) {
         className={`fixed bottom-0 right-0 top-0 flex w-full translate-x-0 flex-col bg-background-sand transition-transform duration-300 group-aria-hidden:translate-x-[100%] md:w-[420px]`}
       >
         <CartHeader />
-        {cart.lines.length === 0 ? (
-          <div className="flex h-full flex-col items-center justify-center gap-1x">
-            <p className="text-heading-2xs">Your cart is empty</p>
-            <button
-              className="text-link-xs"
-              onClick={() => setIsCartOpen(false)}
-            >
-              Continue shopping
-            </button>
-          </div>
+        {!cart?.id ? (
+          <EmptyCart />
+        ) : cart?.lines?.length === 0 ? (
+          <EmptyCart />
         ) : (
           <div
             className="flex h-full flex-col overflow-auto"
             data-lenis-prevent
           >
-            {cart.lines.map((item: CartItem, index: number) => (
+            {cart?.lines?.map((item: CartItem, index: number) => (
               <CartItemProduct key={index} {...item} />
             ))}
           </div>
