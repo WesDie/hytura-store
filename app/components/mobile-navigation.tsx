@@ -17,7 +17,6 @@ export default function MobileNavigation({
   useEffect(() => {
     const handleScroll = () => {
       const mobileNavigation = document.getElementById("mobile-navigation");
-      console.log(window.scrollY);
 
       if (mobileNavigation) {
         mobileNavigation.setAttribute(
@@ -39,7 +38,7 @@ export default function MobileNavigation({
   return (
     <div
       id="mobile-navigation"
-      className={`fixed bottom-0 left-0 right-0 z-50 flex flex-col bg-background-sand md:hidden`}
+      className={`fixed bottom-0 left-0 right-0 z-50 flex translate-x-0 flex-col bg-background-sand transition-all duration-300 group-aria-hidden:translate-x-full md:hidden`}
     >
       <Link
         href={"/"}
@@ -71,12 +70,12 @@ export default function MobileNavigation({
               isSubMenuOpen ? "-rotate-180" : ""
             }`}
           >
-            <g clip-path="url(#clip0_147_1728)">
+            <g clipPath="url(#clip0_147_1728)">
               <path
                 d="M3 17L12 7L21 17"
                 stroke="#1F1F1F"
-                stroke-width="0.892857"
-                stroke-linecap="square"
+                strokeWidth="0.892857"
+                strokeLinecap="square"
               />
             </g>
             <defs>

@@ -7,6 +7,7 @@ import { useCartDrawer, useCartCount } from "../context/cart-drawer-context";
 import { useAccountDrawer } from "../context/account-drawer-context";
 import { useMobileNavigation } from "../context/mobile-navigation-context";
 import MobileNavigation from "../components/mobile-navigation";
+import Transiton from "../components/transition";
 
 export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
   const { setIsCartOpen } = useCartDrawer();
@@ -72,9 +73,9 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
         </div>
       )}
       <header
-        className={`fixed flex w-full justify-between border-b border-solid border-stroke-black backdrop-blur-lg ${
+        className={`fixed flex w-full justify-between border-b border-solid backdrop-blur-lg ${
           isTop ? "top-[32px]" : "top-[0]"
-        } z-10 bg-background-sand md:bg-transparent`}
+        } z-10 bg-background-sand transition-colors duration-300 md:bg-transparent ${isMobileNavigationOpen ? "border-stroke-gray" : "border-stroke-black"}`}
       >
         <div className="z-[11] flex w-full gap-5x py-2x pl-2x md:pl-3x">
           <a href="/" className="flex">
@@ -257,7 +258,9 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
           />
         </div>
       </header>
-      {isMobileNavigationOpen && <MobileNavigation isLoggedIn={isLoggedIn} />}
+      <Transiton transitonTime={300} state={isMobileNavigationOpen}>
+        <MobileNavigation isLoggedIn={isLoggedIn} />
+      </Transiton>
     </>
   );
 }
