@@ -64,6 +64,7 @@ export default function Register() {
             id="email"
             name="email"
             placeholder="Email"
+            autoComplete="email"
             aria-invalid={state.message.email ? "true" : "false"}
           />
         </div>
@@ -81,6 +82,7 @@ export default function Register() {
             id="password"
             name="password"
             placeholder="Password"
+            autoComplete="current-password"
             aria-invalid={state.message.password ? "true" : "false"}
           />
         </div>
