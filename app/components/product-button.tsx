@@ -33,6 +33,8 @@ export default function ProductButton({ product }: { product: Product }) {
     }
   };
 
+  if (!product) return null;
+
   return (
     <div className="h-full w-full bg-background-sand transition-colors">
       <Link

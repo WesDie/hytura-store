@@ -78,7 +78,7 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
         } z-10 bg-background-sand transition-colors duration-300 md:bg-transparent ${isMobileNavigationOpen ? "border-stroke-gray" : "border-stroke-black"}`}
       >
         <div className="z-[11] flex w-full gap-5x py-2x pl-2x md:pl-3x">
-          <a href="/" className="flex">
+          <Link href="/" className="flex">
             <svg
               width="73"
               height="21"
@@ -92,25 +92,25 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
                 fill="#1F1F1F"
               />
             </svg>
-          </a>
+          </Link>
           <div className="hidden gap-2x md:flex">
-            <a href="/" className={linkClass}>
+            <Link href="/" className={linkClass}>
               Home
-            </a>
-            <a
+            </Link>
+            <Link
               href="/shop"
               className={linkClass}
               onMouseOver={() => setIsShopDropdownActive(true)}
               onMouseLeave={() => setIsShopDropdownActive(false)}
             >
               Shop
-            </a>
-            <a href="/about" className={linkClass}>
+            </Link>
+            <Link href="/about" className={linkClass}>
               About
-            </a>
-            <a href="/journal/news" className={linkClass}>
+            </Link>
+            <Link href="/journal/news" className={linkClass}>
               Journal
-            </a>
+            </Link>
           </div>
         </div>
         <div className="z-[11] hidden w-full justify-end gap-2x py-2x pr-2x md:flex md:pr-3x">

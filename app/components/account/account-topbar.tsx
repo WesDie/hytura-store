@@ -9,6 +9,7 @@ export default function AccountTopBar({ firstName }: { firstName: string }) {
   const logout = async () => {
     await shopifyLogoutCustomer();
     router.push("/");
+    router.refresh();
   };
 
   return (
