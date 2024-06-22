@@ -4,6 +4,8 @@ import { cookies } from "next/headers";
 import {
   createCustomerToken,
   customerSendPasswordResetEmail,
+  getCart,
+  updateCartIdentity,
 } from "@/lib/shopify/index";
 
 export async function shopifyCreateCustomer(
@@ -105,6 +107,13 @@ export async function shopifyLoginCustomer(
 
     if (res.customerAccessToken?.accessToken) {
       cookies().set("customerAccessToken", res.customerAccessToken.accessToken);
+
+      let cartId = cookies().get("cartId")?.value;
+
+      if (cartId) {
+        updateCartIdentity(cartId, res.customerAccessToken.accessToken);
+      }
+
       return { message: "Logged in successfully" };
     } else if (res.customerUserErrors) {
       if (res.customerUserErrors[0].message === "Unidentified customer") {

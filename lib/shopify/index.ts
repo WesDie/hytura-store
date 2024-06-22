@@ -8,6 +8,7 @@ import {
   addToCartMutation,
   removeFromCartMutation,
   createCartWithAccountMutation,
+  cartUpdateIdentityMutation,
 } from "./mutations/cart";
 import { getAllCollectionsQuery } from "./queries/collection";
 import {
@@ -40,6 +41,7 @@ import {
   Customer,
   ShopifyGetCustomerOperation,
   ShopifySendPasswordResetEmailOperation,
+  ShopifyCartUpdateIdentityOperation,
 } from "./types";
 import { getPageQuery } from "./queries/page";
 import {
@@ -345,6 +347,23 @@ export async function createCartWithAccount(
   });
 
   return reshapeCart(res.body.data.cartCreate.cart);
+}
+
+export async function updateCartIdentity(
+  cartId: string,
+  customerAccessToken: string,
+) {
+  const res = await shopifyFetch<ShopifyCartUpdateIdentityOperation>({
+    query: cartUpdateIdentityMutation,
+    variables: {
+      cartId,
+      customerAccessToken,
+    },
+  });
+
+  console.log(cartId, customerAccessToken);
+
+  return reshapeCart(res.body.data.cartBuyerIdentityUpdate.cart);
 }
 
 export async function updateCart(

@@ -222,6 +222,18 @@ export type ShopifyCreateCartOperation = {
   data: { cartCreate: { cart: ShopifyCart } };
 };
 
+export type ShopifyCartUpdateIdentityOperation = {
+  data: {
+    cartBuyerIdentityUpdate: {
+      cart: ShopifyCart;
+    };
+  };
+  variables: {
+    cartId: string;
+    customerAccessToken: string;
+  };
+};
+
 export type ShopifyAddToCartOperation = {
   data: {
     cartLinesAdd: {

@@ -22,6 +22,17 @@ export const createCartWithAccountMutation = `
   ${cartFragment}
 `;
 
+export const cartUpdateIdentityMutation = `
+  mutation updateCartIdentity($cartId: ID!, $customerAccessToken: String!) {
+    cartBuyerIdentityUpdate(buyerIdentity: {customerAccessToken: $customerAccessToken}, cartId: $cartId) {
+      cart {
+        ...cart
+      }
+    }
+  }
+  ${cartFragment}
+`;
+
 export const updateCartMutation = `
   mutation editCartItems($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
     cartLinesUpdate(cartId: $cartId, lines: $lines) {
