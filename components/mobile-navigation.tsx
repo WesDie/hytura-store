@@ -2,8 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useAccountDrawer } from "../context/account-drawer-context";
-import { useMobileNavigation } from "../context/mobile-navigation-context";
+import { useAccountDrawer } from "./context/account-drawer-context";
+import { useMobileNavigation } from "./context/mobile-navigation-context";
+import RenderImage from "./render-Image";
 
 export default function MobileNavigation({
   isLoggedIn,
@@ -60,35 +61,15 @@ export default function MobileNavigation({
           className="text-heading-2xs flex justify-between p-2x"
         >
           Shop
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          <RenderImage
+            src={"/icons/arrow-down.svg"}
+            alt={"arrow down"}
+            width={24}
+            height={24}
             className={`transform transition-transform duration-300 ${
               isSubMenuOpen ? "-rotate-180" : ""
             }`}
-          >
-            <g clipPath="url(#clip0_147_1728)">
-              <path
-                d="M3 17L12 7L21 17"
-                stroke="#1F1F1F"
-                strokeWidth="0.892857"
-                strokeLinecap="square"
-              />
-            </g>
-            <defs>
-              <clipPath id="clip0_147_1728">
-                <rect
-                  width="24"
-                  height="24"
-                  fill="white"
-                  transform="matrix(-1 0 0 -1 24 24)"
-                />
-              </clipPath>
-            </defs>
-          </svg>
+          />
         </button>
         <div
           className={`flex w-full gap-7x px-2x transition-opacity duration-300 ${isSubMenuOpen ? "pb-2x" : "pointer-events-none h-0 overflow-hidden pb-0 opacity-0"}`}

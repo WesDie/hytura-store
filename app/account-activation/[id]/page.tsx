@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
-import AccountActivation from "../../components/account/account-activation";
+import AccountActivation from "@/components/account/account-activation";
 
 export default async function MainAccountActivation({
   params,

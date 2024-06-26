@@ -1,5 +1,8 @@
 "use client";
-import { useCartDrawer, useCartCount } from "../../context/cart-drawer-context";
+import {
+  useCartDrawer,
+  useCartCount,
+} from "@/components/context/cart-drawer-context";
 
 export default function CartHeader() {
   const { setIsCartOpen } = useCartDrawer();

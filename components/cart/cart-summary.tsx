@@ -1,7 +1,7 @@
 "use client";
 import { Cart } from "@/lib/shopify/types";
 import Link from "next/link";
-import { useCartDrawer } from "../../context/cart-drawer-context";
+import { useCartDrawer } from "@/components/context/cart-drawer-context";
 
 export default function CartSummary({ cart }: { cart: Cart }) {
   const { setIsCartOpen } = useCartDrawer();

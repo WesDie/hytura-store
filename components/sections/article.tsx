@@ -1,5 +1,5 @@
 "use client";
-import RenderImage from "../components/render-Image";
+import RenderImage from "@/components/render-Image";
 import { Article } from "@/lib/shopify/types";
 
 export default function ArticleDetails({ article }: { article: Article }) {

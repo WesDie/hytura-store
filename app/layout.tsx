@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { Kaisei_Tokumin } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 import localFont from "next/font/local";
 
 import type { Viewport } from "next";
 
-import SmoothScroller from "./components/smooth-scoller";
-import Header from "./sections/header";
-import Footer from "./sections/footer";
-import Account from "./components/account/account";
+import SmoothScroller from "@/components/smooth-scoller";
+import Header from "@/components/sections/header";
+import Footer from "@/components/sections/footer";
+import Account from "@/components/account/account";
 import { cookies } from "next/headers";
-import Provider from "./context/Provider";
-import Cart from "./components/cart/cart";
+import Provider from "@/components/context/Provider";
+import Cart from "@/components/cart/cart";
 
 export const viewport: Viewport = {
   themeColor: "#FBF9EE",

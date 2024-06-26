@@ -1,6 +1,6 @@
 "use client";
 
-import { useAccountDrawer } from "../../context/account-drawer-context";
+import { useAccountDrawer } from "@/components/context/account-drawer-context";
 
 export default function AccountHeader() {
   const { setIsAccountOpen } = useAccountDrawer();

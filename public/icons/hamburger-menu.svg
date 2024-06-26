@@ -1,0 +1,19 @@
+<svg
+  width="20"
+  height="16"
+  viewBox="0 0 20 16"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  className="m-auto"
+>
+  <g clipPath="url(#clip0_179_847)">
+    <path d="M1 1H19" stroke="black" strokeLinecap="square" />
+    <path d="M1 8H19" stroke="black" strokeLinecap="square" />
+    <path d="M1 15H19" stroke="black" strokeLinecap="square" />
+  </g>
+  <defs>
+    <clipPath id="clip0_179_847">
+      <rect width="20" height="16" fill="white" />
+    </clipPath>
+  </defs>
+</svg>

@@ -1,7 +1,7 @@
-import ProductSlider from "@/app/sections/product-slider";
+import ProductSlider from "@/components/sections/product-slider";
 import { getSingleProductData } from "@/lib/shopify";
-import ProductMedia from "@/app/components/product-media";
-import ProductDetails from "@/app/components/product-details";
+import ProductMedia from "@/components/product-media";
+import ProductDetails from "@/components/product-details";
 export default async function Product({
   params,
 }: {

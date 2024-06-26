@@ -7,6 +7,7 @@ import "swiper/css";
 import ProductButton from "./product-button";
 import ArticleCard from "./article-card";
 import ReviewCard from "./review-card";
+import RenderImage from "./render-Image";
 
 export default function Slider({
   products,
@@ -43,32 +44,20 @@ export default function Slider({
         <h1 className="text-heading-xs md:text-heading-md">{text}</h1>
         <div className="flex gap-2x">
           <button onClick={prevto} className="rotate-180">
-            <svg
-              width="16"
-              height="17"
-              viewBox="0 0 16 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M14.6667 8.43325L7.36428 1.83325M14.6667 8.43325L7.36428 15.0333M14.6667 8.43325H0"
-                stroke="#1F1F1F"
-              />
-            </svg>
+            <RenderImage
+              src={"/icons/arrow-left.svg"}
+              alt={"arrow left"}
+              width={16}
+              height={17}
+            />
           </button>
           <button onClick={nexto}>
-            <svg
-              width="16"
-              height="17"
-              viewBox="0 0 16 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M14.6667 8.43325L7.36428 1.83325M14.6667 8.43325L7.36428 15.0333M14.6667 8.43325H0"
-                stroke="#1F1F1F"
-              />
-            </svg>
+            <RenderImage
+              src={"/icons/arrow-right.svg"}
+              alt={"arrow right"}
+              width={16}
+              height={17}
+            />
           </button>
         </div>
       </div>

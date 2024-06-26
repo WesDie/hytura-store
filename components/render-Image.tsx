@@ -17,7 +17,9 @@ export default function RenderImage({
   className?: string;
   imageClassName?: string;
 }) {
-  const [isImageLoading, setImageLoading] = useState(true);
+  const [isImageLoading, setImageLoading] = useState(!src.endsWith(".svg"));
+
+  if (!src) return null;
 
   return (
     <div className={className}>

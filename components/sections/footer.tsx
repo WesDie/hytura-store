@@ -54,6 +54,9 @@ export default async function Footer() {
     },
   ];
 
+  const date = new Date();
+  const year = date.getFullYear();
+
   return (
     <footer className="flex flex-col">
       <div className="flex flex-col-reverse justify-between gap-3x border-b border-solid border-stroke-gray px-2x py-5x md:gap-6x md:px-3x lg:flex-row lg:gap-3x lg:py-8x">
@@ -101,7 +104,7 @@ export default async function Footer() {
       </div>
       <div className="flex justify-between p-2x md:px-4x md:py-3x">
         <p className="text-heading-4xs md:text-heading-3xs text-text-black">
-          © Hytura 2024
+          © Hytura {year}
         </p>
         <p className="text-heading-3xs hidden text-text-light-gray md:block">
           Made by{" "}

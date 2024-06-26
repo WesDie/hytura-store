@@ -1,4 +1,4 @@
-import MainBlog from "../../sections/blog";
+import MainBlog from "@/components/sections/blog";
 import { getAllBlogsData } from "@/lib/shopify";
 
 export default async function Journal({

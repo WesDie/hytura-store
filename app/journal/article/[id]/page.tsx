@@ -1,5 +1,5 @@
-import ArticleSlider from "@/app/sections/article-slider";
-import ArticleDetails from "../../../sections/article";
+import ArticleSlider from "@/components/sections/article-slider";
+import ArticleDetails from "@/components/sections/article";
 import { getSingleArticleData } from "@/lib/shopify";
 
 export default async function Journal({ params }: { params: { id: string } }) {

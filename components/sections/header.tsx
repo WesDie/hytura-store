@@ -1,0 +1,238 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import RenderImage from "@/components/render-Image";
+import Link from "next/link";
+import {
+  useCartDrawer,
+  useCartCount,
+} from "@/components/context/cart-drawer-context";
+import { useAccountDrawer } from "@/components/context/account-drawer-context";
+import { useMobileNavigation } from "@/components/context/mobile-navigation-context";
+import MobileNavigation from "@/components/mobile-navigation";
+import Transiton from "@/components/transition";
+
+export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
+  const { setIsCartOpen } = useCartDrawer();
+  const { setIsAccountOpen } = useAccountDrawer();
+  const { cartCount } = useCartCount();
+  const { setIsMobileNavigationOpen, isMobileNavigationOpen } =
+    useMobileNavigation();
+
+  const [isTop, setIsTop] = useState(false);
+  const [isShopDropdownActive, setIsShopDropdownActive] = useState(false);
+  const linkClass =
+    "text-heading-3xs w-fit inline-block relative after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-text-black after:origin-bottom-right after:transition-transform after:duration-200 after:ease-in-out hover:after:scale-x-[1] hover:after:origin-bottom-left";
+
+  useEffect(() => {
+    const checkScrollPosition = () => {
+      if (window.scrollY < 32) {
+        setIsTop(true);
+      } else {
+        setIsTop(false);
+      }
+    };
+    checkScrollPosition();
+
+    window.onscroll = () => {
+      const announcementBar = document.querySelector(
+        "#announcementBar",
+      ) as HTMLElement;
+      const header = document.querySelector("header") as HTMLElement;
+
+      if (window.scrollY < 32) {
+        setIsTop(true);
+      } else {
+        setIsTop(false);
+      }
+
+      if (header) {
+        header.setAttribute(
+          "style",
+          `top: ${window.scrollY < 32 ? `${32 - window.scrollY}px` : "-0"}`,
+        );
+      }
+
+      if (announcementBar) {
+        announcementBar.setAttribute(
+          "style",
+          `top: ${window.scrollY < 32 ? `${0 - window.scrollY}px` : "-32px"}`,
+        );
+      }
+    };
+  });
+
+  return (
+    <>
+      <div className="h-[86px]" id="empty-header-height"></div>
+      {isTop && (
+        <div
+          id="announcementBar"
+          className={`fixed top-[0] z-[11] w-full bg-background-dark-gray py-1x`}
+        >
+          <p className="text-heading-4xs text-center text-text-white">
+            All orders over €25 shipped for free
+          </p>
+        </div>
+      )}
+      <header
+        className={`fixed flex w-full justify-between border-b border-solid backdrop-blur-lg ${
+          isTop ? "top-[32px]" : "top-[0]"
+        } z-10 bg-background-sand transition-colors duration-300 md:bg-transparent ${isMobileNavigationOpen ? "border-stroke-gray" : "border-stroke-black"}`}
+      >
+        <div className="z-[11] flex w-full gap-5x py-2x pl-2x md:pl-3x">
+          <Link href="/" className="flex">
+            <RenderImage
+              src={"/icons/logo.svg"}
+              alt={"logo"}
+              width={73}
+              height={21}
+              className="w-fit"
+            />
+          </Link>
+          <div className="hidden gap-2x md:flex">
+            <Link href="/" className={linkClass}>
+              Home
+            </Link>
+            <Link
+              href="/shop"
+              className={linkClass}
+              onMouseOver={() => setIsShopDropdownActive(true)}
+              onMouseLeave={() => setIsShopDropdownActive(false)}
+            >
+              Shop
+            </Link>
+            <Link href="/about" className={linkClass}>
+              About
+            </Link>
+            <Link href="/journal/news" className={linkClass}>
+              Journal
+            </Link>
+          </div>
+        </div>
+        <div className="z-[11] hidden w-full justify-end gap-2x py-2x pr-2x md:flex md:pr-3x">
+          <button className={linkClass}>EN</button>
+          {isLoggedIn ? (
+            <button
+              className={linkClass}
+              onClick={() => setIsAccountOpen(true)}
+            >
+              Login
+            </button>
+          ) : (
+            <Link href={"/account"} className={linkClass}>
+              Account
+            </Link>
+          )}
+          <button
+            className={linkClass}
+            onClick={() => setIsCartOpen(true)}
+            id="cart-toggle"
+          >
+            Cart ({cartCount})
+          </button>
+        </div>
+        <div className="relative z-[11] my-auto mr-1x flex md:hidden">
+          <button
+            onClick={() => setIsCartOpen(true)}
+            className="flex h-4x w-4x"
+          >
+            <RenderImage
+              src={"/icons/cart.svg"}
+              alt={"cart icon"}
+              width={17}
+              height={20}
+              className="m-auto"
+            />
+          </button>
+          <button
+            className={`flex h-4x w-4x transition-opacity ${isMobileNavigationOpen ? "pointer-events-none opacity-0" : ""}`}
+            onClick={() => setIsMobileNavigationOpen(true)}
+          >
+            <RenderImage
+              src={"/icons/hamburger-menu.svg"}
+              alt={"menu icon"}
+              width={20}
+              height={16}
+              className="m-auto"
+            />
+          </button>
+          <button
+            className={`absolute right-0 flex h-4x w-4x transition-opacity ${isMobileNavigationOpen ? "" : "pointer-events-none opacity-0"}`}
+            onClick={() => setIsMobileNavigationOpen(false)}
+          >
+            <RenderImage
+              src={"/icons/close.svg"}
+              alt={"close icon"}
+              width={24}
+              height={24}
+              className="m-auto"
+            />
+          </button>
+        </div>
+        <div
+          id="shop-dropdown-header"
+          className={`${
+            isShopDropdownActive
+              ? "max-h-[200px] border-b py-3x"
+              : "max-h-[0px] py-0 opacity-0"
+          } absolute left-0 right-0 top-[54px] flex w-full justify-between overflow-hidden border-solid border-stroke-black bg-background-sand px-3x backdrop-blur-lg transition-all delay-75 duration-300 ease-in-out`}
+          onMouseOver={() => setIsShopDropdownActive(true)}
+          onMouseLeave={() => setIsShopDropdownActive(false)}
+        >
+          <div className="flex gap-2x">
+            <div className="flex min-w-[175px] flex-col gap-1x">
+              <h3 className="text-heading-xs">Main products</h3>
+              <div className="flex flex-col gap-[4px]">
+                <Link
+                  href="/collection/all"
+                  className={`${linkClass} text-body-sm`}
+                  onClick={() => setIsShopDropdownActive(false)}
+                >
+                  All
+                </Link>
+                <Link
+                  href="/collection/home%20page"
+                  className={`${linkClass} text-body-sm`}
+                  onClick={() => setIsShopDropdownActive(false)}
+                >
+                  Home page
+                </Link>
+                <Link
+                  href="/collection/sprays"
+                  className={`${linkClass} text-body-sm`}
+                  onClick={() => setIsShopDropdownActive(false)}
+                >
+                  Sprays
+                </Link>
+              </div>
+            </div>
+            <div className="flex min-w-[175px] flex-col gap-1x">
+              <h3 className="text-heading-xs">Other</h3>
+              <div className="flex flex-col gap-[4px]">
+                <Link
+                  href="/"
+                  className={`${linkClass} text-body-sm`}
+                  onClick={() => setIsShopDropdownActive(false)}
+                >
+                  Accessories
+                </Link>
+              </div>
+            </div>
+          </div>
+          <RenderImage
+            src={"/hero.png"}
+            alt={"product image"}
+            width={1000}
+            height={667}
+            className={`max-h-full w-[200px]`}
+            imageClassName="w-full h-full object-cover"
+          />
+        </div>
+      </header>
+      <Transiton transitonTime={300} state={isMobileNavigationOpen}>
+        <MobileNavigation isLoggedIn={isLoggedIn} />
+      </Transiton>
+    </>
+  );
+}

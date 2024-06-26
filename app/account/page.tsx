@@ -1,5 +1,5 @@
 import { getCustomer } from "@/lib/shopify";
-import AccountTopBar from "../components/account/account-topbar";
+import AccountTopBar from "@/components/account/account-topbar";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 

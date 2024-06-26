@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { addItem } from "./cart/actions";
 import Link from "next/link";
 import { Product } from "@/lib/shopify/types";
-import { useCartDrawer } from "../context/cart-drawer-context";
+import { useCartDrawer } from "./context/cart-drawer-context";
 
 export default function ProductButton({ product }: { product: Product }) {
   const [showSecondProductImage, setShowSecondProductImage] = useState(false);

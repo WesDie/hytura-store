@@ -1,6 +1,6 @@
 "use client";
 
-import RenderImage from "../render-Image";
+import RenderImage from "@/components/render-Image";
 import { removeItem, updateItemQuantity } from "./actions";
 import { CartItem } from "@/lib/shopify/types";
 import { useState, useEffect, useRef } from "react";

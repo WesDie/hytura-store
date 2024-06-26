@@ -1,6 +1,6 @@
-import Hero from "../sections/hero";
-import TextImage from "../sections/text-and-image";
-import BaseText from "../sections/base-text";
+import Hero from "@/components/sections/hero";
+import TextImage from "@/components/sections/text-and-image";
+import BaseText from "@/components/sections/base-text";
 
 export default async function About() {
   return (

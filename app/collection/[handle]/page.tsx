@@ -1,4 +1,4 @@
-import MainCollection from "../../sections/collection";
+import MainCollection from "@/components/sections/collection";
 import { getAllCollections } from "@/lib/shopify";
 
 export default async function CollectionPage({

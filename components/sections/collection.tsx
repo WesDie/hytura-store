@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import ProductButton from "../components/product-button";
+import ProductButton from "@/components/product-button";
 
 import { notFound } from "next/navigation";
 import { Collection, Product } from "@/lib/shopify/types";

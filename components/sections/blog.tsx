@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-import RenderImage from "../components/render-Image";
+import RenderImage from "@/components/render-Image";
 import Link from "next/link";
 
 import { useRouter } from "next/navigation";

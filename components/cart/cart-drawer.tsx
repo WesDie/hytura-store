@@ -3,10 +3,13 @@ import CartHeader from "./cart-header";
 import CartItemProduct from "./cart-item";
 import CartSummary from "./cart-summary";
 import { CartItem } from "@/lib/shopify/types";
-import { useCartDrawer, useCartCount } from "../../context/cart-drawer-context";
+import {
+  useCartDrawer,
+  useCartCount,
+} from "@/components/context/cart-drawer-context";
 import { Cart } from "@/lib/shopify/types";
 import { useEffect } from "react";
-import Transiton from "../transition";
+import Transiton from "@/components/transition";
 
 export default function CartDrawer({ cart }: { cart: Cart }) {
   const { isCartOpen, setIsCartOpen } = useCartDrawer();

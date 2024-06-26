@@ -1,8 +1,8 @@
 "use client";
-import AccountHeader from "./account-header";
-import MainAccount from "./main-account";
-import { useAccountDrawer } from "../../context/account-drawer-context";
-import Transiton from "../transition";
+import AccountHeader from "@/components/account/account-header";
+import MainAccount from "@/components/account/main-account";
+import { useAccountDrawer } from "@/components/context/account-drawer-context";
+import Transiton from "@/components/transition";
 
 export default function AccountDrawer() {
   const { isAccountOpen, setIsAccountOpen } = useAccountDrawer();

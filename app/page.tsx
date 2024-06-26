@@ -1,9 +1,9 @@
-import Hero from "./sections/hero";
-import ProductSlider from "./sections/product-slider";
-import TextImage from "./sections/text-and-image";
-import BaseText from "./sections/base-text";
-import Faq from "./sections/faq";
-import ReviewSlider from "./sections/review-slider";
+import Hero from "@/components/sections/hero";
+import ProductSlider from "@/components/sections/product-slider";
+import TextImage from "@/components/sections/text-and-image";
+import BaseText from "@/components/sections/base-text";
+import Faq from "@/components/sections/faq";
+import ReviewSlider from "@/components/sections/review-slider";
 
 export default async function Home() {
   return (

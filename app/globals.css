@@ -55,11 +55,11 @@
   .button-secondary {
     @apply text-body-sm border border-solid border-background-black px-2x pb-[9px] pt-[7px] text-text-black transition-all hover:bg-background-black hover:text-text-white;
 
-    svg {
-      @apply my-auto transition-all;
+    img {
+      @apply transition-all;
     }
-    &:hover path {
-      @apply fill-stroke-white;
+    &:hover img {
+      @apply invert;
     }
   }
 

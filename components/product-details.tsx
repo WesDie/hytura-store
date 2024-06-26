@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { addItem } from "./cart/actions";
 import { Product, ProductVariant } from "@/lib/shopify/types";
-import { useCartDrawer } from "../context/cart-drawer-context";
+import { useCartDrawer } from "./context/cart-drawer-context";
 
 export default function ProductDetails({ product }: { product: Product }) {
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
