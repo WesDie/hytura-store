@@ -294,6 +294,24 @@ export type ShopifyGetAccountTokenOperation = {
   };
 };
 
+export type ShopifyCustomerActivateOperation = {
+  data: {
+    customerActivate: {
+      customerAccessToken: {
+        accessToken: string;
+      };
+      customerUserErrors: {
+        message: string;
+      }[];
+    };
+  };
+  variables: {
+    id: string;
+    password: string;
+    activationToken: string;
+  };
+};
+
 export type ShopifySendPasswordResetEmailOperation = {
   data: {
     customerRecover: {

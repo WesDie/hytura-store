@@ -24,3 +24,16 @@ export const sendCustomerPasswordResetEmail = `
     } 
   }
 `;
+
+export const customerActivateMutation = `
+  mutation customerActivate($id: ID!, $password: String!, $activationToken: String!) {
+    customerActivate(input: { activationToken: $activationToken, password: $password }, id: $id) {
+      customerAccessToken {
+        accessToken
+      }
+      customerUserErrors {
+        message
+      }
+    } 
+  }
+`;

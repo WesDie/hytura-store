@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import {
   createCustomerToken,
   customerSendPasswordResetEmail,
-  getCart,
+  customerActivateAccount,
   updateCartIdentity,
 } from "@/lib/shopify/index";
 
@@ -163,4 +163,52 @@ export async function shopifySendPasswordResetEmail(
 
 export async function shopifyLogoutCustomer() {
   cookies().delete("customerAccessToken");
+}
+
+export async function shopifyActivateCustomer(
+  prevState: any,
+  formData: FormData,
+): Promise<{ message: any }> {
+  const errors: any = {};
+  const requiredFields = ["password", "confirm_password"];
+  requiredFields.forEach((field) => {
+    if (formData.get(field) === "") {
+      errors[field] = [`is required`];
+    }
+  });
+
+  if (Object.keys(errors).length > 0) {
+    return { message: errors };
+  }
+
+  const password = formData.get("password") as string;
+  const confirmPassword = formData.get("confirm_password") as string;
+  const activationToken = formData.get("activationToken") as string;
+  const id = ("gid://shopify/Customer/" + formData.get("id")) as string;
+
+  if (password !== confirmPassword) {
+    return { message: { confirm_password: ["Does not match"] } };
+  }
+
+  if (password !== null && activationToken !== null && id !== null) {
+    const res = await customerActivateAccount(id, activationToken, password);
+
+    console.log(res);
+
+    if (res.customerUserErrors && res.customerUserErrors.length > 0) {
+      return { message: { base: res.customerUserErrors[0].message } };
+    } else if (res.customerAccessToken) {
+      cookies().set("customerAccessToken", res.customerAccessToken.accessToken);
+
+      let cartId = cookies().get("cartId")?.value;
+
+      if (cartId) {
+        updateCartIdentity(cartId, res.customerAccessToken.accessToken);
+      }
+
+      return { message: "Account activated successfully" };
+    }
+  }
+
+  return { message: "Somthing went wrong" };
 }
