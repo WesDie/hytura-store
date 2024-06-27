@@ -3,7 +3,7 @@ import { Cart } from "@/lib/shopify/types";
 import Link from "next/link";
 import { useCartDrawer } from "@/components/context/cart-drawer-context";
 
-export default function CartSummary({ cart }: { cart: Cart }) {
+export default function CartSummary({ cart }: { cart: Cart | null }) {
   const { setIsCartOpen } = useCartDrawer();
   if (!cart?.lines?.length) return null;
 

@@ -284,7 +284,7 @@ export async function getAllCollections(): Promise<Collection[]> {
   return reshapeCollections(removeEdgesAndNodes(res.body.data.collections));
 }
 
-export async function getCart(id: string): Promise<Cart> {
+export async function getCart(id: string): Promise<Cart | null> {
   const res = await shopifyFetch<ShopifyCartOperation>({
     query: getCartQuery,
     variables: {
@@ -292,6 +292,10 @@ export async function getCart(id: string): Promise<Cart> {
     },
     tags: [TAGS.cart],
   });
+
+  if (res.body.data.cart == null) {
+    return null;
+  }
 
   return reshapeCart(res.body.data.cart);
 }

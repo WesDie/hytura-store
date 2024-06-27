@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use server";
 
 import { cookies } from "next/headers";
@@ -26,9 +25,9 @@ export async function addItem(selectedVariantId: string, quantity: number = 1) {
 
   if (!cartId || !cart) {
     if (!accountToken) {
-      cart = await createCart(selectedVariantId, 1);
+      cart = await createCart(selectedVariantId, "1");
     } else {
-      cart = await createCartWithAccount(selectedVariantId, 1, accountToken);
+      cart = await createCartWithAccount(selectedVariantId, "1", accountToken);
     }
     cartId = cart.id;
     if (cartId) {
@@ -69,7 +68,7 @@ export async function updateItemQuantity(payload: {
   lineId: string;
   variantId: string;
   quantity: number;
-}): Promise<CartItem | string> {
+}): Promise<CartItem | string | undefined> {
   const cartId = cookies().get("cartId")?.value;
 
   if (!cartId) {
@@ -82,7 +81,7 @@ export async function updateItemQuantity(payload: {
     if (quantity === 0) {
       await removeFromCart(cartId, [lineId]);
       revalidateTag(TAGS.cart);
-      return;
+      return undefined;
     }
 
     const res = await updateCart(cartId, [
@@ -100,12 +99,13 @@ export async function updateItemQuantity(payload: {
   }
 }
 
-export async function getCartData(): Promise<Cart> {
+export async function getCartData(): Promise<Cart | null> {
   const cartId = cookies().get("cartId")?.value;
   if (!cartId) {
-    return [];
+    return null;
   }
 
   const cart = await getCart(cartId);
+
   return cart;
 }
