@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import RenderImage from "@/components/render-Image";
+import RenderImage from "@/components/utilities/render-Image";
 import Link from "next/link";
 import {
   useCartDrawer,
@@ -9,8 +9,8 @@ import {
 } from "@/components/context/cart-drawer-context";
 import { useAccountDrawer } from "@/components/context/account-drawer-context";
 import { useMobileNavigation } from "@/components/context/mobile-navigation-context";
-import MobileNavigation from "@/components/mobile-navigation";
-import Transiton from "@/components/transition";
+import MobileNavigation from "@/components/elements/mobile-navigation";
+import Transiton from "@/components/utilities/transition";
 
 export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
   const { setIsCartOpen } = useCartDrawer();

@@ -1,5 +1,5 @@
 import { getAllProducts } from "@/lib/shopify";
-import Slider from "@/components/slider";
+import Slider from "@/components/elements/slider";
 
 export default async function ProductSlider() {
   const products = await getAllProducts();

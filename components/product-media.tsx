@@ -1,5 +1,5 @@
 import { Image, Product } from "@/lib/shopify/types";
-import RenderImage from "./render-Image";
+import RenderImage from "./utilities/render-Image";
 
 export default function ProductMedia({ product }: { product: Product }) {
   return (

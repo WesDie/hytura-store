@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Article } from "@/lib/shopify/types";
-import RenderImage from "./render-Image";
+import RenderImage from "../utilities/render-Image";
 
 export default function ArticleCard({ article }: { article: Article }) {
   return (

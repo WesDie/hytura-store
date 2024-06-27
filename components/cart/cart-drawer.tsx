@@ -9,7 +9,7 @@ import {
 } from "@/components/context/cart-drawer-context";
 import { Cart } from "@/lib/shopify/types";
 import { useEffect } from "react";
-import Transiton from "@/components/transition";
+import Transiton from "@/components/utilities/transition";
 
 export default function CartDrawer({ cart }: { cart: Cart | null }) {
   const { isCartOpen, setIsCartOpen } = useCartDrawer();

@@ -7,7 +7,7 @@ import "swiper/css";
 import ProductButton from "./product-button";
 import ArticleCard from "./article-card";
 import ReviewCard from "./review-card";
-import RenderImage from "./render-Image";
+import RenderImage from "../utilities/render-Image";
 
 export default function Slider({
   products,

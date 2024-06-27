@@ -1,5 +1,5 @@
 import Link from "next/link";
-import RenderImage from "@/components/render-Image";
+import RenderImage from "@/components/utilities/render-Image";
 
 export default function NotFound() {
   return (

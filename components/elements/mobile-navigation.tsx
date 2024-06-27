@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useAccountDrawer } from "./context/account-drawer-context";
-import { useMobileNavigation } from "./context/mobile-navigation-context";
-import RenderImage from "./render-Image";
+import { useAccountDrawer } from "../context/account-drawer-context";
+import { useMobileNavigation } from "../context/mobile-navigation-context";
+import RenderImage from "../utilities/render-Image";
 
 export default function MobileNavigation({
   isLoggedIn,

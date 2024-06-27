@@ -5,7 +5,7 @@ import localFont from "next/font/local";
 
 import type { Viewport } from "next";
 
-import SmoothScroller from "@/components/smooth-scoller";
+import SmoothScroller from "@/components/utilities/smooth-scoller";
 import Header from "@/components/sections/header";
 import Footer from "@/components/sections/footer";
 import Account from "@/components/account/account";

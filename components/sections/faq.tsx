@@ -1,5 +1,5 @@
 "use client";
-import RenderImage from "../render-Image";
+import RenderImage from "../utilities/render-Image";
 
 export default function Faq({ direction }: { direction: "left" | "right" }) {
   const faqItems = [

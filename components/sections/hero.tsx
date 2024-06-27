@@ -1,4 +1,4 @@
-import RenderImage from "@/components/render-Image";
+import RenderImage from "@/components/utilities/render-Image";
 
 export default async function Hero({
   direction,
