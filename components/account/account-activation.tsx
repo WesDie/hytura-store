@@ -26,7 +26,7 @@ export default function AccountActivation({ id }: { id: string }) {
       router.push("/account");
       router.refresh();
     }
-  }, [state]);
+  }, [state, router]);
 
   return (
     <div className="m-auto flex h-fit w-full max-w-[500px] flex-col gap-1x px-3x py-4x pb-0">

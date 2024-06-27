@@ -39,7 +39,7 @@ export default function CartItemProduct(item: CartItem) {
           quantity: newQuantity,
         });
 
-        if (typeof res !== "string") {
+        if (typeof res !== "string" && res !== undefined) {
           setLocalQuantity(res.quantity);
           quantityRef.current = res.quantity;
         }
