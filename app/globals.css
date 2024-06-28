@@ -50,6 +50,10 @@
 
   .button-primary {
     @apply text-body-sm border border-background-black bg-background-black px-2x pb-[9px] pt-[7px] text-text-white transition-all hover:bg-black disabled:pointer-events-none disabled:opacity-50;
+
+    img {
+      @apply invert transition-all;
+    }
   }
 
   .button-secondary {
@@ -61,6 +65,14 @@
     &:hover img {
       @apply invert;
     }
+  }
+
+  .button-link {
+    @apply text-link-sm;
+  }
+
+  .button-header-link {
+    @apply text-heading-3xs relative inline-block w-fit after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-text-black after:transition-transform after:duration-200 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-[1];
   }
 
   .input {

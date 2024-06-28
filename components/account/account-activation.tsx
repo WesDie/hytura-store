@@ -6,6 +6,7 @@ import { shopifyActivateCustomer } from "@/lib/shopify/account/actions";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Input from "../elements/input";
+import Button from "../elements/button";
 
 const initialState = {
   message: "",
@@ -51,13 +52,7 @@ export default function AccountActivation({ id }: { id: string }) {
           type="password"
           toggleShow={true}
         />
-        <button
-          type="submit"
-          className="button-primary"
-          aria-disabled={pending}
-        >
-          Activate
-        </button>
+        <Button text="Activate" variant="primary" disabled={pending}></Button>
       </form>
     </div>
   );

@@ -2,6 +2,7 @@
 import { Cart } from "@/lib/shopify/types";
 import Link from "next/link";
 import { useCartDrawer } from "@/components/context/cart-drawer-context";
+import Button from "../elements/button";
 
 export default function CartSummary({ cart }: { cart: Cart | null }) {
   const { setIsCartOpen } = useCartDrawer();
@@ -15,9 +16,11 @@ export default function CartSummary({ cart }: { cart: Cart | null }) {
       <Link href={cart.checkoutUrl} className="button-primary text-center">
         Checkout - € {cart.cost.totalAmount.amount}
       </Link>
-      <button className="text-link-xs" onClick={() => setIsCartOpen(false)}>
-        Continue shopping
-      </button>
+      <Button
+        text="Continue shopping"
+        variant="link"
+        onclick={() => setIsCartOpen(false)}
+      />
     </div>
   );
 }

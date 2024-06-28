@@ -1,4 +1,6 @@
 import RenderImage from "@/components/utilities/render-Image";
+import Link from "next/link";
+import Button from "../elements/button";
 
 export default async function TextImage({
   direction,
@@ -32,16 +34,9 @@ export default async function TextImage({
           <h1 className="text-heading-md">{title}</h1>
           <p className="text-body-sm">{description}</p>
           <div className="flex gap-2x">
-            <a className="button-secondary flex gap-4x" href="/collection/all">
-              {buttonTitle}
-              <RenderImage
-                src={"/icons/arrow-right.svg"}
-                alt={"arrow right"}
-                width={12}
-                height={13}
-                className="my-auto"
-              />
-            </a>
+            <Link href="/collection/all">
+              <Button text={buttonTitle} variant="secondary" arrow />
+            </Link>
           </div>
         </div>
       </div>

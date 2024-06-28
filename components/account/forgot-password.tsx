@@ -3,6 +3,7 @@
 import { useFormState, useFormStatus } from "react-dom";
 import { shopifySendPasswordResetEmail } from "@/lib/shopify/account/actions";
 import Input from "../elements/input";
+import Button from "../elements/button";
 
 const initialState = {
   message: "",
@@ -31,13 +32,7 @@ export default function ResetPassword() {
           <p className="text-body-sm text-green-700">{state.message.succes}</p>
         )}
         <Input value="email" label="Email" state={state} autoComplete="email" />
-        <button
-          type="submit"
-          className="button-primary"
-          aria-disabled={pending}
-        >
-          Send
-        </button>
+        <Button text="Send" variant="primary" disabled={pending} />
       </form>
     </div>
   );

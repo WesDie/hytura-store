@@ -10,6 +10,7 @@ import {
 import { Cart } from "@/lib/shopify/types";
 import { useEffect } from "react";
 import Transiton from "@/components/utilities/transition";
+import Button from "@/components/elements/button";
 
 export default function CartDrawer({ cart }: { cart: Cart | null }) {
   const { isCartOpen, setIsCartOpen } = useCartDrawer();
@@ -29,9 +30,11 @@ export default function CartDrawer({ cart }: { cart: Cart | null }) {
     return (
       <div className="flex h-full flex-col items-center justify-center gap-1x">
         <p className="text-heading-2xs">Your cart is empty</p>
-        <button className="text-link-xs" onClick={() => setIsCartOpen(false)}>
-          Continue shopping
-        </button>
+        <Button
+          text="Continue shopping"
+          variant="link"
+          onclick={() => setIsCartOpen(false)}
+        />
       </div>
     );
   }

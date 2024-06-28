@@ -4,6 +4,7 @@ import RenderImage from "@/components/utilities/render-Image";
 import { removeItem, updateItemQuantity } from "./actions";
 import { CartItem } from "@/lib/shopify/types";
 import { useState, useEffect, useRef } from "react";
+import Button from "@/components/elements/button";
 
 export default function CartItemProduct(item: CartItem) {
   const product = item.merchandise.product;
@@ -120,9 +121,7 @@ export default function CartItemProduct(item: CartItem) {
               +
             </button>
           </div>
-          <button className="text-link-sm" onClick={() => remove()}>
-            Remove
-          </button>
+          <Button text="Remove" variant="link" onclick={() => remove()} />
         </div>
       </div>
     </div>

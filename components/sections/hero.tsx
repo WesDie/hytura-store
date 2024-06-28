@@ -1,4 +1,6 @@
 import RenderImage from "@/components/utilities/render-Image";
+import Link from "next/link";
+import Button from "../elements/button";
 
 export default async function Hero({
   direction,
@@ -29,16 +31,9 @@ export default async function Hero({
         <div className="m-auto ml-2x flex w-[365px] flex-col gap-3x md:ml-[64px]">
           <h1 className="text-heading-lg md:text-heading-xl">{title}</h1>
           <div className="flex gap-2x">
-            <a className="button-secondary flex gap-4x" href="/collection/all">
-              {buttonTitle}
-              <RenderImage
-                src={"/icons/arrow-right.svg"}
-                alt={"arrow right"}
-                width={12}
-                height={13}
-                className="my-auto"
-              />
-            </a>
+            <Link href="/collection/all">
+              <Button text={buttonTitle} variant="secondary" arrow={true} />
+            </Link>
           </div>
         </div>
       </div>

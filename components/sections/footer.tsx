@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Input from "../elements/input";
+import Button from "../elements/button";
 
 export default async function Footer() {
   const linkClass =
@@ -95,7 +96,7 @@ export default async function Footer() {
                 placeholder="Email"
                 className="h-full md:w-[278px]"
               />
-              <button className="button-primary min-w-max">Sign up</button>
+              <Button text="Sign up" variant="primary" className="min-w-max" />
             </div>
           </div>
           <p className="text-body-xs w-full text-text-light-gray md:max-w-[380px]">

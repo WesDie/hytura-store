@@ -3,6 +3,7 @@
 import { useFormState, useFormStatus } from "react-dom";
 import { shopifyLoginCustomer } from "@/lib/shopify/account/actions";
 import Input from "../elements/input";
+import Button from "../elements/button";
 
 const initialState = {
   message: "",
@@ -26,13 +27,7 @@ export default function Login() {
           toggleShow={true}
           autoComplete="current-password"
         />
-        <button
-          type="submit"
-          className="button-primary"
-          aria-disabled={pending}
-        >
-          Login
-        </button>
+        <Button text="Login" variant="primary" disabled={pending} />
       </form>
     </div>
   );

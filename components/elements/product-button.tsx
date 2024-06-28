@@ -5,12 +5,13 @@ import { addItem } from "../cart/actions";
 import Link from "next/link";
 import { Product } from "@/lib/shopify/types";
 import { useCartDrawer } from "../context/cart-drawer-context";
+import Button from "./button";
 
 export default function ProductButton({ product }: { product: Product }) {
   const [showSecondProductImage, setShowSecondProductImage] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const buyBtn = useRef<HTMLButtonElement | null>(null);
   const { setIsCartOpen } = useCartDrawer();
+  const [buyDisabled, setBuyDisabled] = useState(false);
 
   const productHoverToggle = (hover: boolean) => {
     if (product.media[1]?.sources && videoRef.current) {
@@ -25,12 +26,10 @@ export default function ProductButton({ product }: { product: Product }) {
   };
 
   const quickAdd = async () => {
-    if (buyBtn.current) {
-      buyBtn.current.disabled = true;
-      await addItem(product.variants[0].id);
-      buyBtn.current.disabled = false;
-      setIsCartOpen(true);
-    }
+    setBuyDisabled(true);
+    await addItem(product.variants[0].id);
+    setBuyDisabled(false);
+    setIsCartOpen(true);
   };
 
   if (!product) return null;
@@ -84,14 +83,13 @@ export default function ProductButton({ product }: { product: Product }) {
             Spray | Bottle | Instructions
           </p>
         </Link>
-        <button
-          className="button-primary h-fit"
-          onClick={() => quickAdd()}
-          {...(product.variants[0].availableForSale ? {} : { disabled: true })}
-          ref={buyBtn}
-        >
-          Add
-        </button>
+        <Button
+          text="Add"
+          onclick={() => quickAdd()}
+          className="h-fit"
+          variant="primary"
+          disabled={!product.variants[0]?.availableForSale || buyDisabled}
+        />
       </div>
     </div>
   );

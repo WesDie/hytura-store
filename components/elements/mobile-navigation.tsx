@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useAccountDrawer } from "../context/account-drawer-context";
 import { useMobileNavigation } from "../context/mobile-navigation-context";
 import RenderImage from "../utilities/render-Image";
+import Button from "./button";
 
 export default function MobileNavigation({
   isLoggedIn,
@@ -123,22 +124,22 @@ export default function MobileNavigation({
       </Link>
       <div className="mt-auto flex w-full flex-col gap-2x px-2x pb-3x">
         {isLoggedIn ? (
-          <button
-            onClick={() => {
+          <Button
+            text="Login"
+            variant="secondary"
+            onclick={() => {
               setIsAccountOpen(true);
               setIsMobileNavigationOpen(false);
             }}
-            className="button-secondary"
-          >
-            Login
-          </button>
+          />
         ) : (
-          <Link
-            href={"/account"}
-            onClick={() => setIsMobileNavigationOpen(false)}
-            className="button-secondary text-center"
-          >
-            Account
+          <Link href={"/account"}>
+            <Button
+              text="Account"
+              variant="secondary"
+              className="text-center"
+              onclick={() => setIsMobileNavigationOpen(false)}
+            />
           </Link>
         )}
         <p className="text-body-sm">Language: EN</p>

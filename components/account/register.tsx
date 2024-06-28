@@ -3,6 +3,7 @@
 import { useFormState, useFormStatus } from "react-dom";
 import { shopifyCreateCustomer } from "@/lib/shopify/account/actions";
 import Input from "../elements/input";
+import Button from "../elements/button";
 
 const initialState = {
   message: "",
@@ -45,13 +46,7 @@ export default function Register() {
             Hytura. Unsubscribe at any time
           </label>
         </div>
-        <button
-          type="submit"
-          className="button-primary"
-          aria-disabled={pending}
-        >
-          Register
-        </button>
+        <Button text="Register" variant="primary" disabled={pending} />
       </form>
     </div>
   );

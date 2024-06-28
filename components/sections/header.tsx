@@ -11,6 +11,7 @@ import { useAccountDrawer } from "@/components/context/account-drawer-context";
 import { useMobileNavigation } from "@/components/context/mobile-navigation-context";
 import MobileNavigation from "@/components/elements/mobile-navigation";
 import Transiton from "@/components/utilities/transition";
+import Button from "../elements/button";
 
 export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
   const { setIsCartOpen } = useCartDrawer();
@@ -21,8 +22,6 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
 
   const [isTop, setIsTop] = useState(false);
   const [isShopDropdownActive, setIsShopDropdownActive] = useState(false);
-  const linkClass =
-    "text-heading-3xs w-fit inline-block relative after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-text-black after:origin-bottom-right after:transition-transform after:duration-200 after:ease-in-out hover:after:scale-x-[1] hover:after:origin-bottom-left";
 
   useEffect(() => {
     const checkScrollPosition = () => {
@@ -91,46 +90,43 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
             />
           </Link>
           <div className="hidden gap-2x md:flex">
-            <Link href="/" className={linkClass}>
+            <Link href="/" className="button-header-link">
               Home
             </Link>
             <Link
               href="/shop"
-              className={linkClass}
+              className="button-header-link"
               onMouseOver={() => setIsShopDropdownActive(true)}
               onMouseLeave={() => setIsShopDropdownActive(false)}
             >
               Shop
             </Link>
-            <Link href="/about" className={linkClass}>
+            <Link href="/about" className="button-header-link">
               About
             </Link>
-            <Link href="/journal/news" className={linkClass}>
+            <Link href="/journal/news" className="button-header-link">
               Journal
             </Link>
           </div>
         </div>
         <div className="z-[11] hidden w-full justify-end gap-2x py-2x pr-2x md:flex md:pr-3x">
-          <button className={linkClass}>EN</button>
+          <button className="button-header-link">EN</button>
           {isLoggedIn ? (
-            <button
-              className={linkClass}
-              onClick={() => setIsAccountOpen(true)}
-            >
-              Login
-            </button>
+            <Button
+              text="Login"
+              variant="header-link"
+              onclick={() => setIsAccountOpen(true)}
+            />
           ) : (
-            <Link href={"/account"} className={linkClass}>
+            <Link href={"/account"} className="button-header-link">
               Account
             </Link>
           )}
-          <button
-            className={linkClass}
-            onClick={() => setIsCartOpen(true)}
-            id="cart-toggle"
-          >
-            Cart ({cartCount})
-          </button>
+          <Button
+            text={`Cart (${cartCount})`}
+            variant="header-link"
+            onclick={() => setIsCartOpen(true)}
+          />
         </div>
         <div className="relative z-[11] my-auto mr-1x flex md:hidden">
           <button
@@ -186,21 +182,21 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
               <div className="flex flex-col gap-[4px]">
                 <Link
                   href="/collection/all"
-                  className={`${linkClass} text-body-sm`}
+                  className={`$"button-header-link" text-body-sm`}
                   onClick={() => setIsShopDropdownActive(false)}
                 >
                   All
                 </Link>
                 <Link
                   href="/collection/home%20page"
-                  className={`${linkClass} text-body-sm`}
+                  className={`$"button-header-link" text-body-sm`}
                   onClick={() => setIsShopDropdownActive(false)}
                 >
                   Home page
                 </Link>
                 <Link
                   href="/collection/sprays"
-                  className={`${linkClass} text-body-sm`}
+                  className={`$"button-header-link" text-body-sm`}
                   onClick={() => setIsShopDropdownActive(false)}
                 >
                   Sprays
@@ -212,7 +208,7 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
               <div className="flex flex-col gap-[4px]">
                 <Link
                   href="/"
-                  className={`${linkClass} text-body-sm`}
+                  className={`$"button-header-link" text-body-sm`}
                   onClick={() => setIsShopDropdownActive(false)}
                 >
                   Accessories

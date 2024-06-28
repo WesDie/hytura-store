@@ -1,22 +1,21 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { addItem } from "./cart/actions";
 import { Product, ProductVariant } from "@/lib/shopify/types";
 import { useCartDrawer } from "./context/cart-drawer-context";
+import Button from "@/components/elements/button";
 
 export default function ProductDetails({ product }: { product: Product }) {
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
   const [quantity, setQuantity] = useState(1);
-  const buyBtn = useRef<HTMLButtonElement | null>(null);
+  const [buyDisabled, setBuyDisabled] = useState(false);
   const { setIsCartOpen } = useCartDrawer();
 
   const addToCart = async () => {
-    if (!buyBtn.current) return;
-    buyBtn.current.disabled = true;
-    const res = await addItem(selectedVariant.id, quantity);
-    console.log(res);
-    buyBtn.current.disabled = false;
+    setBuyDisabled(true);
+    await addItem(selectedVariant.id, quantity);
+    setBuyDisabled(false);
     setIsCartOpen(true);
   };
 
@@ -41,13 +40,14 @@ export default function ProductDetails({ product }: { product: Product }) {
             <p className="text-body-sm">Size:</p>
             <div className="flex gap-1x">
               {product.variants.map((variant: ProductVariant) => (
-                <button
+                <Button
                   key={variant.id}
-                  className={`${variant.id === selectedVariant.id ? "button-primary pointer-events-none" : "button-secondary"}`}
-                  onClick={() => setSelectedVariant(variant)}
-                >
-                  {variant.title}
-                </button>
+                  text={variant.title}
+                  variant={`${variant.id === selectedVariant.id ? "primary" : "secondary"}`}
+                  onclick={() => setSelectedVariant(variant)}
+                  className={`${variant.id === selectedVariant.id ? "pointer-events-none" : ""}`}
+                  disabled={variant.availableForSale === false}
+                />
               ))}
             </div>
           </div>
@@ -74,13 +74,13 @@ export default function ProductDetails({ product }: { product: Product }) {
               +
             </button>
           </div>
-          <button
-            className="button-primary w-full"
-            ref={buyBtn}
-            onClick={() => addToCart()}
-          >
-            Add to cart
-          </button>
+          <Button
+            text={"Add to cart"}
+            variant="primary"
+            className="w-full"
+            {...(buyDisabled && { disabled: true })}
+            onclick={() => addToCart()}
+          />
         </div>
         <ul className="flex flex-col gap-[4px]">
           <li className="text-body-xs ml-2x list-disc text-text-light-gray">

@@ -2,6 +2,7 @@
 import { shopifyLogoutCustomer } from "@/lib/shopify/account/actions";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Button from "../elements/button";
 
 export default function AccountTopBar({ firstName }: { firstName: string }) {
   const router = useRouter();
@@ -27,12 +28,7 @@ export default function AccountTopBar({ firstName }: { firstName: string }) {
             Orders
           </Link>
         </div>
-        <button
-          onClick={() => logout()}
-          className="text-link-sm text-text-black"
-        >
-          Logout
-        </button>
+        <Button text="Logout" variant="link" onclick={() => logout()} />
       </div>
     </div>
   );
