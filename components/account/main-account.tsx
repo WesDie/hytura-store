@@ -13,25 +13,15 @@ export default function MainAccount() {
       {activeSection === "login" && (
         <>
           {" "}
-          <Login />{" "}
-          <div className="flex flex-col gap-1x">
-            <p className="text-heading-3xs mx-auto">
-              Not a member yet?{" "}
-              <Button
-                text="Register"
-                variant="link"
-                onclick={() => setActiveSection("register")}
-              />
-            </p>
-            <p className="text-heading-3xs mx-auto">
-              Or{" "}
-              <Button
-                text="Forgot password?"
-                variant="link"
-                onclick={() => setActiveSection("forgot-password")}
-              />
-            </p>
-          </div>
+          <Login setActiveSection={setActiveSection} />{" "}
+          <p className="text-heading-3xs mx-auto">
+            Not a member yet?{" "}
+            <Button
+              text="Register"
+              variant="link"
+              onclick={() => setActiveSection("register")}
+            />
+          </p>
         </>
       )}
       {activeSection === "register" && (

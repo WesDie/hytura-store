@@ -4,12 +4,17 @@ import { useFormState, useFormStatus } from "react-dom";
 import { shopifyLoginCustomer } from "@/lib/shopify/account/actions";
 import Input from "../elements/input";
 import Button from "../elements/button";
+import { Dispatch } from "react";
 
 const initialState = {
   message: "",
 };
 
-export default function Login() {
+export default function Login({
+  setActiveSection,
+}: {
+  setActiveSection: Dispatch<string>;
+}) {
   const [state, formAction] = useFormState(shopifyLoginCustomer, initialState);
   const { pending } = useFormStatus();
 
@@ -26,6 +31,12 @@ export default function Login() {
           type="password"
           toggleShow={true}
           autoComplete="current-password"
+        />
+        <Button
+          text="Forgot password?"
+          variant="link"
+          className="ml-auto"
+          onclick={() => setActiveSection("forgot-password")}
         />
         <Button text="Login" variant="primary" disabled={pending} />
       </form>
