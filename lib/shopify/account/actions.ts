@@ -67,7 +67,6 @@ export async function shopifyCreateCustomer(
     });
 
     const body = await result.json();
-    console.log("body", body);
 
     if (body.errors) {
       return { message: body.errors };
@@ -147,7 +146,6 @@ export async function shopifySendPasswordResetEmail(
 
   if (email !== null) {
     const res = await customerSendPasswordResetEmail(email);
-    console.log(res);
 
     if (res.customerUserErrors) {
       return { message: { error: res.customerUserErrors[0].message } };
@@ -192,8 +190,6 @@ export async function shopifyActivateCustomer(
 
   if (password !== null && activationToken !== null && id !== null) {
     const res = await customerActivateAccount(id, activationToken, password);
-
-    console.log(res);
 
     if (res.customerUserErrors && res.customerUserErrors.length > 0) {
       return { message: { base: res.customerUserErrors[0].message } };

@@ -367,8 +367,6 @@ export async function updateCartIdentity(
     },
   });
 
-  console.log(cartId, customerAccessToken);
-
   return reshapeCart(res.body.data.cartBuyerIdentityUpdate.cart);
 }
 
