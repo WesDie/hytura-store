@@ -2,6 +2,7 @@
 
 import { useFormState, useFormStatus } from "react-dom";
 import { shopifySendPasswordResetEmail } from "@/lib/shopify/account/actions";
+import Input from "../elements/input";
 
 const initialState = {
   message: "",
@@ -29,23 +30,7 @@ export default function ResetPassword() {
         {state.message.succes && (
           <p className="text-body-sm text-green-700">{state.message.succes}</p>
         )}
-        <div className="input">
-          <div className="flex justify-between">
-            <label htmlFor="email">Email</label>
-            {state.message.email && (
-              <p className="text-body-sm text-text-red">
-                * Email {state.message.email}
-              </p>
-            )}
-          </div>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            placeholder="Email"
-            aria-invalid={state.message.email ? "true" : "false"}
-          />
-        </div>
+        <Input value="email" label="Email" state={state} autoComplete="email" />
         <button
           type="submit"
           className="button-primary"

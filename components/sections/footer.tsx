@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Input from "../elements/input";
 
 export default async function Footer() {
   const linkClass =
@@ -89,9 +90,10 @@ export default async function Footer() {
               Sign up for our newsletter
             </label>
             <div className="flex w-full gap-1x">
-              <input
-                className="text-body-sm w-full appearance-none border border-solid border-stroke-black bg-transparent px-2x py-1x text-text-black outline-none transition-colors placeholder-shown:border-stroke-light-gray focus:border-stroke-black md:w-[278px]"
+              <Input
+                value="Email"
                 placeholder="Email"
+                className="h-full md:w-[278px]"
               />
               <button className="button-primary min-w-max">Sign up</button>
             </div>

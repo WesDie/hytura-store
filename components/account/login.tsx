@@ -2,6 +2,7 @@
 
 import { useFormState, useFormStatus } from "react-dom";
 import { shopifyLoginCustomer } from "@/lib/shopify/account/actions";
+import Input from "../elements/input";
 
 const initialState = {
   message: "",
@@ -16,42 +17,15 @@ export default function Login() {
       <h3 className="text-heading-xs">Login</h3>
       <form action={formAction} className="flex flex-col gap-2x">
         <p className="text-body-sm text-text-red">{state.message.base}</p>
-        <div className="input">
-          <div className="flex justify-between">
-            <label htmlFor="email">Email</label>
-            {state.message.email && (
-              <p className="text-body-sm text-text-red">
-                * Email {state.message.email}
-              </p>
-            )}
-          </div>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            placeholder="Email"
-            autoComplete="email"
-            aria-invalid={state.message.email ? "true" : "false"}
-          />
-        </div>
-        <div className="input">
-          <div className="flex justify-between">
-            <label htmlFor="password">Password</label>
-            {state.message.password && (
-              <p className="text-body-sm text-text-red">
-                * Password {state.message.password}
-              </p>
-            )}
-          </div>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            autoComplete="current-password"
-            aria-invalid={state.message.password ? "true" : "false"}
-          />
-        </div>
+        <Input value="email" label="Email" state={state} autoComplete="email" />
+        <Input
+          value="password"
+          label="Password"
+          state={state}
+          type="password"
+          toggleShow={true}
+          autoComplete="current-password"
+        />
         <button
           type="submit"
           className="button-primary"
