@@ -182,21 +182,21 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
               <div className="flex flex-col gap-[4px]">
                 <Link
                   href="/collection/all"
-                  className={`$"button-header-link" text-body-sm`}
+                  className={`button-header-link text-body-sm`}
                   onClick={() => setIsShopDropdownActive(false)}
                 >
                   All
                 </Link>
                 <Link
                   href="/collection/home%20page"
-                  className={`$"button-header-link" text-body-sm`}
+                  className={`button-header-link text-body-sm`}
                   onClick={() => setIsShopDropdownActive(false)}
                 >
                   Home page
                 </Link>
                 <Link
                   href="/collection/sprays"
-                  className={`$"button-header-link" text-body-sm`}
+                  className={`button-header-link text-body-sm`}
                   onClick={() => setIsShopDropdownActive(false)}
                 >
                   Sprays
@@ -208,7 +208,7 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
               <div className="flex flex-col gap-[4px]">
                 <Link
                   href="/"
-                  className={`$"button-header-link" text-body-sm`}
+                  className={`button-header-link text-body-sm`}
                   onClick={() => setIsShopDropdownActive(false)}
                 >
                   Accessories
@@ -221,7 +221,7 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
             alt={"product image"}
             width={1000}
             height={667}
-            className={`max-h-full w-[200px]`}
+            className={`max-h-full w-full max-w-[350px]`}
             imageClassName="w-full h-full object-cover"
           />
         </div>
