@@ -22,7 +22,7 @@ export default function RenderImage({
   if (!src) return null;
 
   return (
-    <div className={className}>
+    <div className={`${className} overflow-hidden`}>
       <Image
         src={src}
         alt={alt}
@@ -30,7 +30,7 @@ export default function RenderImage({
         height={height}
         onLoad={() => setImageLoading(false)}
         className={`${
-          isImageLoading ? "blur-sm" : "remove-blur"
+          isImageLoading ? "blur-[20px]" : "remove-blur"
         } ${imageClassName}`}
       ></Image>
     </div>

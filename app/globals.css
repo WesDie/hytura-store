@@ -92,10 +92,10 @@
 
   .blur {
     filter: blur(3px);
-    transition: filter 0.3s ease-in;
+    transition: filter 0.3s ease-in-out;
   }
   .remove-blur {
     filter: blur(0px);
-    transition: filter 0.3s ease-in;
+    transition: filter 0.3s ease-in-out;
   }
 }
