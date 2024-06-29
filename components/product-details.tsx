@@ -5,6 +5,7 @@ import { addItem } from "./cart/actions";
 import { Product, ProductVariant } from "@/lib/shopify/types";
 import { useCartDrawer } from "./context/cart-drawer-context";
 import Button from "@/components/elements/button";
+import QuantitySelector from "./elements/quantity-selector";
 
 export default function ProductDetails({ product }: { product: Product }) {
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
@@ -17,14 +18,6 @@ export default function ProductDetails({ product }: { product: Product }) {
     await addItem(selectedVariant.id, quantity);
     setBuyDisabled(false);
     setIsCartOpen(true);
-  };
-
-  const handleQuantityChange = (newQuantity: number) => {
-    if (newQuantity > 99) {
-      setQuantity(99);
-    } else if (newQuantity >= 1) {
-      setQuantity(newQuantity);
-    }
   };
 
   return (
@@ -45,40 +38,21 @@ export default function ProductDetails({ product }: { product: Product }) {
                   text={variant.title}
                   variant={`${variant.id === selectedVariant.id ? "primary" : "secondary"}`}
                   onclick={() => setSelectedVariant(variant)}
-                  className={`${variant.id === selectedVariant.id ? "pointer-events-none" : ""}`}
-                  disabled={variant.availableForSale === false}
+                  className={`${variant.id === selectedVariant.id ? "pointer-events-none" : ""} ${variant.availableForSale ? "" : "opacity-50"}`}
                 />
               ))}
             </div>
           </div>
         </div>
         <div className="flex w-full gap-1x">
-          <div className="flex w-[80px] border border-stroke-gray py-[2px]">
-            <button
-              onClick={() =>
-                handleQuantityChange(quantity <= 1 ? 1 : quantity - 1)
-              }
-              className="text-body-sm w-full"
-            >
-              -
-            </button>
-            <input
-              className="text-body-sm my-auto h-fit w-full bg-transparent text-center focus:outline-none"
-              onChange={(e) => handleQuantityChange(Number(e.target.value))}
-              value={quantity}
-            />
-            <button
-              onClick={() => handleQuantityChange(quantity + 1)}
-              className="text-body-sm w-full"
-            >
-              +
-            </button>
-          </div>
+          <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
           <Button
-            text={"Add to cart"}
+            text={`${!selectedVariant?.availableForSale ? "Sold out" : "Add to cart"}`}
             variant="primary"
             className="w-full"
-            {...(buyDisabled && { disabled: true })}
+            {...(buyDisabled || !selectedVariant?.availableForSale
+              ? { disabled: true }
+              : {})}
             onclick={() => addToCart()}
           />
         </div>

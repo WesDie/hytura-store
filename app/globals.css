@@ -49,7 +49,7 @@
   }
 
   .button-primary {
-    @apply text-body-sm border border-background-black bg-background-black px-2x pb-[9px] pt-[7px] text-text-white transition-all hover:bg-black disabled:pointer-events-none disabled:opacity-50;
+    @apply text-body-sm border border-background-black bg-background-black px-2x pb-[9px] pt-[7px] text-text-white transition-all hover:bg-black disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-background-black;
 
     img {
       @apply invert transition-all;
