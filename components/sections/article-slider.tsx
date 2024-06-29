@@ -13,7 +13,9 @@ export default async function ArticleSlider() {
         articles={articles}
         text="Learn more"
         spaceBetween={24}
-        sliderClass={"px-2x md:px-4x"}
+        paddingDesktop={32}
+        paddingTablet={32}
+        paddingMobile={16}
         slidesMobile={1.2}
         slidesTablet={2.2}
         slidesDesktop={2.8}

@@ -2,7 +2,7 @@
 "use client";
 import { useState } from "react";
 import { Product, Article } from "@/lib/shopify/types";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import ProductButton from "./product-button";
 import ArticleCard from "./article-card";
@@ -18,6 +18,9 @@ export default function Slider({
   slidesMobile,
   slidesTablet,
   slidesDesktop,
+  paddingDesktop,
+  paddingTablet,
+  paddingMobile,
 }: {
   text: string;
   products?: Product[];
@@ -27,6 +30,9 @@ export default function Slider({
   slidesMobile?: number;
   slidesTablet?: number;
   slidesDesktop?: number;
+  paddingDesktop?: number;
+  paddingTablet?: number;
+  paddingMobile?: number;
 }) {
   const [swiper, setSwiper] = useState(null);
 
@@ -65,20 +71,25 @@ export default function Slider({
         breakpoints={{
           0: {
             slidesPerView: slidesMobile || 1.2,
+            slidesOffsetBefore: paddingMobile || 0,
+            slidesOffsetAfter: paddingMobile || 0,
           },
-          640: {
+          768: {
             slidesPerView: slidesTablet || 2.2,
+            slidesOffsetBefore: paddingTablet || 0,
+            slidesOffsetAfter: paddingTablet || 0,
           },
           1024: {
             slidesPerView: slidesDesktop || 4.5,
+            slidesOffsetBefore: paddingDesktop || 0,
+            slidesOffsetAfter: paddingDesktop || 0,
           },
         }}
         onSwiper={setSwiper}
         spaceBetween={spaceBetween || 0}
-        className="border-y border-solid border-stroke-gray"
-        wrapperClass={sliderClass}
+        className={`border-y border-solid border-stroke-gray ${sliderClass}`}
       >
-        {products
+        {products && products.length > 0
           ? products.map((product: Product) => (
               <SwiperSlide
                 key={product.id}
@@ -88,17 +99,20 @@ export default function Slider({
               </SwiperSlide>
             ))
           : null}
-        {articles
+        {articles && articles.length > 0
           ? articles.map((article: Article) => (
               <SwiperSlide key={article.id}>
                 <ArticleCard article={article} />
               </SwiperSlide>
             ))
-          : Array.from(Array(10)).map((test: any, index: number) => (
+          : null}
+        {!products && !articles
+          ? Array.from(Array(10)).map((test: any, index: number) => (
               <SwiperSlide key={index}>
                 <ReviewCard />
               </SwiperSlide>
-            ))}
+            ))
+          : null}
       </Swiper>
     </div>
   );
