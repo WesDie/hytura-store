@@ -1,17 +1,13 @@
 "use client";
 import RenderImage from "../utilities/render-Image";
 import { useState, useRef } from "react";
-import { addItem } from "../cart/actions";
 import Link from "next/link";
 import { Product } from "@/lib/shopify/types";
-import { useCartDrawer } from "../context/cart-drawer-context";
-import Button from "./button";
+import BuyButton from "./buy-button";
 
 export default function ProductButton({ product }: { product: Product }) {
   const [showSecondProductImage, setShowSecondProductImage] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const { setIsCartOpen } = useCartDrawer();
-  const [buyDisabled, setBuyDisabled] = useState(false);
 
   const productHoverToggle = (hover: boolean) => {
     if (product.media[1]?.sources && videoRef.current) {
@@ -23,13 +19,6 @@ export default function ProductButton({ product }: { product: Product }) {
         videoRef.current.pause();
       }
     }
-  };
-
-  const quickAdd = async () => {
-    setBuyDisabled(true);
-    await addItem(product.variants[0].id);
-    setBuyDisabled(false);
-    setIsCartOpen(true);
   };
 
   if (!product) return null;
@@ -83,12 +72,11 @@ export default function ProductButton({ product }: { product: Product }) {
             Spray | Bottle | Instructions
           </p>
         </Link>
-        <Button
+        <BuyButton
+          selectedVariant={product.variants[0]}
+          quantity={1}
           text="Add"
-          onclick={() => quickAdd()}
-          className="h-fit"
-          variant="primary"
-          disabled={!product.variants[0]?.availableForSale || buyDisabled}
+          className="my-auto h-fit w-fit"
         />
       </div>
     </div>

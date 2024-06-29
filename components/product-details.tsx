@@ -1,24 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { addItem } from "./cart/actions";
 import { Product, ProductVariant } from "@/lib/shopify/types";
-import { useCartDrawer } from "./context/cart-drawer-context";
 import Button from "@/components/elements/button";
 import QuantitySelector from "./elements/quantity-selector";
+import BuyButton from "./elements/buy-button";
 
 export default function ProductDetails({ product }: { product: Product }) {
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
   const [quantity, setQuantity] = useState(1);
-  const [buyDisabled, setBuyDisabled] = useState(false);
-  const { setIsCartOpen } = useCartDrawer();
-
-  const addToCart = async () => {
-    setBuyDisabled(true);
-    await addItem(selectedVariant.id, quantity);
-    setBuyDisabled(false);
-    setIsCartOpen(true);
-  };
 
   return (
     <div className="sticky top-[53px] flex h-fit w-[50%] flex-col py-2x">
@@ -46,15 +36,7 @@ export default function ProductDetails({ product }: { product: Product }) {
         </div>
         <div className="flex w-full gap-1x">
           <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
-          <Button
-            text={`${!selectedVariant?.availableForSale ? "Sold out" : "Add to cart"}`}
-            variant="primary"
-            className="w-full"
-            {...(buyDisabled || !selectedVariant?.availableForSale
-              ? { disabled: true }
-              : {})}
-            onclick={() => addToCart()}
-          />
+          <BuyButton selectedVariant={selectedVariant} quantity={quantity} />
         </div>
         <ul className="flex flex-col gap-[4px]">
           <li className="text-body-xs ml-2x list-disc text-text-light-gray">
