@@ -1,8 +1,15 @@
+"use client";
 import Link from "next/link";
 import Input from "../elements/input";
 import Button from "../elements/button";
+import { shopifySubscribeMarketing } from "@/lib/shopify/account/actions";
+import { useFormState, useFormStatus } from "react-dom";
 
-export default async function Footer() {
+const initialState = {
+  message: "",
+};
+
+export default function Footer() {
   const linkClass =
     "w-fit inline-block relative after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-text-black after:origin-bottom-right after:transition-transform after:duration-200 after:ease-in-out hover:after:scale-x-[1] hover:after:origin-bottom-left";
 
@@ -56,6 +63,12 @@ export default async function Footer() {
     },
   ];
 
+  const [state, formAction] = useFormState(
+    shopifySubscribeMarketing,
+    initialState,
+  );
+  const { pending } = useFormStatus();
+
   const date = new Date();
   const year = date.getFullYear();
 
@@ -90,13 +103,31 @@ export default async function Footer() {
             <label className="text-heading-2xs md:text-heading-xs">
               Sign up for our newsletter
             </label>
-            <div className="flex w-full gap-1x">
-              <Input
-                value="Email"
-                placeholder="Email"
-                className="h-full md:w-[278px]"
-              />
-              <Button text="Sign up" variant="primary" className="min-w-max" />
+            <div className="flex flex-col gap-1x">
+              <form action={formAction} className="flex w-full gap-1x">
+                <Input
+                  value="email"
+                  placeholder="Email"
+                  className="h-full md:w-[278px]"
+                  state={state}
+                />
+                <Button
+                  text="Sign up"
+                  variant="primary"
+                  className="min-w-max"
+                  disabled={pending}
+                />
+              </form>
+              {state.message.succes && (
+                <p className="text-body-sm text-text-green">
+                  {state.message.succes}
+                </p>
+              )}
+              {state.message.email && (
+                <p className="text-body-sm text-text-red">
+                  * Email {state.message.email}
+                </p>
+              )}
             </div>
           </div>
           <p className="text-body-xs w-full text-text-light-gray md:max-w-[380px]">

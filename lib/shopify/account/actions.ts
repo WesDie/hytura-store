@@ -6,28 +6,15 @@ import {
   customerSendPasswordResetEmail,
   customerActivateAccount,
   updateCartIdentity,
+  updateCustomer,
+  getCustomer,
 } from "@/lib/shopify/index";
+import { Customer } from "../types";
 
-export async function shopifyCreateCustomer(
-  prevState: any,
+export async function createCustomer(
   formData: FormData,
+  emailMarketing?: boolean,
 ) {
-  if (formData.get("accpets_terms") !== "on") {
-    return { message: { base: ["Please accept the terms and conditions"] } };
-  }
-
-  const errors: any = {};
-  const requiredFields = ["first_name", "last_name", "email", "password"];
-  requiredFields.forEach((field) => {
-    if (formData.get(field) === "") {
-      errors[field] = [`is required`];
-    }
-  });
-
-  if (Object.keys(errors).length > 0) {
-    return { message: errors };
-  }
-
   const data = JSON.stringify({
     customer: {
       first_name: formData.get("first_name"),
@@ -69,10 +56,20 @@ export async function shopifyCreateCustomer(
     const body = await result.json();
 
     if (body.errors) {
+      if (emailMarketing) {
+        return {
+          message: { succes: "Updated marketing status" },
+        };
+      }
+
       return { message: body.errors };
     }
 
-    return { message: "Customer created successfully" };
+    if (emailMarketing) {
+      return { message: { succes: "Subscribed to marketing succesfully" } };
+    }
+
+    return { message: { succes: "Created customer succesfully" } };
   } catch (error) {
     console.error("Error:", error);
 
@@ -80,6 +77,29 @@ export async function shopifyCreateCustomer(
       error: error,
     };
   }
+}
+
+export async function shopifyCreateCustomer(
+  prevState: any,
+  formData: FormData,
+) {
+  if (formData.get("accpets_terms") !== "on") {
+    return { message: { base: ["Please accept the terms and conditions"] } };
+  }
+
+  const errors: any = {};
+  const requiredFields = ["first_name", "last_name", "email", "password"];
+  requiredFields.forEach((field) => {
+    if (formData.get(field) === "") {
+      errors[field] = [`is required`];
+    }
+  });
+
+  if (Object.keys(errors).length > 0) {
+    return { message: errors };
+  }
+
+  return createCustomer(formData);
 }
 
 export async function shopifyLoginCustomer(
@@ -113,7 +133,7 @@ export async function shopifyLoginCustomer(
         updateCartIdentity(cartId, res.customerAccessToken.accessToken);
       }
 
-      return { message: "Logged in successfully" };
+      return { message: { succes: "Logged in successfully" } };
     } else if (res.customerUserErrors) {
       if (res.customerUserErrors[0].message === "Unidentified customer") {
         return { message: { base: ["Invalid email or password"] } };
@@ -161,6 +181,8 @@ export async function shopifySendPasswordResetEmail(
 
 export async function shopifyLogoutCustomer() {
   cookies().delete("customerAccessToken");
+
+  return { message: { succes: "Logout succes" } };
 }
 
 export async function shopifyActivateCustomer(
@@ -202,9 +224,97 @@ export async function shopifyActivateCustomer(
         updateCartIdentity(cartId, res.customerAccessToken.accessToken);
       }
 
-      return { message: "Account activated successfully" };
+      return { message: { succes: "Activated customer succesfully" } };
     }
   }
 
   return { message: "Somthing went wrong" };
+}
+
+export async function shopifySubscribeMarketing(
+  prevState: any,
+  formData: FormData,
+): Promise<{ message: any }> {
+  const errors: any = {};
+  const requiredFields = ["email"];
+  requiredFields.forEach((field) => {
+    if (formData.get(field) === "") {
+      errors[field] = [`is required`];
+    }
+  });
+
+  if (Object.keys(errors).length > 0) {
+    return { message: errors };
+  }
+
+  formData.set("email_marketing_status", "on");
+  formData.set("new_email_marketing_status", "on");
+
+  const customerToken = cookies().get("customerAccessToken")?.value;
+
+  if (customerToken) {
+    const customer = await getCustomer(customerToken);
+
+    if (customer.email !== formData.get("email")) {
+      return await createCustomer(formData, true);
+    }
+
+    const updateRes = await shopifyUpdateCustomer(null, formData);
+    if (updateRes.message.succes.length > 0) {
+      return {
+        message: { succes: "Updated marketing status" },
+      };
+    }
+  }
+
+  return await createCustomer(formData, true);
+}
+
+export async function shopifyUpdateCustomer(
+  prevState: any,
+  formData: FormData,
+  customer?: Customer,
+): Promise<{ message: any }> {
+  const customerToken = cookies().get("customerAccessToken")?.value;
+
+  if (!customerToken) {
+    return { message: { base: ["Unauthorized"] } };
+  }
+
+  if (!customer) {
+    customer = await getCustomer(customerToken);
+  }
+
+  if (!customer) {
+    return { message: { base: ["Unauthorized"] } };
+  }
+
+  const errors: any = {};
+  const requiredFields = ["first_name", "last_name", "email"];
+  requiredFields.forEach((field) => {
+    if (formData.get(field) === "") {
+      errors[field] = [`is required`];
+    }
+  });
+
+  if (Object.keys(errors).length > 0) {
+    return { message: errors };
+  }
+
+  const newCustomerData: Customer = {
+    acceptsMarketing:
+      formData.get("new_email_marketing_status") === "on" ||
+      customer.acceptsMarketing,
+    firstName: (formData.get("new_first_name") as string) || customer.firstName,
+    lastName: (formData.get("new_last_name") as string) || customer.lastName,
+    email: (formData.get("new_email") as string) || customer.email,
+    phone: (formData.get("new_phone") as string) || customer.phone,
+  };
+
+  const res = await updateCustomer(newCustomerData, customerToken);
+  if (res.customerUserErrors && res.customerUserErrors.length > 0) {
+    return { message: res.customerUserErrors };
+  }
+
+  return { message: { succes: "Updated customer succesfully" } };
 }

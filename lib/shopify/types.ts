@@ -93,15 +93,15 @@ export type CustomerAccessToken = {
 
 export type Customer = {
   firstName: string;
-  createdAt: string;
+  createdAt?: string;
   acceptsMarketing: boolean;
-  displayName: string;
+  displayName?: string;
   email: string;
-  id: string;
+  id?: string;
   lastName: string;
-  numberOfOrders: number;
-  updatedAt: string;
-  tags: string[];
+  numberOfOrders?: number;
+  updatedAt?: string;
+  tags?: string[];
   phone: string;
 };
 
@@ -334,6 +334,28 @@ export type ShopifyGetCustomerOperation = {
     customer: Customer;
   };
   variables: {
+    customerAccessToken: string;
+  };
+};
+
+export type ShopifyUpdateCustomerOperation = {
+  data: {
+    customerUpdate: {
+      customer: Customer;
+      customerUserErrors: {
+        message: string;
+      }[];
+    };
+  };
+  variables: {
+    customer: {
+      acceptsMarketing?: boolean;
+      email?: string;
+      firstName?: string;
+      lastName?: string;
+      password?: string;
+      phone?: string;
+    };
     customerAccessToken: string;
   };
 };

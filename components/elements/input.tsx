@@ -28,17 +28,16 @@ export default function Input({
   return (
     value && (
       <div className={`input ${className}`}>
-        {state?.message[value] ||
-          (label && (
-            <div className="flex justify-between">
-              {label && <label htmlFor="password">{label}</label>}
-              {state && state.message[value] && (
-                <p className="text-body-sm text-text-red">
-                  * {label} {state.message[value]}
-                </p>
-              )}
-            </div>
-          ))}
+        {label && (
+          <div className="flex justify-between">
+            {label && <label htmlFor="password">{label}</label>}
+            {state && state.message[value] && (
+              <p className="text-body-sm text-text-red">
+                * {placeholder} {state.message[value]}
+              </p>
+            )}
+          </div>
+        )}
         <div
           className={`relative ${disabled ? "pointer-events-none opacity-50" : ""}`}
         >

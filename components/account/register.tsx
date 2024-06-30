@@ -42,7 +42,7 @@ export default function Register() {
             name="email_marketing_status"
           />
           <label htmlFor="email_marketing_status">
-            Sign up for emails on products, deals or Other announcements by
+            Sign up for emails on products, deals or other announcements by
             Hytura. Unsubscribe at any time
           </label>
         </div>

@@ -1,3 +1,5 @@
+import customerFragment from "../fragments/customer";
+
 export const createCustomerAccessTokenMutation = `
   mutation customerAccessTokenCreate($email: String!, $password: String!) {
     customerAccessTokenCreate(input: {email: $email, password: $password}) {
@@ -36,4 +38,18 @@ export const customerActivateMutation = `
       }
     } 
   }
+`;
+
+export const customerUpdateMutation = `
+  mutation customerUpdate($customerAccessToken: String!, $customer: CustomerUpdateInput!) {
+    customerUpdate(customerAccessToken: $customerAccessToken, customer: $customer) {
+      customer {
+        ...customer
+      }
+      customerUserErrors {
+        message
+      }
+    }
+  }
+  ${customerFragment}
 `;

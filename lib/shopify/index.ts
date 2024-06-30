@@ -43,12 +43,14 @@ import {
   ShopifySendPasswordResetEmailOperation,
   ShopifyCartUpdateIdentityOperation,
   ShopifyCustomerActivateOperation,
+  ShopifyUpdateCustomerOperation,
 } from "./types";
 import { getPageQuery } from "./queries/page";
 import {
   createCustomerAccessTokenMutation,
   customerActivateMutation,
   sendCustomerPasswordResetEmail,
+  customerUpdateMutation,
 } from "./mutations/account";
 import { getCustomerQuery } from "./queries/account";
 
@@ -456,4 +458,16 @@ export async function customerActivateAccount(
   });
 
   return res.body.data.customerActivate;
+}
+
+export async function updateCustomer(customer: Customer, token: string) {
+  const res = await shopifyFetch<ShopifyUpdateCustomerOperation>({
+    query: customerUpdateMutation,
+    variables: {
+      customer,
+      customerAccessToken: token,
+    },
+  });
+
+  return res.body.data.customerUpdate;
 }
