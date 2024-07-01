@@ -2,8 +2,8 @@
 import Link from "next/link";
 import Input from "../elements/input";
 import Button from "../elements/button";
-import { shopifySubscribeMarketing } from "@/lib/shopify/account/actions";
-import { useFormState, useFormStatus } from "react-dom";
+import { shopifySubscribeMarketing } from "../account/actions";
+import { useFormState } from "react-dom";
 
 const initialState = {
   message: "",
@@ -67,7 +67,6 @@ export default function Footer() {
     shopifySubscribeMarketing,
     initialState,
   );
-  const { pending } = useFormStatus();
 
   const date = new Date();
   const year = date.getFullYear();
@@ -107,6 +106,7 @@ export default function Footer() {
               <form action={formAction} className="flex w-full gap-1x">
                 <Input
                   value="email"
+                  id="newsletter_email"
                   placeholder="Email"
                   className="h-full md:w-[278px]"
                   state={state}
@@ -115,12 +115,11 @@ export default function Footer() {
                   text="Sign up"
                   variant="primary"
                   className="min-w-max"
-                  disabled={pending}
                 />
               </form>
-              {state.message.succes && (
+              {state.message.success && (
                 <p className="text-body-sm text-text-green">
-                  {state.message.succes}
+                  {state.message.success}
                 </p>
               )}
               {state.message.email && (

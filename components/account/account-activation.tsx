@@ -1,8 +1,8 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
 import { useSearchParams } from "next/navigation";
-import { shopifyActivateCustomer } from "@/lib/shopify/account/actions";
+import { shopifyActivateCustomer } from "../account/actions";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Input from "../elements/input";
@@ -17,14 +17,13 @@ export default function AccountActivation({ id }: { id: string }) {
     shopifyActivateCustomer,
     initialState,
   );
-  const { pending } = useFormStatus();
   const params = useSearchParams();
   const token = params.get("token");
 
   const router = useRouter();
 
   useEffect(() => {
-    if (state.message === "success") {
+    if (state.message === "successs") {
       router.push("/account");
       router.refresh();
     }
@@ -52,7 +51,7 @@ export default function AccountActivation({ id }: { id: string }) {
           type="password"
           toggleShow={true}
         />
-        <Button text="Activate" variant="primary" disabled={pending}></Button>
+        <Button text="Activate" variant="primary"></Button>
       </form>
     </div>
   );

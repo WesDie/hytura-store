@@ -5,6 +5,7 @@ import { useState } from "react";
 export default function Input({
   value,
   label,
+  id,
   placeholder,
   disabled,
   className,
@@ -15,6 +16,7 @@ export default function Input({
 }: {
   value: string;
   label?: string;
+  id?: string;
   placeholder?: string;
   disabled?: boolean;
   className?: string;
@@ -33,7 +35,7 @@ export default function Input({
             {label && <label htmlFor="password">{label}</label>}
             {state && state.message[value] && (
               <p className="text-body-sm text-text-red">
-                * {placeholder} {state.message[value]}
+                * {placeholder || label} {state.message[value]}
               </p>
             )}
           </div>
@@ -44,7 +46,7 @@ export default function Input({
           <input
             {...(show ? { type: "text" } : { type: type || "text" })}
             disabled={disabled || false}
-            id={value}
+            id={id || value}
             name={value}
             placeholder={placeholder || label || ""}
             autoComplete={autoComplete || ""}

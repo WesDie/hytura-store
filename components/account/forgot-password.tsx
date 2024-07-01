@@ -1,7 +1,7 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
-import { shopifySendPasswordResetEmail } from "@/lib/shopify/account/actions";
+import { useFormState } from "react-dom";
+import { shopifySendPasswordResetEmail } from "../account/actions";
 import Input from "../elements/input";
 import Button from "../elements/button";
 
@@ -14,10 +14,9 @@ export default function ResetPassword() {
     shopifySendPasswordResetEmail,
     initialState,
   );
-  const { pending } = useFormStatus();
 
   return (
-    <div className="flex h-full flex-col gap-3x px-3x py-4x pb-0">
+    <div className="flex h-full flex-col gap-2x px-3x py-5x pb-0">
       <div className="flex flex-col gap-1x">
         <h3 className="text-heading-xs">Reset password</h3>
         <p className="text-body-sm text-text-light-gray">
@@ -28,11 +27,11 @@ export default function ResetPassword() {
         {state.message.error && (
           <p className="text-body-sm text-text-red">{state.message.error}</p>
         )}
-        {state.message.succes && (
-          <p className="text-body-sm text-green-700">{state.message.succes}</p>
+        {state.message.success && (
+          <p className="text-body-sm text-green-700">{state.message.success}</p>
         )}
         <Input value="email" label="Email" state={state} autoComplete="email" />
-        <Button text="Send" variant="primary" disabled={pending} />
+        <Button text="Send" variant="primary" />
       </form>
     </div>
   );

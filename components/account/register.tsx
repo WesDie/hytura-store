@@ -1,23 +1,39 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
-import { shopifyCreateCustomer } from "@/lib/shopify/account/actions";
+import { useFormState } from "react-dom";
+import { shopifyCreateCustomer } from "../account/actions";
 import Input from "../elements/input";
 import Button from "../elements/button";
+import { Dispatch } from "react";
+import { useEffect } from "react";
 
 const initialState = {
   message: "",
 };
 
-export default function Register() {
+export default function Register({
+  setActiveSection,
+  setSuccessMessage,
+}: {
+  setActiveSection: Dispatch<string>;
+  setSuccessMessage: Dispatch<string>;
+}) {
   const [state, formAction] = useFormState(shopifyCreateCustomer, initialState);
-  const { pending } = useFormStatus();
+
+  useEffect(() => {
+    if (state.message.success) {
+      setActiveSection("login");
+      setSuccessMessage("Account created successfully. Please login.");
+    }
+  }, [state.message, setActiveSection, setSuccessMessage]);
 
   return (
-    <div className="flex h-full flex-col gap-1x px-3x py-4x pb-0">
+    <div className="flex h-full flex-col gap-2x px-3x py-5x pb-0">
       <h3 className="text-heading-xs">Register</h3>
       <form action={formAction} className="flex flex-col gap-2x">
-        <p className="text-body-sm text-text-red">{state.message?.base}</p>
+        {state.message?.base && (
+          <p className="text-body-sm text-text-red">{state.message?.base}</p>
+        )}
         <Input value="first_name" label="First name" state={state} />
         <Input value="last_name" label="Last name" state={state} />
         <Input value="email" label="Email" state={state} autoComplete="email" />
@@ -30,8 +46,21 @@ export default function Register() {
           autoComplete="current-password"
         />
         <div className="checkbox">
-          <input type="checkbox" id="accepts_terms" name="accpets_terms" />
-          <label htmlFor="accepts_terms">
+          {state.message.terms_invalid}
+          <input
+            type="checkbox"
+            id="accepts_terms"
+            name="accpets_terms"
+            onClick={() => {
+              state.message.terms_invalid = false;
+            }}
+            className={`${state.message.terms_invalid ? "!outline-stroke-red" : ""}`}
+          />
+          {state.message.terms_invalid}
+          <label
+            htmlFor="accepts_terms"
+            className={`${state.message.terms_invalid ? "!text-text-red" : ""}`}
+          >
             By clicking here, I agree to the Terms of Service and Privacy Policy
           </label>
         </div>
@@ -46,7 +75,7 @@ export default function Register() {
             Hytura. Unsubscribe at any time
           </label>
         </div>
-        <Button text="Register" variant="primary" disabled={pending} />
+        <Button text="Register" variant="primary" />
       </form>
     </div>
   );

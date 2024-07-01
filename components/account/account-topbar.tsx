@@ -1,5 +1,5 @@
 "use client";
-import { shopifyLogoutCustomer } from "@/lib/shopify/account/actions";
+import { shopifyLogoutCustomer } from "../account/actions";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Button from "../elements/button";

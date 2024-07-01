@@ -1,5 +1,6 @@
 "use client";
 import RenderImage from "../utilities/render-Image";
+import { useFormStatus } from "react-dom";
 
 export default function Button({
   text,
@@ -28,9 +29,11 @@ export default function Button({
     variantClass = "button-header-link";
   }
 
+  const { pending } = useFormStatus();
+
   return (
     <button
-      disabled={disabled}
+      disabled={disabled || pending}
       type={type}
       className={`${variantClass} ${className} ${arrow ? "flex gap-4x" : ""}`}
       onClick={onclick}

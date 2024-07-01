@@ -79,7 +79,7 @@
     @apply flex flex-col gap-1x;
 
     label {
-      @apply text-heading-3xs text-text-black;
+      @apply text-heading-3xs;
     }
 
     input {
@@ -98,7 +98,7 @@
     }
 
     label {
-      @apply text-heading-4xs text-text-black;
+      @apply text-heading-4xs;
     }
   }
 

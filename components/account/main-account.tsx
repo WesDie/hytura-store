@@ -2,14 +2,38 @@
 import ResetPassword from "./forgot-password";
 import Login from "./login";
 import Register from "./register";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../elements/button";
 
 export default function MainAccount() {
   const [activeSection, setActiveSection] = useState("login");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    let canbeOff = false;
+
+    if (successMessage) {
+      canbeOff = false;
+      setTimeout(() => {
+        canbeOff = true;
+        setSuccessMessage("");
+      }, 5000);
+    }
+
+    return () => {
+      if (canbeOff) {
+        setSuccessMessage("");
+      }
+    };
+  }, [successMessage, setActiveSection]);
 
   return (
-    <div className="flex flex-col gap-2x">
+    <div className="relative flex flex-col gap-2x">
+      {successMessage && (
+        <p className="text-heading-3xs text-text-green absolute left-3x top-1x text-center">
+          {successMessage}
+        </p>
+      )}
       {activeSection === "login" && (
         <>
           {" "}
@@ -26,7 +50,10 @@ export default function MainAccount() {
       )}
       {activeSection === "register" && (
         <>
-          <Register />
+          <Register
+            setActiveSection={setActiveSection}
+            setSuccessMessage={setSuccessMessage}
+          />
           <p className="text-heading-3xs mx-auto">
             Already a member?{" "}
             <Button

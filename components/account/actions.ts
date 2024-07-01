@@ -9,84 +9,13 @@ import {
   updateCustomer,
   getCustomer,
 } from "@/lib/shopify/index";
-import { Customer } from "../types";
-
-export async function createCustomer(
-  formData: FormData,
-  emailMarketing?: boolean,
-) {
-  const data = JSON.stringify({
-    customer: {
-      first_name: formData.get("first_name"),
-      last_name: formData.get("last_name"),
-      email: formData.get("email"),
-      phone: "",
-      verified_email: true,
-      password: formData.get("password"),
-      password_confirmation: formData.get("password"),
-      send_email_welcome: false,
-      email_marketing_consent: {
-        state:
-          formData.get("email_marketing_status") == "on"
-            ? "subscribed"
-            : "unsubscribed",
-      },
-    },
-  });
-
-  const endpoint = process.env.SHOPIFY_ADMIN_DOMAIN + "/customers.json";
-  const key = process.env.SHOPIFY_ADMIN_API_ACCESS_TOKEN;
-
-  try {
-    if (!endpoint) {
-      throw new Error("Endpoint is not defined");
-    } else if (!key) {
-      throw new Error("Key is not defined");
-    }
-
-    const result = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Shopify-Access-Token": key,
-      },
-      body: data,
-    });
-
-    const body = await result.json();
-
-    if (body.errors) {
-      if (emailMarketing) {
-        return {
-          message: { succes: "Updated marketing status" },
-        };
-      }
-
-      return { message: body.errors };
-    }
-
-    if (emailMarketing) {
-      return { message: { succes: "Subscribed to marketing succesfully" } };
-    }
-
-    return { message: { succes: "Created customer succesfully" } };
-  } catch (error) {
-    console.error("Error:", error);
-
-    throw {
-      error: error,
-    };
-  }
-}
+import { Customer } from "@/lib/shopify/types";
+import { createCustomer } from "@/lib/shopify/customer/actions";
 
 export async function shopifyCreateCustomer(
   prevState: any,
   formData: FormData,
 ) {
-  if (formData.get("accpets_terms") !== "on") {
-    return { message: { base: ["Please accept the terms and conditions"] } };
-  }
-
   const errors: any = {};
   const requiredFields = ["first_name", "last_name", "email", "password"];
   requiredFields.forEach((field) => {
@@ -96,7 +25,21 @@ export async function shopifyCreateCustomer(
   });
 
   if (Object.keys(errors).length > 0) {
-    return { message: errors };
+    errors.terms_invalid = formData.get("accpets_terms") !== "on";
+    errors.base = ["Please fill in the required fields"];
+
+    return {
+      message: errors,
+    };
+  }
+
+  if (formData.get("accpets_terms") !== "on") {
+    return {
+      message: {
+        base: ["Please accept the terms and conditions"],
+        terms_invalid: true,
+      },
+    };
   }
 
   return createCustomer(formData);
@@ -133,7 +76,7 @@ export async function shopifyLoginCustomer(
         updateCartIdentity(cartId, res.customerAccessToken.accessToken);
       }
 
-      return { message: { succes: "Logged in successfully" } };
+      return { message: { success: "Logged in successsfully" } };
     } else if (res.customerUserErrors) {
       if (res.customerUserErrors[0].message === "Unidentified customer") {
         return { message: { base: ["Invalid email or password"] } };
@@ -173,7 +116,7 @@ export async function shopifySendPasswordResetEmail(
       return { message: { error: res.userErrors[0].message } };
     }
 
-    return { message: { succes: "Email sent successfully" } };
+    return { message: { success: "Email sent successsfully" } };
   }
 
   return { message: { error: "Somthing went wrong" } };
@@ -182,7 +125,7 @@ export async function shopifySendPasswordResetEmail(
 export async function shopifyLogoutCustomer() {
   cookies().delete("customerAccessToken");
 
-  return { message: { succes: "Logout succes" } };
+  return { message: { success: "Logout success" } };
 }
 
 export async function shopifyActivateCustomer(
@@ -224,7 +167,7 @@ export async function shopifyActivateCustomer(
         updateCartIdentity(cartId, res.customerAccessToken.accessToken);
       }
 
-      return { message: { succes: "Activated customer succesfully" } };
+      return { message: { success: "Activated customer successfully" } };
     }
   }
 
@@ -260,9 +203,9 @@ export async function shopifySubscribeMarketing(
     }
 
     const updateRes = await shopifyUpdateCustomer(null, formData);
-    if (updateRes.message.succes.length > 0) {
+    if (updateRes.message.success.length > 0) {
       return {
-        message: { succes: "Updated marketing status" },
+        message: { success: "Updated marketing status" },
       };
     }
   }
@@ -316,5 +259,5 @@ export async function shopifyUpdateCustomer(
     return { message: res.customerUserErrors };
   }
 
-  return { message: { succes: "Updated customer succesfully" } };
+  return { message: { success: "Updated customer successfully" } };
 }
