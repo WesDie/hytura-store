@@ -6,6 +6,7 @@ import Input from "../elements/input";
 import Button from "../elements/button";
 import { Dispatch } from "react";
 import { useEffect } from "react";
+import Checkbox from "../elements/checkbox";
 
 const initialState = {
   message: "",
@@ -45,36 +46,16 @@ export default function Register({
           toggleShow={true}
           autoComplete="current-password"
         />
-        <div className="checkbox">
-          {state.message.terms_invalid}
-          <input
-            type="checkbox"
-            id="accepts_terms"
-            name="accpets_terms"
-            onClick={() => {
-              state.message.terms_invalid = false;
-            }}
-            className={`${state.message.terms_invalid ? "!outline-stroke-red" : ""}`}
-          />
-          {state.message.terms_invalid}
-          <label
-            htmlFor="accepts_terms"
-            className={`${state.message.terms_invalid ? "!text-text-red" : ""}`}
-          >
-            By clicking here, I agree to the Terms of Service and Privacy Policy
-          </label>
-        </div>
-        <div className="checkbox">
-          <input
-            type="checkbox"
-            id="email_marketing_status"
-            name="email_marketing_status"
-          />
-          <label htmlFor="email_marketing_status">
-            Sign up for emails on products, deals or other announcements by
-            Hytura. Unsubscribe at any time
-          </label>
-        </div>
+        <Checkbox
+          value="accepts_terms"
+          label="By clicking here, I agree to the Terms of Service and Privacy Policy"
+          state={state}
+        />
+        <Checkbox
+          value="email_marketing_status"
+          label="Sign up for emails on products, deals or other announcements by Hytura. Unsubscribe at any time"
+          state={state}
+        />
         <Button text="Register" variant="primary" />
       </form>
     </div>
