@@ -9,8 +9,8 @@ import {
   updateCustomer,
   getCustomer,
 } from "@/lib/shopify/index";
-import { Customer } from "@/lib/shopify/types";
 import { createCustomer } from "@/lib/shopify/customer/actions";
+import { Customer } from "@/lib/shopify/types";
 
 export async function shopifyCreateCustomer(
   prevState: any,
@@ -205,7 +205,7 @@ export async function shopifySubscribeMarketing(
     const updateRes = await shopifyUpdateCustomer(null, formData);
     if (updateRes.message.success.length > 0) {
       return {
-        message: { success: "Updated marketing status" },
+        message: { success: "Subscribed to marketing successfully" },
       };
     }
   }

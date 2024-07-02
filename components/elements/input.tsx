@@ -13,6 +13,8 @@ export default function Input({
   autoComplete,
   type,
   toggleShow,
+  onChange,
+  inputValue,
 }: {
   value: string;
   label?: string;
@@ -24,6 +26,8 @@ export default function Input({
   autoComplete?: string;
   type?: string;
   toggleShow?: boolean;
+  onChange?: (e: any) => void;
+  inputValue?: string;
 }) {
   const [show, setShow] = useState(false);
 
@@ -48,9 +52,11 @@ export default function Input({
             disabled={disabled || false}
             id={id || value}
             name={value}
+            value={inputValue}
             placeholder={placeholder || label || ""}
             autoComplete={autoComplete || ""}
             aria-invalid={state && state.message[value] ? "true" : "false"}
+            onChange={onChange}
           />
           {toggleShow && (
             <button

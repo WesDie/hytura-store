@@ -49,7 +49,7 @@ export async function createCustomer(
         }
 
         return {
-          message: { success: "Updated marketing status" },
+          message: { success: "Subscribed to marketing successfully" },
         };
       }
 

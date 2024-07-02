@@ -4,6 +4,7 @@ import Input from "../elements/input";
 import Button from "../elements/button";
 import { shopifySubscribeMarketing } from "../account/actions";
 import { useFormState } from "react-dom";
+import { useEffect, useState } from "react";
 
 const initialState = {
   message: "",
@@ -67,9 +68,22 @@ export default function Footer() {
     shopifySubscribeMarketing,
     initialState,
   );
+  const [message, setMessage] = useState(state.message);
+  const [email, setEmail] = useState("");
 
   const date = new Date();
   const year = date.getFullYear();
+
+  useEffect(() => {
+    setMessage(state.message);
+
+    if (state.message?.success) {
+      setEmail("");
+      setTimeout(() => {
+        setMessage({});
+      }, 5000);
+    }
+  }, [state]);
 
   return (
     <footer className="flex flex-col">
@@ -106,10 +120,12 @@ export default function Footer() {
               <form action={formAction} className="flex w-full gap-1x">
                 <Input
                   value="email"
+                  inputValue={email}
                   id="newsletter_email"
                   placeholder="Email"
                   className="h-full md:w-[278px]"
                   state={state}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <Button
                   text="Sign up"
@@ -117,12 +133,12 @@ export default function Footer() {
                   className="min-w-max"
                 />
               </form>
-              {state.message.success && (
+              {message.success && (
                 <p className="text-body-sm text-text-green">
                   {state.message.success}
                 </p>
               )}
-              {state.message.email && (
+              {message.email && (
                 <p className="text-body-sm text-text-red">
                   * Email {state.message.email}
                 </p>
