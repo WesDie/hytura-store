@@ -75,9 +75,9 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
         </div>
       )}
       <header
-        className={`fixed flex w-full justify-between border-b border-solid backdrop-blur-lg ${
+        className={`blur-transition blur-header fixed flex w-full justify-between border-b border-solid bg-background-sand ${
           isTop ? "top-[32px]" : "top-[0]"
-        } z-10 bg-background-sand transition-colors duration-300 md:bg-transparent ${isMobileNavigationOpen ? "border-stroke-gray" : "border-stroke-black"}`}
+        } z-10 transition-colors duration-300 ${isMobileNavigationOpen ? "border-stroke-gray" : "border-stroke-black"}`}
       >
         <div className="z-[11] flex w-full gap-5x py-2x pl-2x md:pl-3x">
           <Link href="/" className="flex">
@@ -170,13 +170,15 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
           id="shop-dropdown-header"
           className={`${
             isShopDropdownActive
-              ? "max-h-[200px] border-b py-3x"
-              : "max-h-[0px] py-0 opacity-0"
+              ? "visible max-h-[200px] min-h-[100px] border-b py-3x opacity-100"
+              : "invisible max-h-[0px] py-0 opacity-0"
           } absolute left-0 right-0 top-[54px] flex w-full justify-between overflow-hidden border-solid border-stroke-black bg-background-sand px-3x backdrop-blur-lg transition-all delay-75 duration-300 ease-in-out`}
           onMouseOver={() => setIsShopDropdownActive(true)}
           onMouseLeave={() => setIsShopDropdownActive(false)}
         >
-          <div className="flex gap-2x">
+          <div
+            className={`flex gap-2x transition-all duration-300 ${isShopDropdownActive ? "opacity-100" : "opacity-0"}`}
+          >
             <div className="flex min-w-[175px] flex-col gap-1x">
               <h3 className="text-heading-xs">Main products</h3>
               <div className="flex flex-col gap-[4px]">
