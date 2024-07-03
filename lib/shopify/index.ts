@@ -140,13 +140,16 @@ const reshapeMenu = (res: ShopifyMenuOperation): Menu[] => {
         path: item.url
           .replace(domain, "")
           .replace("/collections", "/collection")
-          .replace("/pages", "/page"),
+          .replace("/pages", "/page")
+          .replace("/blogs", "/journal"),
+
         items: item.items.map((subItem: { title: string; url: string }) => ({
           title: subItem.title,
           path: subItem.url
             .replace(domain, "")
             .replace("/collections", "/collection")
-            .replace("/pages", "/page"),
+            .replace("/pages", "/page")
+            .replace("/blogs", "/journal"),
         })),
       }),
     ) || []

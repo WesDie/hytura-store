@@ -13,21 +13,22 @@ export default function MainCollection({
   collections: Collection[];
   currentCollection: string;
 }) {
+  console.log(collections, currentCollection);
   const router = useRouter();
   const [collectionName, setCollectionName] = useState(
-    currentCollection[0].toUpperCase() +
-      currentCollection.slice(1).toLowerCase(),
+    currentCollection.toLowerCase(),
   );
   const [filteredCollection, setfilteredCollection] = useState(
     collections.filter(
-      (collection: Collection) => collection.title === collectionName,
+      (collection: Collection) =>
+        collection.title.toLowerCase() === collectionName,
     ),
   );
 
   const changeCurrentCollection = (title: string) => () => {
     setfilteredCollection(
       collections.filter(
-        (collection: Collection) => collection.title === title,
+        (collection: Collection) => collection.title.toLowerCase() === title,
       ),
     );
     setCollectionName(title);
@@ -42,7 +43,7 @@ export default function MainCollection({
         <div className="flex flex-col gap-2x p-2x md:px-4x md:py-3x">
           <div className="flex">
             <h1 className="text-heading-lg md:text-heading-xl">
-              {collectionName}
+              {collectionName.charAt(0).toUpperCase() + collectionName.slice(1)}
             </h1>
             <p className="text-heading-4xs">
               ({filteredCollection[0].products.length})
@@ -58,8 +59,8 @@ export default function MainCollection({
           {collections.map((collection: Collection, index: number) => (
             <div
               key={index}
-              onClick={changeCurrentCollection(collection.title)}
-              className={`text-link-sm cursor-pointer ${collection.title === collectionName ? "text-text-black" : "text-text-light-gray"}`}
+              onClick={changeCurrentCollection(collection.title.toLowerCase())}
+              className={`text-link-sm cursor-pointer ${collection.title.toLowerCase() === collectionName.toLowerCase() ? "text-text-black" : "text-text-light-gray"}`}
             >
               {collection.title}
             </div>
