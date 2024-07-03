@@ -5,64 +5,15 @@ import Button from "../elements/button";
 import { shopifySubscribeMarketing } from "../account/actions";
 import { useFormState } from "react-dom";
 import { useEffect, useState } from "react";
+import { Menu } from "@/lib/shopify/types";
 
 const initialState = {
   message: "",
 };
 
-export default function Footer() {
+export default function Footer({ menu }: { menu: Menu[] }) {
   const linkClass =
     "w-fit inline-block relative after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-text-black after:origin-bottom-right after:transition-transform after:duration-200 after:ease-in-out hover:after:scale-x-[1] hover:after:origin-bottom-left";
-
-  const footerLinks = [
-    {
-      title: "Shop",
-      links: [
-        {
-          title: "All products",
-          href: "/collection/all",
-        },
-        {
-          title: "Home page",
-          href: "/collection/home%20page",
-        },
-        {
-          title: "Sprays",
-          href: "/collection/sprays",
-        },
-      ],
-    },
-    {
-      title: "Support",
-      links: [
-        {
-          title: "Shipping & returns",
-          href: "/page/shipping-returns",
-        },
-        {
-          title: "Contact us",
-          href: "/page/Contact%20us",
-        },
-        {
-          title: "FAQ",
-          href: "/page/faq",
-        },
-        {
-          title: "Journal",
-          href: "/journal/news",
-        },
-      ],
-    },
-    {
-      title: "About & Other",
-      links: [
-        {
-          title: "About",
-          href: "/about",
-        },
-      ],
-    },
-  ];
 
   const [state, formAction] = useFormState(
     shopifySubscribeMarketing,
@@ -89,19 +40,19 @@ export default function Footer() {
     <footer className="flex flex-col">
       <div className="flex flex-col-reverse justify-between gap-3x border-b border-solid border-stroke-gray px-2x py-5x md:gap-6x md:px-3x lg:flex-row lg:gap-3x lg:py-8x">
         <div className="grid w-full grid-cols-2 gap-3x md:flex md:w-fit md:gap-2x">
-          {footerLinks.map((section) => (
+          {menu.map((item) => (
             <div
-              key={section.title}
+              key={item.title}
               className="flex w-full flex-col gap-2x md:w-fit md:min-w-[190px]"
             >
               <h1 className="text-heading-2xs md:text-heading-xs">
-                {section.title}
+                {item.title}
               </h1>
               <div className="flex flex-col gap-[4px]">
-                {section.links.map((link) => (
+                {item.items.map((link) => (
                   <Link
                     key={link.title}
-                    href={link.href}
+                    href={link.path}
                     className={`text-body-xs md:text-body-sm ${linkClass}`}
                   >
                     {link.title}

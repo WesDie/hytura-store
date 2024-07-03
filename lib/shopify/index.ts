@@ -10,6 +10,7 @@ import {
   createCartWithAccountMutation,
   cartUpdateIdentityMutation,
 } from "./mutations/cart";
+import { getMenuQuery } from "./queries/menu";
 import { getAllCollectionsQuery } from "./queries/collection";
 import {
   Cart,
@@ -17,6 +18,7 @@ import {
   Connection,
   Image,
   Media,
+  Menu,
   Page,
   Product,
   ShopifyAddToCartOperation,
@@ -44,6 +46,7 @@ import {
   ShopifyCartUpdateIdentityOperation,
   ShopifyCustomerActivateOperation,
   ShopifyUpdateCustomerOperation,
+  ShopifyMenuOperation,
 } from "./types";
 import { getPageQuery } from "./queries/page";
 import {
@@ -53,6 +56,8 @@ import {
   customerUpdateMutation,
 } from "./mutations/account";
 import { getCustomerQuery } from "./queries/account";
+
+const domain = process.env.SHOPIFY_STORE_DOMAIN_URL || "";
 
 export async function shopifyFetch<T>({
   cache = "no-store",
@@ -121,6 +126,31 @@ const reshapeCart = (cart: ShopifyCart): Cart => {
     ...cart,
     lines: removeEdgesAndNodes(cart.lines),
   };
+};
+
+const reshapeMenu = (res: ShopifyMenuOperation): Menu[] => {
+  return (
+    res.data?.menu?.items.map(
+      (item: {
+        title: string;
+        url: string;
+        items: { title: string; url: string }[];
+      }) => ({
+        title: item.title,
+        path: item.url
+          .replace(domain, "")
+          .replace("/collections", "/collection")
+          .replace("/pages", "/page"),
+        items: item.items.map((subItem: { title: string; url: string }) => ({
+          title: subItem.title,
+          path: subItem.url
+            .replace(domain, "")
+            .replace("/collections", "/collection")
+            .replace("/pages", "/page"),
+        })),
+      }),
+    ) || []
+  );
 };
 
 const reshapeCollection = (collection: ShopifyCollection) => {
@@ -276,6 +306,18 @@ export async function getPage(handle: string): Promise<Page> {
   });
 
   return res.body.data.pageByHandle;
+}
+
+export async function getMenu(handle: string): Promise<Menu[]> {
+  const res = await shopifyFetch<ShopifyMenuOperation>({
+    query: getMenuQuery,
+    tags: [TAGS.collections],
+    variables: {
+      handle,
+    },
+  });
+
+  return reshapeMenu(res.body);
 }
 
 export async function getAllCollections(): Promise<Collection[]> {

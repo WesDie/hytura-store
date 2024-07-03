@@ -62,6 +62,17 @@ export type Media = {
   sources: Source[];
 };
 
+export type Menu = {
+  title: string;
+  path: string;
+  items: MenuItem[];
+};
+
+export type MenuItem = {
+  title: string;
+  path: string;
+};
+
 export type Source = {
   url: string;
 };
@@ -357,6 +368,24 @@ export type ShopifyUpdateCustomerOperation = {
       phone?: string;
     };
     customerAccessToken: string;
+  };
+};
+
+export type ShopifyMenuOperation = {
+  data: {
+    menu?: {
+      items: {
+        title: string;
+        url: string;
+        items: {
+          title: string;
+          url: string;
+        }[];
+      }[];
+    };
+  };
+  variables: {
+    handle: string;
   };
 };
 

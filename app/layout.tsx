@@ -12,6 +12,7 @@ import Account from "@/components/account/account";
 import { cookies } from "next/headers";
 import Provider from "@/components/context/Provider";
 import Cart from "@/components/cart/cart";
+import { getMenu } from "@/lib/shopify";
 
 export const viewport: Viewport = {
   themeColor: "#FBF9EE",
@@ -32,12 +33,14 @@ export const metadata: Metadata = {
   description: "Store of Hytura",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const isLoggedIn = cookies().get("customerAccessToken") ? false : true;
+
+  const footerMenu = await getMenu("footer");
 
   return (
     <html lang="en">
@@ -48,7 +51,7 @@ export default function RootLayout({
           <SmoothScroller />
           <Header isLoggedIn={isLoggedIn} />
           {children}
-          <Footer />
+          <Footer menu={footerMenu} />
           <Cart />
           <Account />
         </Provider>
