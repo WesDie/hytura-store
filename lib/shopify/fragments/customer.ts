@@ -62,6 +62,25 @@ const customerFragment = `
           currencyCode
           canceledAt
           cancelReason
+          totalPrice {
+            amount
+            currencyCode
+          }
+          lineItems(first: 10) {
+            edges {
+              node {
+                quantity
+                title
+                variant {
+                  title
+                }
+                originalTotalPrice {
+                  amount
+                  currencyCode
+                }
+              }
+            }
+          }
         }
       }
     }

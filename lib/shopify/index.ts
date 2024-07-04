@@ -49,6 +49,7 @@ import {
   ShopifyMenuOperation,
   ShopifyCustomer,
   EditCustomer,
+  ShopifyOrder,
 } from "./types";
 import { getPageQuery } from "./queries/page";
 import {
@@ -178,10 +179,36 @@ const reshapeCustomer = (customer: ShopifyCustomer) => {
   }
 
   const { addresses, orders, ...rest } = customer;
+
   return {
     ...rest,
     addresses: removeEdgesAndNodes(addresses),
-    orders: removeEdgesAndNodes(orders),
+    orders: reshapeOrders(removeEdgesAndNodes(orders)),
+  };
+};
+
+const reshapeOrders = (orders: ShopifyOrder[]) => {
+  const reshapedOrders = [];
+
+  for (const order of orders) {
+    if (order) {
+      const reshapedOrder = reshapeOrder(order);
+
+      if (reshapedOrder) {
+        reshapedOrders.push(reshapedOrder);
+      }
+    }
+  }
+
+  return reshapedOrders;
+};
+
+const reshapeOrder = (order: ShopifyOrder) => {
+  const { lineItems, ...rest } = order;
+
+  return {
+    ...rest,
+    lineItems: removeEdgesAndNodes(lineItems),
   };
 };
 

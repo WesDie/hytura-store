@@ -160,6 +160,37 @@ export type Order = {
   currencyCode: string;
   canceledAt: string;
   cancelReason: string;
+  totalPrice: Money;
+  lineItems: OrderLineItem[];
+};
+
+export type ShopifyOrder = {
+  statusUrl: string;
+  processedAt: string;
+  phone: string;
+  orderNumber: string;
+  name: string;
+  id: string;
+  fulfillmentStatus: string;
+  financialStatus: string;
+  email: string;
+  edited: boolean;
+  customerUrl: string;
+  customerLocale: string;
+  currencyCode: string;
+  canceledAt: string;
+  cancelReason: string;
+  totalPrice: Money;
+  lineItems: Connection<ShopifyOrderLineItem>;
+};
+
+export type OrderLineItem = {
+  quantity: number;
+  title: string;
+  variant: {
+    title: string;
+  };
+  originalTotalPrice: Money;
 };
 
 export type Product = Omit<ShopifyProduct, "variants" | "images" | "media"> & {
@@ -290,6 +321,15 @@ export type ShopifyCartOperation = {
   variables: {
     cartId: string;
   };
+};
+
+export type ShopifyOrderLineItem = {
+  quantity: number;
+  title: string;
+  variant: {
+    title: string;
+  };
+  originalTotalPrice: Money;
 };
 
 export type ShopifyCreateCartOperation = {
