@@ -12,8 +12,17 @@ import { useMobileNavigation } from "@/components/context/mobile-navigation-cont
 import MobileNavigation from "@/components/elements/mobile-navigation";
 import Transiton from "@/components/utilities/transition";
 import Button from "../elements/button";
+import { Menu } from "@/lib/shopify/types";
 
-export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
+export default function Header({
+  isLoggedIn,
+  menu,
+  shopMenu,
+}: {
+  isLoggedIn: boolean;
+  menu: Menu[];
+  shopMenu: Menu[];
+}) {
   const { setIsCartOpen } = useCartDrawer();
   const { setIsAccountOpen } = useAccountDrawer();
   const { cartCount } = useCartCount();
@@ -90,27 +99,31 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
             />
           </Link>
           <div className="hidden gap-2x md:flex">
-            <Link href="/" className="button-header-link">
-              Home
-            </Link>
-            <Link
-              href="/shop"
-              className="button-header-link"
-              onMouseOver={() => setIsShopDropdownActive(true)}
-              onMouseLeave={() => setIsShopDropdownActive(false)}
-            >
-              Shop
-            </Link>
-            <Link href="/about" className="button-header-link">
-              About
-            </Link>
-            <Link href="/journal/news" className="button-header-link">
-              Journal
-            </Link>
+            {menu.map((item) =>
+              item.title.toLowerCase() === "shop" ? (
+                <Link
+                  key={item.title}
+                  href={item.path}
+                  className="button-header-link"
+                  onMouseOver={() => setIsShopDropdownActive(true)}
+                  onMouseLeave={() => setIsShopDropdownActive(false)}
+                >
+                  {item.title}
+                </Link>
+              ) : (
+                <Link
+                  key={item.title}
+                  href={item.path}
+                  className="button-header-link"
+                >
+                  {item.title}
+                </Link>
+              ),
+            )}
           </div>
         </div>
         <div className="z-[11] hidden w-full justify-end gap-2x py-2x pr-2x md:flex md:pr-3x">
-          <button className="button-header-link">EN</button>
+          {/* <button className="button-header-link">EN</button> */}
           {isLoggedIn ? (
             <Button
               text="Login"
@@ -179,44 +192,26 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
           <div
             className={`flex gap-2x transition-all duration-300 ${isShopDropdownActive ? "opacity-100" : "opacity-0"}`}
           >
-            <div className="flex min-w-[175px] flex-col gap-1x">
-              <h3 className="text-heading-xs">Main products</h3>
-              <div className="flex flex-col gap-[4px]">
-                <Link
-                  href="/collection/all"
-                  className={`button-header-link text-body-sm`}
-                  onClick={() => setIsShopDropdownActive(false)}
-                >
-                  All
-                </Link>
-                <Link
-                  href="/collection/home%20page"
-                  className={`button-header-link text-body-sm`}
-                  onClick={() => setIsShopDropdownActive(false)}
-                >
-                  Home page
-                </Link>
-                <Link
-                  href="/collection/sprays"
-                  className={`button-header-link text-body-sm`}
-                  onClick={() => setIsShopDropdownActive(false)}
-                >
-                  Sprays
-                </Link>
+            {shopMenu.map((item) => (
+              <div
+                key={item.title}
+                className="flex min-w-[175px] flex-col gap-1x"
+              >
+                <h3 className="text-heading-xs">{item.title}</h3>
+                <div className="flex flex-col gap-[4px]">
+                  {item.items.map((link) => (
+                    <Link
+                      key={link.title}
+                      href={link.path}
+                      className={`button-header-link text-body-sm`}
+                      onClick={() => setIsShopDropdownActive(false)}
+                    >
+                      {link.title}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className="flex min-w-[175px] flex-col gap-1x">
-              <h3 className="text-heading-xs">Other</h3>
-              <div className="flex flex-col gap-[4px]">
-                <Link
-                  href="/"
-                  className={`button-header-link text-body-sm`}
-                  onClick={() => setIsShopDropdownActive(false)}
-                >
-                  Accessories
-                </Link>
-              </div>
-            </div>
+            ))}
           </div>
           <RenderImage
             src={"/hero.png"}

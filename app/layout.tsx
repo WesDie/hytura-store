@@ -41,6 +41,8 @@ export default async function RootLayout({
   const isLoggedIn = cookies().get("customerAccessToken") ? false : true;
 
   const footerMenu = await getMenu("footer");
+  const headerMenu = await getMenu("header");
+  const shopMenu = await getMenu("shopmenu");
 
   return (
     <html lang="en">
@@ -49,7 +51,11 @@ export default async function RootLayout({
       >
         <Provider>
           <SmoothScroller />
-          <Header isLoggedIn={isLoggedIn} />
+          <Header
+            isLoggedIn={isLoggedIn}
+            menu={headerMenu}
+            shopMenu={shopMenu}
+          />
           {children}
           <Footer menu={footerMenu} />
           <Cart />
