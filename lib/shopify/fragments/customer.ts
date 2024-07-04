@@ -1,3 +1,5 @@
+import productFragment from "./product";
+
 const customerFragment = `
   fragment customer on Customer {
     acceptsMarketing
@@ -66,6 +68,28 @@ const customerFragment = `
             amount
             currencyCode
           }
+          totalTax {
+            amount
+            currencyCode
+          }
+          currentSubtotalPrice {
+            amount
+            currencyCode
+          }
+          billingAddress{
+            address1
+            city
+            country
+            name
+            zip
+          }
+          shippingAddress{
+            address1
+            city
+            country
+            name
+            zip
+          }
           lineItems(first: 10) {
             edges {
               node {
@@ -73,6 +97,9 @@ const customerFragment = `
                 title
                 variant {
                   title
+                  product {
+                    ...product
+                  }
                 }
                 originalTotalPrice {
                   amount
@@ -85,6 +112,7 @@ const customerFragment = `
       }
     }
   }
+  ${productFragment}
 `;
 
 export default customerFragment;

@@ -161,7 +161,11 @@ export type Order = {
   canceledAt: string;
   cancelReason: string;
   totalPrice: Money;
+  billingAddress: Address;
+  shippingAddress: Address;
   lineItems: OrderLineItem[];
+  currentSubtotalPrice: Money;
+  totalTax: Money;
 };
 
 export type ShopifyOrder = {
@@ -181,7 +185,11 @@ export type ShopifyOrder = {
   canceledAt: string;
   cancelReason: string;
   totalPrice: Money;
+  billingAddress: Address;
+  shippingAddress: Address;
   lineItems: Connection<ShopifyOrderLineItem>;
+  currentSubtotalPrice: Money;
+  totalTax: Money;
 };
 
 export type OrderLineItem = {
@@ -189,6 +197,7 @@ export type OrderLineItem = {
   title: string;
   variant: {
     title: string;
+    product: Product;
   };
   originalTotalPrice: Money;
 };
@@ -328,6 +337,7 @@ export type ShopifyOrderLineItem = {
   title: string;
   variant: {
     title: string;
+    product: ShopifyProduct;
   };
   originalTotalPrice: Money;
 };

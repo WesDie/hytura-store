@@ -22,7 +22,7 @@ export default function OrderOverview({ customer }: { customer: Customer }) {
           className="flex w-full border-b border-stroke-light-gray px-1x py-2x"
         >
           <Link
-            href={"/account/order/" + order.orderNumber}
+            href={"/account/orders/" + order.orderNumber}
             className="button-link w-full"
           >
             #{order.orderNumber}
