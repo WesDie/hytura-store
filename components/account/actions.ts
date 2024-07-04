@@ -262,7 +262,6 @@ export async function shopifyUpdateCustomer(
   };
 
   const res = await updateCustomer(newCustomerData, customerToken);
-  console.log(res);
   if (res.customerUserErrors && res.customerUserErrors.length > 0) {
     if (res.customerUserErrors[0].message === "Enter a valid phone number") {
       return { message: { new_phone: ["is not valid"] } };

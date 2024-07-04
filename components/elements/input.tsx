@@ -27,7 +27,7 @@ export default function Input({
   type?: string;
   toggleShow?: boolean;
   onChange?: (e: any) => void;
-  inputValue?: string;
+  inputValue?: string | number;
 }) {
   const [show, setShow] = useState(false);
 

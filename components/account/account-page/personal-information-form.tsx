@@ -74,7 +74,6 @@ export default function PersonalInformationForm({
         />
         <Input
           value="new_phone"
-          type="number"
           label="Phone number"
           inputValue={newPhone}
           disabled={!canbeEdited}
