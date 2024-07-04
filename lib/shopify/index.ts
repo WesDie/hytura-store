@@ -48,6 +48,7 @@ import {
   ShopifyUpdateCustomerOperation,
   ShopifyMenuOperation,
   ShopifyCustomer,
+  EditCustomer,
 } from "./types";
 import { getPageQuery } from "./queries/page";
 import {
@@ -172,6 +173,10 @@ const reshapeCollection = (collection: ShopifyCollection) => {
 };
 
 const reshapeCustomer = (customer: ShopifyCustomer) => {
+  if (!customer) {
+    return undefined;
+  }
+
   const { addresses, orders, ...rest } = customer;
   return {
     ...rest,
@@ -357,7 +362,9 @@ export async function getCart(id: string): Promise<Cart | null> {
   return reshapeCart(res.body.data.cart);
 }
 
-export async function getCustomer(token: string): Promise<Customer> {
+export async function getCustomer(
+  token: string,
+): Promise<Customer | undefined> {
   const res = await shopifyFetch<ShopifyGetCustomerOperation>({
     query: getCustomerQuery,
     variables: {
@@ -515,7 +522,7 @@ export async function customerActivateAccount(
   return res.body.data.customerActivate;
 }
 
-export async function updateCustomer(customer: Customer, token: string) {
+export async function updateCustomer(customer: EditCustomer, token: string) {
   const res = await shopifyFetch<ShopifyUpdateCustomerOperation>({
     query: customerUpdateMutation,
     variables: {

@@ -10,7 +10,7 @@ import {
   getCustomer,
 } from "@/lib/shopify/index";
 import { createCustomer } from "@/lib/shopify/customer/actions";
-import { Customer } from "@/lib/shopify/types";
+import { Customer, EditCustomer } from "@/lib/shopify/types";
 
 export async function shopifyCreateCustomer(
   prevState: any,
@@ -198,7 +198,7 @@ export async function shopifySubscribeMarketing(
   if (customerToken) {
     const customer = await getCustomer(customerToken);
 
-    if (customer.email !== formData.get("email")) {
+    if (customer && customer.email !== formData.get("email")) {
       return await createCustomer(formData, true);
     }
 
@@ -233,7 +233,14 @@ export async function shopifyUpdateCustomer(
   }
 
   const errors: any = {};
-  const requiredFields = ["first_name", "last_name", "email"];
+  const requiredFields = [
+    "new_first_name",
+    "new_last_name",
+    "new_email",
+    "first_name",
+    "last_name",
+    "email",
+  ];
   requiredFields.forEach((field) => {
     if (formData.get(field) === "") {
       errors[field] = [`is required`];
@@ -244,7 +251,7 @@ export async function shopifyUpdateCustomer(
     return { message: errors };
   }
 
-  const newCustomerData: Customer = {
+  const newCustomerData: EditCustomer = {
     acceptsMarketing:
       formData.get("new_email_marketing_status") === "on" ||
       customer.acceptsMarketing,
@@ -255,8 +262,12 @@ export async function shopifyUpdateCustomer(
   };
 
   const res = await updateCustomer(newCustomerData, customerToken);
+  console.log(res);
   if (res.customerUserErrors && res.customerUserErrors.length > 0) {
-    return { message: res.customerUserErrors };
+    if (res.customerUserErrors[0].message === "Enter a valid phone number") {
+      return { message: { new_phone: ["is not valid"] } };
+    }
+    return { message: { base: res.customerUserErrors[0].message } };
   }
 
   return { message: { success: "Updated customer successfully" } };

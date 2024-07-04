@@ -52,7 +52,7 @@ export default function Input({
             disabled={disabled || false}
             id={id || value}
             name={value}
-            value={inputValue}
+            value={inputValue || ""}
             placeholder={placeholder || label || ""}
             autoComplete={autoComplete || ""}
             aria-invalid={state && state.message[value] ? "true" : "false"}

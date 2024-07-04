@@ -102,6 +102,15 @@ export type CustomerAccessToken = {
   }[];
 };
 
+export type EditCustomer = {
+  acceptsMarketing?: boolean;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  password?: string;
+  phone?: string;
+};
+
 export type Customer = {
   firstName: string;
   createdAt?: string;
