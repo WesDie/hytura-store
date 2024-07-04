@@ -13,7 +13,6 @@ export default function MainCollection({
   collections: Collection[];
   currentCollection: string;
 }) {
-  console.log(collections, currentCollection);
   const router = useRouter();
   const [collectionName, setCollectionName] = useState(
     currentCollection.toLowerCase(),
