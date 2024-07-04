@@ -47,6 +47,7 @@ import {
   ShopifyCustomerActivateOperation,
   ShopifyUpdateCustomerOperation,
   ShopifyMenuOperation,
+  ShopifyCustomer,
 } from "./types";
 import { getPageQuery } from "./queries/page";
 import {
@@ -167,6 +168,15 @@ const reshapeCollection = (collection: ShopifyCollection) => {
     ...rest,
     products: reshapeProducts(removeEdgesAndNodes(products)),
     path: `/search/${collection.handle}`,
+  };
+};
+
+const reshapeCustomer = (customer: ShopifyCustomer) => {
+  const { addresses, orders, ...rest } = customer;
+  return {
+    ...rest,
+    addresses: removeEdgesAndNodes(addresses),
+    orders: removeEdgesAndNodes(orders),
   };
 };
 
@@ -355,7 +365,7 @@ export async function getCustomer(token: string): Promise<Customer> {
     },
   });
 
-  return res.body.data.customer;
+  return reshapeCustomer(res.body.data.customer);
 }
 
 export async function createCart(

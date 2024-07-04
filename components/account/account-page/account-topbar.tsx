@@ -1,8 +1,8 @@
 "use client";
-import { shopifyLogoutCustomer } from "../account/actions";
+import { shopifyLogoutCustomer } from "../actions";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Button from "../elements/button";
+import Button from "../../elements/button";
 
 export default function AccountTopBar({ firstName }: { firstName: string }) {
   const router = useRouter();
@@ -15,7 +15,9 @@ export default function AccountTopBar({ firstName }: { firstName: string }) {
 
   return (
     <div className="flex flex-col gap-2x pt-[96px]">
-      <h1 className="text-heading-lg pl-4x">Welcome, {firstName}</h1>
+      <h1 className="text-heading-lg pl-4x">
+        Welcome{firstName && `, ${firstName}`}
+      </h1>
       <div className="flex justify-between border-y border-stroke-gray px-4x py-2x">
         <div className="flex gap-2x">
           <Link href={"/account"} className="text-link-sm text-text-black">

@@ -114,6 +114,43 @@ export type Customer = {
   updatedAt?: string;
   tags?: string[];
   phone: string;
+  addresses: Address[];
+  defaultAddress?: Address;
+  orders: Order[];
+};
+
+export type Address = {
+  address1: string;
+  address2: string;
+  city: string;
+  company: string;
+  country: string;
+  firstName: string;
+  id: string;
+  lastName: string;
+  name: string;
+  phone: string;
+  province: string;
+  provinceCode: string;
+  zip: string;
+};
+
+export type Order = {
+  statusUrl: string;
+  processedAt: string;
+  phone: string;
+  orderNumber: string;
+  name: string;
+  id: string;
+  fulfillmentStatus: string;
+  financialStatus: string;
+  email: string;
+  edited: boolean;
+  customerUrl: string;
+  customerLocale: string;
+  currencyCode: string;
+  canceledAt: string;
+  cancelReason: string;
 };
 
 export type Product = Omit<ShopifyProduct, "variants" | "images" | "media"> & {
@@ -189,6 +226,23 @@ export type ShopifyCollection = {
   seo: SEO;
   updatedAt: string;
   products: Connection<ShopifyProduct>;
+};
+
+export type ShopifyCustomer = {
+  firstName: string;
+  createdAt?: string;
+  acceptsMarketing: boolean;
+  displayName?: string;
+  email: string;
+  id?: string;
+  lastName: string;
+  numberOfOrders?: number;
+  updatedAt?: string;
+  tags?: string[];
+  phone: string;
+  addresses: Connection<Address>;
+  defaultAddress?: Address;
+  orders: Connection<Order>;
 };
 
 export type ShopifyProduct = {
@@ -342,7 +396,7 @@ export type ShopifySendPasswordResetEmailOperation = {
 
 export type ShopifyGetCustomerOperation = {
   data: {
-    customer: Customer;
+    customer: ShopifyCustomer;
   };
   variables: {
     customerAccessToken: string;
