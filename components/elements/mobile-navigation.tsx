@@ -133,7 +133,7 @@ export default function MobileNavigation({
             }}
           />
         ) : (
-          <Link href={"/account"}>
+          <Link href={"/account/general-information"}>
             <Button
               text="Account"
               variant="secondary"

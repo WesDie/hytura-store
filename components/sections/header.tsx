@@ -131,7 +131,10 @@ export default function Header({
               onclick={() => setIsAccountOpen(true)}
             />
           ) : (
-            <Link href={"/account"} className="button-header-link">
+            <Link
+              href={"/account/general-information"}
+              className="button-header-link"
+            >
               Account
             </Link>
           )}
