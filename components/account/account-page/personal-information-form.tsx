@@ -26,6 +26,7 @@ export default function PersonalInformationForm({
     setNewFirstName(customer.firstName || "");
     setNewLastName(customer.lastName || "");
     setNewPhone(customer.phone || "");
+    state.message = "";
   };
 
   useEffect(() => {
