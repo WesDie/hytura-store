@@ -9,6 +9,7 @@ export default function RenderImage({
   height,
   className,
   imageClassName,
+  onClick,
 }: {
   src: string;
   alt: string;
@@ -16,13 +17,14 @@ export default function RenderImage({
   height: number;
   className?: string;
   imageClassName?: string;
+  onClick?: () => void;
 }) {
   const [isImageLoading, setImageLoading] = useState(!src.endsWith(".svg"));
 
   if (!src) return null;
 
   return (
-    <div className={`${className} overflow-hidden`}>
+    <div className={`${className} overflow-hidden`} onClick={onClick}>
       <Image
         src={src}
         alt={alt}

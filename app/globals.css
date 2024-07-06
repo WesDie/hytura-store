@@ -98,6 +98,21 @@
     }
   }
 
+  .select {
+    @apply flex flex-col gap-1x;
+
+    label {
+      @apply text-heading-3xs;
+    }
+
+    .select-inner {
+      @apply text-body-md flex w-full appearance-none border border-stroke-black bg-transparent px-2x transition-colors duration-300 placeholder-shown:border-stroke-gray focus:outline-none;
+    }
+    .select-inner:is([aria-invalid="true"]) {
+      @apply border-stroke-red;
+    }
+  }
+
   .checkbox {
     @apply flex items-center gap-1x;
 
