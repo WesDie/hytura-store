@@ -70,3 +70,14 @@ export const customerAddressUpdateMutation = `
   }
   ${customerAddressFragment}
 `;
+
+export const customerAddressDeleteMutation = `
+  mutation customerAddressDelete($customerAccessToken: String!, $id: ID!) {
+    customerAddressDelete(customerAccessToken: $customerAccessToken, id: $id) {
+      deletedCustomerAddressId
+      customerUserErrors {
+        message
+      }
+    }
+  }
+`;

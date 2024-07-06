@@ -3,6 +3,13 @@ import Link from "next/link";
 import Button from "../../elements/button";
 import { Address } from "@/lib/shopify/types";
 import { usePathname } from "next/navigation";
+import { ShopifyDeleteCustomerAddress } from "../actions";
+import { useFormState } from "react-dom";
+import { useState } from "react";
+
+const initialState = {
+  message: "",
+};
 
 export default function AddressesOverview({
   addresses,
@@ -11,6 +18,15 @@ export default function AddressesOverview({
   addresses: Address[];
   defaultAddressId: string;
 }) {
+  const [state, formAction] = useFormState(
+    ShopifyDeleteCustomerAddress,
+    initialState,
+  );
+
+  const [deleteOverlay, setDeleteOverlay] = useState(
+    addresses.map(() => false),
+  );
+
   const pathname = usePathname();
   const addressId = addresses.map((address) =>
     address.id.split("?")[0].split("/").pop(),
@@ -27,11 +43,37 @@ export default function AddressesOverview({
       {addresses.map((address, index) => (
         <div
           key={address.id}
-          className="flex w-full flex-col gap-2x border-b border-solid border-stroke-light-gray py-2x"
+          className="relative flex w-full flex-col gap-2x border-b border-solid border-stroke-light-gray py-2x"
         >
+          <div
+            className={`absolute inset-0 flex bg-background-sand bg-opacity-70 transition-opacity ${deleteOverlay[index] ? "opacity-100" : "pointer-events-none opacity-0"}`}
+          >
+            <div className="m-auto flex gap-1x">
+              <form action={formAction}>
+                <input type="hidden" name="id" value={address.id} />
+                <Button
+                  text="Delete"
+                  variant="primary"
+                  className="text-body-sm"
+                />
+              </form>
+              <Button
+                text="Cancel"
+                variant="secondary"
+                className="text-body-sm"
+                onclick={() => {
+                  const updatedOverlay = [...deleteOverlay];
+                  updatedOverlay[index] = false;
+                  setDeleteOverlay(updatedOverlay);
+                }}
+              />
+            </div>
+          </div>
           <div className="flex w-full justify-between">
             <h3
-              className={`text-heading-2xs ${isActiveAddress[index] ? "underline" : ""}`}
+              className={`text-heading-2xs ${
+                isActiveAddress[index] ? "underline" : ""
+              }`}
             >
               {address.address1}
             </h3>
@@ -66,7 +108,15 @@ export default function AddressesOverview({
                   Edit
                 </Link>
               )}
-              <Button text="Remove" variant="link" />
+              <Button
+                text="Remove"
+                variant="link"
+                onclick={() => {
+                  const updatedOverlay = [...deleteOverlay];
+                  updatedOverlay[index] = true;
+                  setDeleteOverlay(updatedOverlay);
+                }}
+              />
             </div>
           </div>
         </div>

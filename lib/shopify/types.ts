@@ -513,6 +513,20 @@ export type ShopifyUpdateCustomerAddressOperation = {
   };
 };
 
+export type ShopifyDeleteCustomerAddressOperation = {
+  data: {
+    customerAddressDelete: {
+      customerUserErrors: {
+        message: string;
+      }[];
+    };
+  };
+  variables: {
+    customerAccessToken: string;
+    id: string;
+  };
+};
+
 export type ShopifyMenuOperation = {
   data: {
     menu?: {

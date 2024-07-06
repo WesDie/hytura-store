@@ -47,6 +47,7 @@ import {
   ShopifyCustomerActivateOperation,
   ShopifyUpdateCustomerOperation,
   ShopifyUpdateCustomerAddressOperation,
+  ShopifyDeleteCustomerAddressOperation,
   ShopifyMenuOperation,
   ShopifyCustomer,
   EditCustomer,
@@ -59,6 +60,7 @@ import {
   sendCustomerPasswordResetEmail,
   customerUpdateMutation,
   customerAddressUpdateMutation,
+  customerAddressDeleteMutation,
 } from "./mutations/account";
 import { getCustomerQuery } from "./queries/account";
 
@@ -579,4 +581,16 @@ export async function updateCustomerAddress(
   });
 
   return res.body.data.customerAddressUpdate;
+}
+
+export async function deleteCustomerAddress(id: string, token: string) {
+  const res = await shopifyFetch<ShopifyDeleteCustomerAddressOperation>({
+    query: customerAddressDeleteMutation,
+    variables: {
+      id,
+      customerAccessToken: token,
+    },
+  });
+
+  return res.body.data.customerAddressDelete;
 }

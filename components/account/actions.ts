@@ -9,6 +9,7 @@ import {
   updateCustomer,
   getCustomer,
   updateCustomerAddress,
+  deleteCustomerAddress,
 } from "@/lib/shopify/index";
 import { createCustomer } from "@/lib/shopify/customer/actions";
 import { Customer, EditCustomer } from "@/lib/shopify/types";
@@ -346,4 +347,40 @@ export async function ShopifyUpdateCustomerAddress(
   revalidateTag(TAGS.customer);
 
   return { message: { success: "Updated address successfully" } };
+}
+
+export async function ShopifyDeleteCustomerAddress(
+  prevState: any,
+  formData: FormData,
+  customer?: Customer,
+): Promise<{ message: any }> {
+  const customerToken = cookies().get("customerAccessToken")?.value;
+
+  if (!customerToken) {
+    return { message: { base: ["Unauthorized"] } };
+  }
+
+  if (!customer) {
+    customer = await getCustomer(customerToken);
+  }
+
+  if (!customer) {
+    return { message: { base: ["Unauthorized"] } };
+  }
+
+  const id = formData.get("id") as string;
+
+  if (!id) {
+    return { message: { base: ["Address not found"] } };
+  }
+
+  const res = await deleteCustomerAddress(id, customerToken);
+
+  if (res.customerUserErrors && res.customerUserErrors.length > 0) {
+    return { message: { base: res.customerUserErrors[0].message } };
+  }
+
+  revalidateTag(TAGS.customer);
+
+  return { message: { success: "Deleted address successfully" } };
 }
