@@ -30,7 +30,7 @@ export default function ResetPassword() {
         {state.message.success && (
           <p className="text-body-sm text-green-700">{state.message.success}</p>
         )}
-        <Input value="email" label="Email" state={state} autoComplete="email" />
+        <Input name="email" label="Email" state={state} autoComplete="email" />
         <Button text="Send" variant="primary" />
       </form>
     </div>

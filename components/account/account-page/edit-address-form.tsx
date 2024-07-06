@@ -46,37 +46,37 @@ export default function EditAddressForm({ address }: { address: Address }) {
         )}
         <input type="hidden" name="id" value={address.id} />
         <Input
-          value="first_name"
+          name="first_name"
           label="First name*"
-          inputValue={firstName}
+          value={firstName}
           state={state}
           onChange={(e) => setFirstName(e.target.value)}
         />
         <Input
-          value="last_name"
+          name="last_name"
           label="Last name*"
-          inputValue={lastName}
+          value={lastName}
           state={state}
           onChange={(e) => setLastName(e.target.value)}
         />
         <Input
-          value="company"
+          name="company"
           label="Company"
-          inputValue={company}
+          value={company}
           state={state}
           onChange={(e) => setCompany(e.target.value)}
         />
         <Input
-          value="address1"
+          name="address1"
           label="Address*"
-          inputValue={address1}
+          value={address1}
           state={state}
           onChange={(e) => setAddress1(e.target.value)}
         />
         <Input
-          value="city"
+          name="city"
           label="City*"
-          inputValue={city}
+          value={city}
           state={state}
           onChange={(e) => setCity(e.target.value)}
         />
@@ -86,16 +86,16 @@ export default function EditAddressForm({ address }: { address: Address }) {
           state={state}
         />
         <Input
-          value="zip"
+          name="zip"
           label="Zip*"
-          inputValue={zip}
+          value={zip}
           state={state}
           onChange={(e) => setZip(e.target.value)}
         />
         <Input
-          value="phone"
+          name="phone"
           label="Phone"
-          inputValue={phone}
+          value={phone}
           state={state}
           onChange={(e) => setPhone(e.target.value)}
         />

@@ -57,25 +57,25 @@ export default function PersonalInformationForm({
           <p className="text-body-sm text-text-red">{state.message?.base}</p>
         )}
         <Input
-          value="new_first_name"
+          name="new_first_name"
           label="First name"
-          inputValue={newFirstName}
+          value={newFirstName}
           disabled={!canbeEdited}
           state={state}
           onChange={(e) => setNewFirstName(e.target.value)}
         />
         <Input
-          value="new_last_name"
+          name="new_last_name"
           label="Last name"
           disabled={!canbeEdited}
-          inputValue={newLastName}
+          value={newLastName}
           state={state}
           onChange={(e) => setNewLastName(e.target.value)}
         />
         <Input
-          value="new_phone"
+          name="new_phone"
           label="Phone number"
-          inputValue={newPhone}
+          value={newPhone}
           disabled={!canbeEdited}
           state={state}
           onChange={(e) => setNewPhone(e.target.value)}

@@ -37,7 +37,7 @@ export default function AccountActivation({ id }: { id: string }) {
         <input type="hidden" name="id" value={id} />
         <input type="hidden" name="activationToken" value={token || ""} />
         <Input
-          value="password"
+          name="password"
           label="Password"
           state={state}
           type="password"
@@ -45,7 +45,7 @@ export default function AccountActivation({ id }: { id: string }) {
           autoComplete="current-password"
         />
         <Input
-          value="confirm_password"
+          name="confirm_password"
           label="Confirm password"
           state={state}
           type="password"

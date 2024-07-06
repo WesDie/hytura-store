@@ -35,11 +35,11 @@ export default function Register({
         {state.message?.base && (
           <p className="text-body-sm text-text-red">{state.message?.base}</p>
         )}
-        <Input value="first_name" label="First name" state={state} />
-        <Input value="last_name" label="Last name" state={state} />
-        <Input value="email" label="Email" state={state} autoComplete="email" />
+        <Input name="first_name" label="First name" state={state} />
+        <Input name="last_name" label="Last name" state={state} />
+        <Input name="email" label="Email" state={state} autoComplete="email" />
         <Input
-          value="password"
+          name="password"
           label="Password"
           state={state}
           type="password"

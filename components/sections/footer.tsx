@@ -70,8 +70,8 @@ export default function Footer({ menu }: { menu: Menu[] }) {
             <div className="flex flex-col gap-1x">
               <form action={formAction} className="flex w-full gap-1x">
                 <Input
-                  value="email"
-                  inputValue={email}
+                  name="email"
+                  value={email}
                   id="newsletter_email"
                   placeholder="Email"
                   className="h-full md:w-[278px]"

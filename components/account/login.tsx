@@ -24,9 +24,9 @@ export default function Login({
         {state.message.base && (
           <p className="text-body-sm text-text-red">{state.message.base}</p>
         )}
-        <Input value="email" label="Email" state={state} autoComplete="email" />
+        <Input name="email" label="Email" state={state} autoComplete="email" />
         <Input
-          value="password"
+          name="password"
           label="Password"
           state={state}
           type="password"

@@ -14,15 +14,15 @@ export default function LoginInformationForm({
       </div>
       <div className="flex flex-col gap-2x">
         <Input
-          value="email"
+          value={customer.email || ""}
           label="Email"
-          inputValue={customer.email || ""}
+          name="email"
           disabled={true}
         />
         <Input
-          value="password"
+          value="*********"
           label="Password"
-          inputValue="*******"
+          name="password"
           disabled={true}
         />
       </div>
