@@ -1,4 +1,4 @@
-import customerFragment from "../fragments/customer";
+import { customerFragment } from "../fragments/customer";
 
 export const getCustomerQuery = `
   query getCustomer($customerAccessToken: String!) {

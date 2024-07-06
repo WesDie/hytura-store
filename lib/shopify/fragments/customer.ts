@@ -1,6 +1,6 @@
 import productFragment from "./product";
 
-const customerFragment = `
+export const customerFragment = `
   fragment customer on Customer {
     acceptsMarketing
     createdAt
@@ -20,6 +20,7 @@ const customerFragment = `
           city
           company
           country
+          countryCode
           firstName
           id
           lastName
@@ -37,6 +38,7 @@ const customerFragment = `
       city
       company
       country
+      countryCode
       firstName
       id
       lastName
@@ -80,6 +82,7 @@ const customerFragment = `
             address1
             city
             country
+            countryCode
             name
             zip
           }
@@ -87,6 +90,7 @@ const customerFragment = `
             address1
             city
             country
+            countryCode
             name
             zip
           }
@@ -115,4 +119,21 @@ const customerFragment = `
   ${productFragment}
 `;
 
-export default customerFragment;
+export const customerAddressFragment = `
+  fragment customerAddress on MailingAddress {
+    address1
+    address2
+    city
+    company
+    country
+    countryCode
+    firstName
+    id
+    lastName
+    name
+    phone
+    province
+    provinceCode
+    zip
+  }
+`;

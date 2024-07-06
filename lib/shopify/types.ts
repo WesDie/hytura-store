@@ -134,6 +134,7 @@ export type Address = {
   city: string;
   company: string;
   country: string;
+  countryCode: string;
   firstName: string;
   id: string;
   lastName: string;
@@ -481,6 +482,34 @@ export type ShopifyUpdateCustomerOperation = {
       phone?: string;
     };
     customerAccessToken: string;
+  };
+};
+
+export type ShopifyUpdateCustomerAddressOperation = {
+  data: {
+    customerAddressUpdate: {
+      customer: Customer;
+      customerUserErrors: {
+        message: string;
+      }[];
+    };
+  };
+  variables: {
+    address: {
+      address1: string;
+      address2: string;
+      city: string;
+      company: string;
+      country: string;
+      countryCode: string;
+      firstName: string;
+      lastName: string;
+      phone: string;
+      province: string;
+      zip: string;
+    };
+    customerAccessToken: string;
+    id: string;
   };
 };
 

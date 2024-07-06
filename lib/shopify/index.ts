@@ -46,6 +46,7 @@ import {
   ShopifyCartUpdateIdentityOperation,
   ShopifyCustomerActivateOperation,
   ShopifyUpdateCustomerOperation,
+  ShopifyUpdateCustomerAddressOperation,
   ShopifyMenuOperation,
   ShopifyCustomer,
   EditCustomer,
@@ -57,6 +58,7 @@ import {
   customerActivateMutation,
   sendCustomerPasswordResetEmail,
   customerUpdateMutation,
+  customerAddressUpdateMutation,
 } from "./mutations/account";
 import { getCustomerQuery } from "./queries/account";
 
@@ -397,6 +399,7 @@ export async function getCustomer(
     variables: {
       customerAccessToken: token,
     },
+    tags: [TAGS.customer],
   });
 
   return reshapeCustomer(res.body.data.customer);
@@ -559,4 +562,21 @@ export async function updateCustomer(customer: EditCustomer, token: string) {
   });
 
   return res.body.data.customerUpdate;
+}
+
+export async function updateCustomerAddress(
+  id: string,
+  address: any[],
+  token: string,
+) {
+  const res = await shopifyFetch<ShopifyUpdateCustomerAddressOperation>({
+    query: customerAddressUpdateMutation,
+    variables: {
+      id,
+      address,
+      customerAccessToken: token,
+    },
+  });
+
+  return res.body.data.customerAddressUpdate;
 }
