@@ -3,7 +3,10 @@ import Button from "../../elements/button";
 import type { Address } from "@/lib/shopify/types";
 import Input from "../../elements/input";
 import { useFormState } from "react-dom";
-import { ShopifyUpdateCustomerAddress } from "../actions";
+import {
+  ShopifyUpdateCustomerAddress,
+  ShopifyCreateCustomerAddress,
+} from "../actions";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -13,38 +16,49 @@ const initialState = {
   message: "",
 };
 
-export default function EditAddressForm({ address }: { address: Address }) {
-  const [state, formAction] = useFormState(
+export default function EditAddressForm({ address }: { address?: Address }) {
+  const [stateEdit, formActionEdit] = useFormState(
     ShopifyUpdateCustomerAddress,
     initialState,
   );
+  const [stateCreate, formActionCreate] = useFormState(
+    ShopifyCreateCustomerAddress,
+    initialState,
+  );
   const router = useRouter();
+  const [state, setState] = useState(initialState) as any;
 
-  const [firstName, setFirstName] = useState(address.firstName || "");
-  const [lastName, setLastName] = useState(address.lastName || "");
-  const [company, setCompany] = useState(address.company || "");
-  const [address1, setAddress1] = useState(address.address1 || "");
-  const [city, setCity] = useState(address.city || "");
-  const [country, setCountry] = useState(address.countryCode || "");
-  const [zip, setZip] = useState(address.zip || "");
-  const [phone, setPhone] = useState(address.phone || "");
+  const [firstName, setFirstName] = useState(address?.firstName || "");
+  const [lastName, setLastName] = useState(address?.lastName || "");
+  const [company, setCompany] = useState(address?.company || "");
+  const [address1, setAddress1] = useState(address?.address1 || "");
+  const [city, setCity] = useState(address?.city || "");
+  const [country, setCountry] = useState(address?.countryCode || "");
+  const [zip, setZip] = useState(address?.zip || "");
+  const [phone, setPhone] = useState(address?.phone || "");
 
   useEffect(() => {
-    if (state.message.success) {
+    setState(stateEdit || ShopifyCreateCustomerAddress);
+    if (stateEdit.message.success || stateCreate.message.success) {
       router.push("/account/general-information");
     }
-  }, [state.message, router]);
+  }, [stateCreate, stateEdit, router]);
 
   return (
     <div className="flex w-[60%] flex-col gap-3x p-4x">
       <div className="flex gap-3x">
-        <h2 className="text-heading-xs">Edit address</h2>
+        <h2 className="text-heading-xs">{address ? "Edit" : "Add"} address</h2>
       </div>
-      <form action={formAction} className="flex flex-col gap-2x">
+      <form
+        {...(address
+          ? { action: formActionEdit }
+          : { action: formActionCreate })}
+        className="flex flex-col gap-2x"
+      >
         {state.message?.base && (
           <p className="text-body-sm text-text-red">{state.message?.base}</p>
         )}
-        <input type="hidden" name="id" value={address.id} />
+        <input type="hidden" name="id" value={address?.id} />
         <Input
           name="first_name"
           label="First name*"
@@ -99,7 +113,11 @@ export default function EditAddressForm({ address }: { address: Address }) {
           state={state}
           onChange={(e) => setPhone(e.target.value)}
         />
-        <Button text="Save" variant="primary" type="submit" />
+        <Button
+          {...(address ? { text: "Save" } : { text: "Create" })}
+          variant="primary"
+          type="submit"
+        />
         <Link
           href="/account/general-information"
           className="button-link w-full text-center"

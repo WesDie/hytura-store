@@ -52,6 +52,7 @@ import {
   ShopifyCustomer,
   EditCustomer,
   ShopifyOrder,
+  ShopifyCreateCustomerAddressOperation,
 } from "./types";
 import { getPageQuery } from "./queries/page";
 import {
@@ -61,6 +62,7 @@ import {
   customerUpdateMutation,
   customerAddressUpdateMutation,
   customerAddressDeleteMutation,
+  customerAddressCreateMutation,
 } from "./mutations/account";
 import { getCustomerQuery } from "./queries/account";
 
@@ -593,4 +595,16 @@ export async function deleteCustomerAddress(id: string, token: string) {
   });
 
   return res.body.data.customerAddressDelete;
+}
+
+export async function createCustomerAddress(address: any[], token: string) {
+  const res = await shopifyFetch<ShopifyCreateCustomerAddressOperation>({
+    query: customerAddressCreateMutation,
+    variables: {
+      address,
+      customerAccessToken: token,
+    },
+  });
+
+  return res.body.data.customerAddressCreate;
 }

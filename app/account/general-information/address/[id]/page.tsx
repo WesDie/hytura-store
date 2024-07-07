@@ -11,6 +11,10 @@ export default function Order({ params }: { params: { id: string } }) {
     (address) => address.id.split("?")[0].split("/").pop() === params.id,
   );
 
+  if (params.id === "new") {
+    return <EditAddressForm />;
+  }
+
   if (!address)
     return (
       <div className="my-auto flex flex-col gap-2x p-4x">

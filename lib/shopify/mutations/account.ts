@@ -81,3 +81,17 @@ export const customerAddressDeleteMutation = `
     }
   }
 `;
+
+export const customerAddressCreateMutation = `
+  mutation customerAddressCreate($customerAccessToken: String!, $address: MailingAddressInput!) {
+    customerAddressCreate(customerAccessToken: $customerAccessToken, address: $address) {
+      customerAddress {
+        ...customerAddress
+      }
+      customerUserErrors {
+        message
+      }
+    }
+  }
+  ${customerAddressFragment}
+`;

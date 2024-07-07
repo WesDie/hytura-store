@@ -99,7 +99,7 @@ export default function Select({
           className={`relative ${disabled ? "pointer-events-none opacity-50" : ""}`}
         >
           <div
-            className="select-inner"
+            className={`select-inner ${searchValue == "" && !isOpen ? "!border-stroke-light-gray" : ""}`}
             aria-invalid={state && state.message[name] ? "true" : "false"}
           >
             <input

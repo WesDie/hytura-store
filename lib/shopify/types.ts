@@ -513,6 +513,33 @@ export type ShopifyUpdateCustomerAddressOperation = {
   };
 };
 
+export type ShopifyCreateCustomerAddressOperation = {
+  data: {
+    customerAddressCreate: {
+      customerAddress: Address;
+      customerUserErrors: {
+        message: string;
+      }[];
+    };
+  };
+  variables: {
+    address: {
+      address1: string;
+      address2: string;
+      city: string;
+      company: string;
+      country: string;
+      countryCode: string;
+      firstName: string;
+      lastName: string;
+      phone: string;
+      province: string;
+      zip: string;
+    };
+    customerAccessToken: string;
+  };
+};
+
 export type ShopifyDeleteCustomerAddressOperation = {
   data: {
     customerAddressDelete: {

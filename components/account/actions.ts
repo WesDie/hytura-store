@@ -10,6 +10,7 @@ import {
   getCustomer,
   updateCustomerAddress,
   deleteCustomerAddress,
+  createCustomerAddress,
 } from "@/lib/shopify/index";
 import { createCustomer } from "@/lib/shopify/customer/actions";
 import { Customer, EditCustomer } from "@/lib/shopify/types";
@@ -383,4 +384,71 @@ export async function ShopifyDeleteCustomerAddress(
   revalidateTag(TAGS.customer);
 
   return { message: { success: "Deleted address successfully" } };
+}
+
+export async function ShopifyCreateCustomerAddress(
+  prevState: any,
+  formData: FormData,
+  customer?: Customer,
+): Promise<{ message: any }> {
+  const customerToken = cookies().get("customerAccessToken")?.value;
+
+  if (!customerToken) {
+    return { message: { base: ["Unauthorized"] } };
+  }
+
+  if (!customer) {
+    customer = await getCustomer(customerToken);
+  }
+
+  if (!customer) {
+    return { message: { base: ["Unauthorized"] } };
+  }
+
+  const errors: any = {};
+  const requiredFields = [
+    "first_name",
+    "last_name",
+    "address1",
+    "city",
+    "country",
+    "zip",
+  ];
+  requiredFields.forEach((field) => {
+    if (formData.get(field) === "") {
+      errors[field] = [`is required`];
+    }
+  });
+
+  if (Object.keys(errors).length > 0) {
+    return { message: errors };
+  }
+
+  const address: any = {
+    address1: formData.get("address1"),
+    address2: formData.get("address2"),
+    city: formData.get("city"),
+    company: formData.get("company"),
+    country: formData.get("country"),
+    firstName: formData.get("first_name"),
+    lastName: formData.get("last_name"),
+    phone: formData.get("phone"),
+    zip: formData.get("zip"),
+  };
+
+  const res = await createCustomerAddress(address, customerToken);
+
+  if (res.customerUserErrors && res.customerUserErrors.length > 0) {
+    if (
+      res.customerUserErrors[0].message === "Country is not a valid country"
+    ) {
+      return { message: { country: ["is not valid"] } };
+    }
+
+    return { message: { base: res.customerUserErrors[0].message } };
+  }
+
+  revalidateTag(TAGS.customer);
+
+  return { message: { success: "Added address successfully" } };
 }

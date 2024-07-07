@@ -121,7 +121,13 @@ export default function AddressesOverview({
           </div>
         </div>
       ))}
-      <Button text="Add address" variant="secondary" className="mt-2x w-fit" />
+      <Link href="/account/general-information/address/new">
+        <Button
+          text="Add address"
+          variant="secondary"
+          className="mt-2x w-fit"
+        />
+      </Link>
     </div>
   );
 }
