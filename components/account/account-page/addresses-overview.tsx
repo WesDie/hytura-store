@@ -130,7 +130,7 @@ export default function AddressesOverview({
           </div>
         </div>
       ))}
-      <Link href="/account/general-information/address/new">
+      <Link href="/account/general-information/address/new" className="w-fit">
         <Button
           text="Add address"
           variant="secondary"
