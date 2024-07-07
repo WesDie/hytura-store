@@ -4,14 +4,14 @@ import Link from "next/link";
 
 export default function SingleOrderOverview({ order }: { order: Order }) {
   const orderListItemClass =
-    "text-body-xs w-full text-center text-text-light-gray";
-  const orderHeaderItemClass = "text-heading-4xs w-full text-center";
+    "text-body-sm w-full text-center text-text-light-gray";
+  const orderHeaderItemClass = "text-heading-3xs w-full text-center";
 
   return (
     <div className="flex w-full flex-col md:flex-row">
       <div className="flex w-full flex-col gap-4x p-2x pb-5x md:p-4x">
         <div className="flex flex-col gap-3x">
-          <h2 className="text-heading-sm">Order information</h2>
+          <h2 className="text-heading-sm">Summary</h2>
           <div className="flex gap-3x">
             <div className="flex flex-col gap-1x">
               <h2 className="text-heading-3xs">Date:</h2>
@@ -40,7 +40,7 @@ export default function SingleOrderOverview({ order }: { order: Order }) {
         <div className="flex flex-col gap-2x">
           <div className="flex w-full flex-col">
             <div className="flex w-full border-b border-stroke-light-gray px-1x py-2x">
-              <p className="text-heading-4xs w-full">Product</p>
+              <p className="text-heading-3xs w-full">Product</p>
               <p className={orderHeaderItemClass}>Price</p>
               <p className={orderHeaderItemClass}>Amount</p>
               <p className={`${orderHeaderItemClass} text-end`}>Total cost</p>
@@ -71,7 +71,7 @@ export default function SingleOrderOverview({ order }: { order: Order }) {
 
           <div className="flex w-full flex-col">
             <div className="flex w-full border-b border-stroke-light-gray px-1x py-2x">
-              <p className="text-heading-4xs w-full">Subtotal</p>
+              <p className="text-heading-3xs w-full">Subtotal</p>
               <p className={orderHeaderItemClass}>Tax</p>
               <p className={orderHeaderItemClass}>Total</p>
             </div>
@@ -96,7 +96,7 @@ export default function SingleOrderOverview({ order }: { order: Order }) {
           <p className="text-body-sm max-w-[400px] text-text-light-gray"></p>
         </div> */}
       </div>
-      <div className="w-full border-t border-solid border-stroke-light-gray md:w-[30%] md:border-l">
+      <div className="w-full border-t border-solid border-stroke-light-gray md:w-[30%] md:border-l md:border-t-0">
         <div className="flex flex-col gap-1x border-b border-solid border-stroke-light-gray px-2x py-2x md:px-4x md:py-3x">
           <h2 className="text-heading-xs">Shipping Address</h2>
           <div className="flex flex-col gap-1x py-2x">
