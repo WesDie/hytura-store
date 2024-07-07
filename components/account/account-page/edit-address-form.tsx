@@ -45,7 +45,7 @@ export default function EditAddressForm({ address }: { address?: Address }) {
   }, [stateCreate, stateEdit, router]);
 
   return (
-    <div className="flex w-[60%] flex-col gap-3x p-4x">
+    <div className="flex flex-col gap-3x p-2x md:w-[60%] md:p-4x">
       <div className="flex gap-3x">
         <h2 className="text-heading-xs">{address ? "Edit" : "Add"} address</h2>
       </div>

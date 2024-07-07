@@ -8,11 +8,15 @@ export default function OrderOverview({ customer }: { customer: Customer }) {
   const orderHeaderItemClass = "text-heading-4xs w-full text-center";
 
   return (
-    <div className="flex w-full flex-col p-4x pt-2x">
+    <div className="flex w-full flex-col p-2x pt-2x md:p-4x">
       <div className="flex w-full border-b border-stroke-light-gray px-1x py-2x">
         <p className="text-heading-4xs w-full">Order ID</p>
-        <p className={orderHeaderItemClass}>Payment status</p>
-        <p className={orderHeaderItemClass}>Fulfillment status</p>
+        <p className={`${orderHeaderItemClass} hidden md:block`}>
+          Payment status
+        </p>
+        <p className={`${orderHeaderItemClass} hidden md:block`}>
+          Fulfillment status
+        </p>
         <p className={orderHeaderItemClass}>Date</p>
         <p className={`${orderHeaderItemClass} text-end`}>Items | Price</p>
       </div>
@@ -27,8 +31,12 @@ export default function OrderOverview({ customer }: { customer: Customer }) {
           >
             #{order.orderNumber}
           </Link>
-          <p className={orderListItemClass}>{order.financialStatus}</p>
-          <p className={orderListItemClass}>{order.fulfillmentStatus}</p>
+          <p className={`${orderListItemClass} hidden md:block`}>
+            {order.financialStatus}
+          </p>
+          <p className={`${orderListItemClass} hidden md:block`}>
+            {order.fulfillmentStatus}
+          </p>
           <p className={orderListItemClass}>
             {order.processedAt.split("T")[0]}
           </p>

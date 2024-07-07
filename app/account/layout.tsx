@@ -26,7 +26,7 @@ export default async function AppLayout({
     <CustomerProvider customer={customer}>
       <main>
         <AccountTopBar firstName={customer.firstName} />
-        <div className="flex min-h-[60dvh] border-b border-stroke-gray">
+        <div className="flex min-h-[60dvh] flex-col border-b border-stroke-gray md:flex-row">
           {children}
         </div>
       </main>

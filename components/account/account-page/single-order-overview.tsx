@@ -8,8 +8,8 @@ export default function SingleOrderOverview({ order }: { order: Order }) {
   const orderHeaderItemClass = "text-heading-4xs w-full text-center";
 
   return (
-    <div className="flex w-full">
-      <div className="flex w-full flex-col gap-4x p-4x">
+    <div className="flex w-full flex-col md:flex-row">
+      <div className="flex w-full flex-col gap-4x p-2x pb-5x md:p-4x">
         <div className="flex flex-col gap-3x">
           <h2 className="text-heading-sm">Order information</h2>
           <div className="flex gap-3x">
@@ -96,8 +96,8 @@ export default function SingleOrderOverview({ order }: { order: Order }) {
           <p className="text-body-sm max-w-[400px] text-text-light-gray"></p>
         </div> */}
       </div>
-      <div className="w-[30%] border-l border-solid border-stroke-light-gray">
-        <div className="flex flex-col gap-1x border-b border-solid border-stroke-light-gray px-4x py-3x">
+      <div className="w-full border-t border-solid border-stroke-light-gray md:w-[30%] md:border-l">
+        <div className="flex flex-col gap-1x border-b border-solid border-stroke-light-gray px-2x py-2x md:px-4x md:py-3x">
           <h2 className="text-heading-xs">Shipping Address</h2>
           <div className="flex flex-col gap-1x py-2x">
             <h3 className="text-heading-2xs text-text-black">
@@ -113,7 +113,7 @@ export default function SingleOrderOverview({ order }: { order: Order }) {
             </li>
           </div>
         </div>
-        <div className="flex flex-col gap-1x px-4x py-3x">
+        <div className="flex flex-col gap-1x px-2x py-2x md:px-4x md:py-3x">
           <h2 className="text-heading-xs">Billing Address</h2>
           <div className="flex flex-col gap-1x py-2x">
             <h3 className="text-heading-2xs text-text-black">

@@ -44,7 +44,7 @@ export default function AddressesOverview({
   );
 
   return (
-    <div className="flex w-full flex-col gap-1x border-l border-solid border-stroke-light-gray p-4x pb-7x">
+    <div className="flex w-full flex-col gap-1x border-t border-solid border-stroke-light-gray px-2x pb-5x pt-2x md:border-l md:p-4x md:pb-7x md:pt-4x">
       <h2 className="text-heading-xs">Your addresses</h2>
       {addresses.map((address, index) => (
         <div

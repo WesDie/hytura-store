@@ -21,11 +21,11 @@ export default function AccountTopBar({ firstName }: { firstName: string }) {
   }, [pathname]);
 
   return (
-    <div className="flex flex-col gap-2x pt-[96px]">
-      <h1 className="text-heading-lg pl-4x">
+    <div className="flex flex-col gap-2x pt-5x md:pt-[96px]">
+      <h1 className="text-heading-lg pl-2x md:pl-4x">
         Welcome{firstName && `, ${firstName}`}
       </h1>
-      <div className="flex justify-between border-y border-stroke-gray px-4x py-2x">
+      <div className="flex justify-between border-y border-stroke-gray px-2x py-2x md:px-4x">
         <div className="flex gap-2x">
           <Link
             href={"/account/general-information"}
