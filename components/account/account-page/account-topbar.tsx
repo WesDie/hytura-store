@@ -39,6 +39,18 @@ export default function AccountTopBar({ firstName }: { firstName: string }) {
           >
             Orders
           </Link>
+          {activeTab.includes("/account/orders/") && (
+            <Link href={pathname} className="text-link-sm text-text-black">
+              Order #{pathname.split("/").pop()}
+            </Link>
+          )}
+          {activeTab.includes("/general-information/address/") && (
+            <Link href={pathname} className="text-link-sm text-text-black">
+              {pathname.split("/").pop() == "new"
+                ? "Add address"
+                : "Edit address"}
+            </Link>
+          )}
         </div>
         <Button text="Logout" variant="link" onclick={() => logout()} />
       </div>
