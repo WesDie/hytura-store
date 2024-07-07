@@ -5,7 +5,7 @@ import { Address } from "@/lib/shopify/types";
 import { usePathname } from "next/navigation";
 import { ShopifyDeleteCustomerAddress } from "../actions";
 import { useFormState } from "react-dom";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 
 const initialState = {
   message: "",
@@ -23,9 +23,15 @@ export default function AddressesOverview({
     initialState,
   );
 
-  const [deleteOverlay, setDeleteOverlay] = useState(
+  const [deleteOverlay, setDeleteOverlay] = useState<boolean[]>(
     addresses.map(() => false),
   );
+
+  useEffect(() => {
+    if (state.message.success === "Deleted address successfully") {
+      setDeleteOverlay(addresses.map(() => false));
+    }
+  }, [addresses, state.message]);
 
   const pathname = usePathname();
   const addressId = addresses.map((address) =>
@@ -113,6 +119,9 @@ export default function AddressesOverview({
                 variant="link"
                 onclick={() => {
                   const updatedOverlay = [...deleteOverlay];
+                  for (let i = 0; i < deleteOverlay.length; i++) {
+                    updatedOverlay[i] = false;
+                  }
                   updatedOverlay[index] = true;
                   setDeleteOverlay(updatedOverlay);
                 }}
