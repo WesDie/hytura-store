@@ -125,7 +125,7 @@ export default function Select({
                 setIsOpen(!isOpen);
               }}
               className={`my-auto ml-auto h-fit transform cursor-pointer select-none py-1x transition-transform duration-300 ${
-                isOpen ? "-rotate-180" : ""
+                isOpen ? "" : "-rotate-180"
               }`}
             />
           </div>

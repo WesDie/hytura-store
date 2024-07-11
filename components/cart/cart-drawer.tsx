@@ -62,8 +62,8 @@ export default function CartDrawer({ cart }: { cart: Cart | null }) {
             className="flex h-full flex-col overflow-auto"
             data-lenis-prevent
           >
-            {cart?.lines?.map((item: CartItem, index: number) => (
-              <CartItemProduct key={index} {...item} />
+            {cart?.lines?.map((item: CartItem) => (
+              <CartItemProduct key={item.id} {...item} />
             ))}
           </div>
         )}

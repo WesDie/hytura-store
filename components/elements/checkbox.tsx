@@ -21,14 +21,11 @@ export default function Checkbox({
         type="checkbox"
         id={id || value}
         name={value}
-        onClick={() => {
-          state.message[value] = false;
-        }}
         className={`${state.message[value] ? "!outline-stroke-red" : ""}`}
         disabled={disabled}
       />
       <label
-        htmlFor="accepts_terms"
+        htmlFor={id || value}
         className={`${state.message[value] ? "!text-text-red" : ""}`}
       >
         {label}
