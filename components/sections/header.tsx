@@ -13,6 +13,7 @@ import MobileNavigation from "@/components/elements/mobile-navigation";
 import Transiton from "@/components/utilities/transition";
 import Button from "../elements/button";
 import { Menu } from "@/lib/shopify/types";
+import HeaderDropdown from "../elements/header-dropdown";
 
 export default function Header({
   isLoggedIn,
@@ -31,6 +32,18 @@ export default function Header({
 
   const [isTop, setIsTop] = useState(false);
   const [isShopDropdownActive, setIsShopDropdownActive] = useState(false);
+  const [isShopDropdownClicked, setIsShopDropdownClicked] = useState(false);
+
+  const toggleShopDropdown = (
+    toggle: boolean,
+    clickToggle?: boolean,
+    overwrite?: boolean,
+  ) => {
+    if (isShopDropdownClicked && !overwrite) return;
+    setIsShopDropdownActive(toggle);
+    if (clickToggle) setIsShopDropdownClicked(clickToggle);
+    else setIsShopDropdownClicked(false);
+  };
 
   useEffect(() => {
     const checkScrollPosition = () => {
@@ -47,6 +60,9 @@ export default function Header({
         "#announcementBar",
       ) as HTMLElement;
       const header = document.querySelector("header") as HTMLElement;
+      const dropdown = document.querySelector(
+        "#shop-dropdown-header",
+      ) as HTMLElement;
 
       if (window.scrollY < 32) {
         setIsTop(true);
@@ -58,6 +74,13 @@ export default function Header({
         header.setAttribute(
           "style",
           `top: ${window.scrollY < 32 ? `${32 - window.scrollY}px` : "-0"}`,
+        );
+      }
+
+      if (dropdown) {
+        dropdown.setAttribute(
+          "style",
+          `top: ${window.scrollY < 32 ? `${86 - window.scrollY}px` : "54px"}`,
         );
       }
 
@@ -105,8 +128,8 @@ export default function Header({
                   key={item.title}
                   href={item.path}
                   className="button-header-link"
-                  onMouseOver={() => setIsShopDropdownActive(true)}
-                  onMouseLeave={() => setIsShopDropdownActive(false)}
+                  onMouseOver={() => toggleShopDropdown(true, false, true)}
+                  onMouseLeave={() => toggleShopDropdown(false)}
                 >
                   {item.title}
                 </Link>
@@ -182,50 +205,13 @@ export default function Header({
             />
           </button>
         </div>
-        <div
-          id="shop-dropdown-header"
-          className={`${
-            isShopDropdownActive
-              ? "visible max-h-[200px] min-h-[100px] border-b py-3x opacity-100"
-              : "invisible max-h-[0px] py-0 opacity-0"
-          } absolute left-0 right-0 top-[54px] flex w-full justify-between overflow-hidden border-solid border-stroke-black bg-background-sand px-3x backdrop-blur-lg transition-all delay-75 duration-300 ease-in-out`}
-          onMouseOver={() => setIsShopDropdownActive(true)}
-          onMouseLeave={() => setIsShopDropdownActive(false)}
-        >
-          <div
-            className={`flex gap-2x transition-all duration-300 ${isShopDropdownActive ? "opacity-100" : "opacity-0"}`}
-          >
-            {shopMenu.map((item) => (
-              <div
-                key={item.title}
-                className="flex min-w-[175px] flex-col gap-1x"
-              >
-                <h3 className="text-heading-xs">{item.title}</h3>
-                <div className="flex flex-col gap-[4px]">
-                  {item.items.map((link) => (
-                    <Link
-                      key={link.title}
-                      href={link.path}
-                      className={`button-header-link text-body-sm`}
-                      onClick={() => setIsShopDropdownActive(false)}
-                    >
-                      {link.title}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-          <RenderImage
-            src={"/hero.png"}
-            alt={"product image"}
-            width={1000}
-            height={667}
-            className={`max-h-full w-full max-w-[350px]`}
-            imageClassName="w-full h-full object-cover"
-          />
-        </div>
       </header>
+      <HeaderDropdown
+        isShopDropdownActive={isShopDropdownActive}
+        isShopDropdownClicked={isShopDropdownClicked}
+        toggleShopDropdown={toggleShopDropdown}
+        shopMenu={shopMenu}
+      />
       <Transiton transitonTime={300} state={isMobileNavigationOpen}>
         <MobileNavigation isLoggedIn={isLoggedIn} />
       </Transiton>
