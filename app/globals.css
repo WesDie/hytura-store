@@ -91,7 +91,7 @@
     }
 
     input {
-      @apply text-body-md w-full appearance-none border border-stroke-black bg-transparent px-2x py-1x transition-colors duration-300 placeholder-shown:border-stroke-gray focus:outline-none;
+      @apply text-body-md w-full appearance-none rounded-none border border-stroke-black bg-transparent px-2x py-1x transition-colors duration-300 placeholder-shown:border-stroke-gray focus:outline-none;
     }
     input:is([aria-invalid="true"]) {
       @apply border-stroke-red;
@@ -117,7 +117,7 @@
     @apply flex items-center gap-1x;
 
     input[type="checkbox"] {
-      @apply m-[3px] h-[14px] min-w-[14px] cursor-pointer appearance-none outline outline-1 outline-offset-1 outline-stroke-gray transition-all duration-300 checked:bg-background-black checked:outline-stroke-black;
+      @apply m-[3px] h-[14px] min-w-[14px] cursor-pointer appearance-none rounded-none outline outline-1 outline-offset-1 outline-stroke-gray transition-all duration-300 checked:bg-background-black checked:outline-stroke-black;
     }
 
     label {
