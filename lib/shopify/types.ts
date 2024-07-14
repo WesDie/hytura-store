@@ -438,6 +438,24 @@ export type ShopifyCustomerActivateOperation = {
   };
 };
 
+export type shopifyCustomerResetOperation = {
+  data: {
+    customerReset: {
+      customerAccessToken: {
+        accessToken: string;
+      };
+      customerUserErrors: {
+        message: string;
+      }[];
+    };
+  };
+  variables: {
+    id: string;
+    password: string;
+    resetToken: string;
+  };
+};
+
 export type ShopifySendPasswordResetEmailOperation = {
   data: {
     customerRecover: {

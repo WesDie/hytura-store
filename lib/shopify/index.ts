@@ -53,6 +53,7 @@ import {
   EditCustomer,
   ShopifyOrder,
   ShopifyCreateCustomerAddressOperation,
+  shopifyCustomerResetOperation,
 } from "./types";
 import { getPageQuery } from "./queries/page";
 import {
@@ -63,6 +64,7 @@ import {
   customerAddressUpdateMutation,
   customerAddressDeleteMutation,
   customerAddressCreateMutation,
+  customerResetMutation,
 } from "./mutations/account";
 import { getCustomerQuery } from "./queries/account";
 
@@ -554,6 +556,23 @@ export async function customerActivateAccount(
   });
 
   return res.body.data.customerActivate;
+}
+
+export async function customerResetPassword(
+  id: string,
+  resetToken: string,
+  password: string,
+) {
+  const res = await shopifyFetch<shopifyCustomerResetOperation>({
+    query: customerResetMutation,
+    variables: {
+      id,
+      password,
+      resetToken: resetToken,
+    },
+  });
+
+  return res.body.data.customerReset;
 }
 
 export async function updateCustomer(customer: EditCustomer, token: string) {

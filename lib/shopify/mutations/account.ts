@@ -43,6 +43,19 @@ export const customerActivateMutation = `
   }
 `;
 
+export const customerResetMutation = `
+  mutation customerReset($id: ID!, $password: String!, $resetToken: String!) {
+    customerReset(id: $id, input: { password: $password, resetToken: $resetToken}) {
+      customerAccessToken {
+        accessToken
+      }
+      customerUserErrors {
+        message
+      }
+    }
+  }
+`;
+
 export const customerUpdateMutation = `
   mutation customerUpdate($customerAccessToken: String!, $customer: CustomerUpdateInput!) {
     customerUpdate(customerAccessToken: $customerAccessToken, customer: $customer) {

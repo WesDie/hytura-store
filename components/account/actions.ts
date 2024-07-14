@@ -11,6 +11,7 @@ import {
   updateCustomerAddress,
   deleteCustomerAddress,
   createCustomerAddress,
+  customerResetPassword,
 } from "@/lib/shopify/index";
 import { createCustomer } from "@/lib/shopify/customer/actions";
 import { Customer, EditCustomer } from "@/lib/shopify/types";
@@ -82,7 +83,7 @@ export async function shopifyLoginCustomer(
       }
 
       return { message: { success: "Logged in successsfully" } };
-    } else if (res.customerUserErrors) {
+    } else if (res.customerUserErrors && res.customerUserErrors.length > 0) {
       if (res.customerUserErrors[0].message === "Unidentified customer") {
         return { message: { base: ["Invalid email or password"] } };
       }
@@ -115,9 +116,9 @@ export async function shopifySendPasswordResetEmail(
   if (email !== null) {
     const res = await customerSendPasswordResetEmail(email);
 
-    if (res.customerUserErrors) {
+    if (res.customerUserErrors && res.customerUserErrors.length > 0) {
       return { message: { error: res.customerUserErrors[0].message } };
-    } else if (res.userErrors) {
+    } else if (res.userErrors && res.userErrors.length > 0) {
       return { message: { error: res.userErrors[0].message } };
     }
 
@@ -453,4 +454,51 @@ export async function ShopifyCreateCustomerAddress(
   revalidateTag(TAGS.customer);
 
   return { message: { success: "Added address successfully" } };
+}
+
+export async function shopifyResetCustomer(
+  prevState: any,
+  formData: FormData,
+): Promise<{ message: any }> {
+  const errors: any = {};
+  const requiredFields = ["password", "confirm_password"];
+  requiredFields.forEach((field) => {
+    if (formData.get(field) === "") {
+      errors[field] = [`is required`];
+    }
+  });
+
+  if (Object.keys(errors).length > 0) {
+    return { message: errors };
+  }
+
+  const password = formData.get("password") as string;
+  const confirmPassword = formData.get("confirm_password") as string;
+  const resetToken = formData.get("activationToken") as string;
+  const id = ("gid://shopify/Customer/" + formData.get("id")) as string;
+
+  if (password !== confirmPassword) {
+    return { message: { confirm_password: ["Does not match"] } };
+  }
+
+  if (password !== null && resetToken !== null && id !== null) {
+    const res = await customerResetPassword(id, resetToken, password);
+
+    if (res.customerUserErrors && res.customerUserErrors.length > 0) {
+      return { message: { base: res.customerUserErrors[0].message } };
+    } else if (res.customerAccessToken) {
+      cookies().set("customerAccessToken", res.customerAccessToken.accessToken);
+
+      let cartId = cookies().get("cartId")?.value;
+
+      if (cartId) {
+        updateCartIdentity(cartId, res.customerAccessToken.accessToken);
+      }
+      console.log("res", res);
+
+      return { message: { success: "Reset customer successfully" } };
+    }
+  }
+
+  return { message: "Somthing went wrong" };
 }
