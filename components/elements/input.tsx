@@ -37,7 +37,7 @@ export default function Input({
       {label && (
         <div className="flex justify-between">
           {label && <label htmlFor="password">{label}</label>}
-          {state && state.message[name] && (
+          {state?.message?.[name] && (
             <p className="text-body-sm text-text-red">
               * {placeholder || label} {state.message[name]}
             </p>
@@ -55,7 +55,7 @@ export default function Input({
           {...(onChange ? { value: value } : { value: inoutValue })}
           placeholder={placeholder || label || ""}
           autoComplete={autoComplete || ""}
-          aria-invalid={state && state.message[name] ? "true" : "false"}
+          aria-invalid={state?.message?.[name] ? "true" : "false"}
           onChange={onChange || ((e) => setInputValue(e.target.value))}
         />
         {toggleShow && (

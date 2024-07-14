@@ -117,6 +117,7 @@ export type Customer = {
   acceptsMarketing: boolean;
   displayName?: string;
   email: string;
+  state?: string;
   id?: string;
   lastName: string;
   numberOfOrders?: number;

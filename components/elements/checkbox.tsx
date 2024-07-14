@@ -21,12 +21,12 @@ export default function Checkbox({
         type="checkbox"
         id={id || value}
         name={value}
-        className={`${state.message[value] ? "!outline-stroke-red" : ""}`}
+        className={`${state?.message?.[value] ? "!outline-stroke-red" : ""}`}
         disabled={disabled}
       />
       <label
         htmlFor={id || value}
-        className={`${state.message[value] ? "!text-text-red" : ""}`}
+        className={`${state?.message?.[value] ? "!text-text-red" : ""}`}
       >
         {label}
       </label>

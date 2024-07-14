@@ -30,7 +30,7 @@ export async function shopifyCreateCustomer(
   });
 
   if (Object.keys(errors).length > 0) {
-    errors.accepts_terms = formData.get("accpets_terms") !== "on";
+    errors.accepts_terms = formData.get("accepts_terms") !== "on";
     errors.base = ["Please fill in the required fields"];
 
     return {
@@ -38,7 +38,7 @@ export async function shopifyCreateCustomer(
     };
   }
 
-  if (formData.get("accpets_terms") !== "on") {
+  if (formData.get("accepts_terms") !== "on") {
     return {
       message: {
         base: ["Please accept the terms and conditions"],
