@@ -274,6 +274,8 @@ export async function shopifyUpdateCustomer(
     return { message: { base: res.customerUserErrors[0].message } };
   }
 
+  revalidateTag(TAGS.customer);
+
   return { message: { success: "Updated customer successfully" } };
 }
 

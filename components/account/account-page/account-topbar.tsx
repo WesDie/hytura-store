@@ -18,7 +18,7 @@ export default function AccountTopBar({ firstName }: { firstName: string }) {
 
   const setNewTitle = useCallback(() => {
     if (pathname == "/account/general-information")
-      return `Welcome${firstName && `, ${firstName}`}`;
+      return `Welcome${firstName ? `, ${firstName}` : ""}`;
     else if (pathname.includes("/account/orders/")) return "Order details";
     else if (pathname.includes("/account/orders")) return "Order overview";
     else if (pathname == "/account/general-information/address/new")

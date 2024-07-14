@@ -46,6 +46,11 @@ export default function AddressesOverview({
   return (
     <div className="flex w-full flex-col gap-1x border-t border-solid border-stroke-light-gray px-2x pb-5x pt-2x md:border-l md:border-t-0 md:p-4x md:pb-7x md:pt-4x">
       <h2 className="text-heading-xs">Your addresses</h2>
+      {addresses.length === 0 && (
+        <p className="text-body-sm py-2x text-text-light-gray">
+          No addresses found
+        </p>
+      )}
       {addresses.map((address, index) => (
         <div
           key={address.id}

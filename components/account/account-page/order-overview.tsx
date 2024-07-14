@@ -20,6 +20,11 @@ export default function OrderOverview({ customer }: { customer: Customer }) {
         <p className={orderHeaderItemClass}>Date</p>
         <p className={`${orderHeaderItemClass} text-end`}>Items | Price</p>
       </div>
+      {customer.orders.length === 0 && (
+        <p className="text-body-sm py-2x text-center text-text-light-gray">
+          No orders found
+        </p>
+      )}
       {customer.orders.map((order) => (
         <div
           key={order.id}
