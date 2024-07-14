@@ -125,6 +125,15 @@
     }
   }
 
+  .blur-header {
+    backdrop-filter: blur(10px);
+    background: #ffffff40;
+  }
+
+  .blur-bg {
+    backdrop-filter: blur(1px);
+  }
+
   .blur {
     filter: blur(3px);
     transition: filter 0.3s ease-in-out;

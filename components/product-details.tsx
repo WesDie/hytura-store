@@ -11,8 +11,8 @@ export default function ProductDetails({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1);
 
   return (
-    <div className="sticky top-[53px] flex h-fit w-[50%] flex-col py-2x">
-      <div className="flex flex-col gap-3x border-b border-stroke-gray px-4x py-2x">
+    <div className="sticky top-[53px] flex h-fit w-full flex-col py-2x md:w-[70%]">
+      <div className="flex flex-col gap-3x border-b border-stroke-gray px-2x py-2x md:px-4x">
         <div className="flex flex-col gap-2x">
           <div className="flex flex-col gap-1x">
             <h3 className="text-body-md">Bottle of {selectedVariant.title}</h3>

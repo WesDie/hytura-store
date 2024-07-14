@@ -11,7 +11,7 @@ export default async function Product({
 
   return (
     <main>
-      <div className="relative flex h-full border-b border-stroke-gray">
+      <div className="relative flex h-full flex-col border-b border-stroke-gray md:flex-row">
         <ProductMedia product={product} />
         <ProductDetails product={product} />
       </div>

@@ -14,7 +14,7 @@ export default function AccountDrawer() {
       className="group fixed inset-0 z-50"
     >
       <div
-        className="fixed inset-0 bg-black opacity-30 transition-opacity group-aria-hidden:opacity-0"
+        className="blur-bg fixed inset-0 bg-[#00000044] transition-opacity group-aria-hidden:opacity-0"
         onClick={() => setIsAccountOpen(false)}
       ></div>
       <div className="fixed bottom-0 left-0 top-0 flex w-full flex-col bg-background-sand transition-transform duration-300 group-aria-hidden:translate-x-[-100%] md:w-[420px]">

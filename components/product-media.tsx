@@ -3,7 +3,7 @@ import RenderImage from "./utilities/render-Image";
 
 export default function ProductMedia({ product }: { product: Product }) {
   return (
-    <div className="flex w-full flex-col border-r border-stroke-gray">
+    <div className="flex w-full flex-col border-b border-stroke-gray md:border-r">
       <div className="flex">
         {product.images.slice(0, 1).map((image: Image, index: number) => (
           <RenderImage
@@ -16,7 +16,7 @@ export default function ProductMedia({ product }: { product: Product }) {
             imageClassName="object-cover w-full h-full"
           />
         ))}
-        <div className="flex w-full flex-col">
+        <div className="hidden w-full flex-col md:flex">
           {product.images.slice(1, 3).map((image: Image, index: number) => (
             <RenderImage
               key={index}
@@ -37,7 +37,7 @@ export default function ProductMedia({ product }: { product: Product }) {
           alt={"product image"}
           width={500}
           height={500}
-          className="h-[450px] w-full object-cover"
+          className="hidden h-[450px] w-full object-cover md:block"
           imageClassName="object-cover w-full h-full"
         />
       ))}

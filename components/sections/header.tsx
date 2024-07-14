@@ -107,9 +107,9 @@ export default function Header({
         </div>
       )}
       <header
-        className={`blur-transition blur-header fixed flex w-full justify-between border-b border-solid bg-background-sand ${
+        className={`blur-transition blur-header fixed flex w-full justify-between border-b border-solid ${
           isTop ? "top-[32px]" : "top-[0]"
-        } z-10 transition-colors duration-300 ${isMobileNavigationOpen ? "border-stroke-gray" : "border-stroke-black"}`}
+        } z-10 transition-colors duration-300 ${isMobileNavigationOpen ? "border-stroke-gray" : "border-stroke-black"} ${isShopDropdownActive || isMobileNavigationOpen ? "bg-background-sand" : ""}`}
       >
         <div className="z-[11] flex w-full gap-5x py-2x pl-2x md:pl-3x">
           <Link href="/" className="flex">
@@ -212,7 +212,12 @@ export default function Header({
         toggleShopDropdown={toggleShopDropdown}
         shopMenu={shopMenu}
       />
-      <Transiton transitonTime={300} state={isMobileNavigationOpen}>
+      <Transiton
+        transitonTime={300}
+        state={isMobileNavigationOpen}
+        className="fixed inset-0 z-[9]"
+      >
+        <div className="blur-bg fixed inset-0 bg-[#00000044] transition-opacity group-aria-hidden:opacity-0"></div>
         <MobileNavigation isLoggedIn={isLoggedIn} />
       </Transiton>
     </>

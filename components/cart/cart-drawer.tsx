@@ -46,7 +46,7 @@ export default function CartDrawer({ cart }: { cart: Cart | null }) {
       className="fixed inset-0 z-50"
     >
       <div
-        className={`fixed inset-0 bg-black opacity-30 transition-opacity group-aria-hidden:opacity-0`}
+        className={`blur-bg fixed inset-0 bg-[#00000044] transition-opacity group-aria-hidden:opacity-0`}
         onClick={() => setIsCartOpen(false)}
       ></div>
       <div
