@@ -3,7 +3,7 @@
 import Lenis from "lenis";
 
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useCartDrawer } from "../context/cart-drawer-context";
 import { useAccountDrawer } from "../context/account-drawer-context";
 import { useMobileNavigation } from "../context/mobile-navigation-context";
@@ -14,6 +14,7 @@ export default function SmoothScroller() {
   const { isMobileNavigationOpen } = useMobileNavigation();
 
   const pathname = usePathname();
+  const oldPathname = useRef(usePathname());
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -23,7 +24,6 @@ export default function SmoothScroller() {
 
     lenis.on("scroll", (e: any) => {
       // console.log(e);
-      console.log(lenis.scroll);
     });
 
     function raf(time: number) {
@@ -39,7 +39,10 @@ export default function SmoothScroller() {
       lenis.start();
     }
 
-    window.scrollTo(0, 0);
+    if (pathname !== oldPathname.current) {
+      window.scrollTo(0, 0);
+      oldPathname.current = pathname;
+    }
 
     return () => {
       lenis.stop();
