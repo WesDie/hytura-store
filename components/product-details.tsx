@@ -5,10 +5,28 @@ import { Product, ProductVariant } from "@/lib/shopify/types";
 import Button from "@/components/elements/button";
 import QuantitySelector from "./elements/quantity-selector";
 import BuyButton from "./elements/buy-button";
+import FaqItems from "./elements/faq-items";
 
 export default function ProductDetails({ product }: { product: Product }) {
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
   const [quantity, setQuantity] = useState(1);
+
+  const faqItems = [
+    {
+      question: "Description",
+      answer: product.description
+        ? product.description
+        : "No description available",
+    },
+    {
+      question: "Specifications",
+      answer: "No specifications available",
+    },
+    {
+      question: "Shipping",
+      answer: "We deliver the next day",
+    },
+  ];
 
   return (
     <div className="sticky top-[53px] flex h-fit w-full flex-col py-2x md:w-[70%]">
@@ -47,7 +65,13 @@ export default function ProductDetails({ product }: { product: Product }) {
           </li>
         </ul>
       </div>
-      <div className="flex px-4x py-2x"></div>
+      <div className="flex flex-col px-2x py-2x md:px-4x">
+        <FaqItems
+          firstOpen={true}
+          faqItems={faqItems}
+          topBottomBorders={false}
+        />
+      </div>
     </div>
   );
 }

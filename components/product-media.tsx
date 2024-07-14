@@ -3,7 +3,7 @@ import RenderImage from "./utilities/render-Image";
 
 export default function ProductMedia({ product }: { product: Product }) {
   return (
-    <div className="flex w-full flex-col border-b border-stroke-gray md:border-r">
+    <div className="flex w-full flex-col border-b border-stroke-gray md:border-b-0 md:border-r">
       <div className="flex">
         {product.images.slice(0, 1).map((image: Image, index: number) => (
           <RenderImage
