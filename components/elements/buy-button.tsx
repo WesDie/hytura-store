@@ -11,7 +11,7 @@ export default function BuyButton({
   text,
   className,
 }: {
-  selectedVariant: ProductVariant;
+  selectedVariant: ProductVariant | undefined;
   quantity: number;
   text?: string;
   className?: string;
@@ -20,6 +20,8 @@ export default function BuyButton({
   const { setIsCartOpen } = useCartDrawer();
 
   const addToCart = async () => {
+    if (!selectedVariant) return;
+
     setBuyDisabled(true);
     await addItem(selectedVariant.id, quantity);
     setTimeout(() => {
@@ -30,7 +32,7 @@ export default function BuyButton({
 
   return (
     <Button
-      text={`${text ? text : !selectedVariant?.availableForSale ? "Sold out" : "Add to cart"}`}
+      text={`${text ? text : selectedVariant ? (!selectedVariant?.availableForSale ? "Sold out" : "Add to cart") : "Choose an option"}`}
       variant="primary"
       className={`${className ? className : "w-full"}`}
       {...(buyDisabled || !selectedVariant?.availableForSale

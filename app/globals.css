@@ -83,6 +83,10 @@
     @apply text-heading-3xs relative inline-block w-fit after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-text-black after:transition-transform after:duration-200 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-[1];
   }
 
+  .line-trough-button {
+    @apply relative after:absolute after:bottom-0 after:left-0 after:right-0 after:top-0 after:mx-auto after:my-auto after:h-[1px] after:w-[60%] after:origin-bottom-left after:scale-x-0 after:overflow-hidden after:bg-black after:transition-all after:duration-200 after:ease-in-out;
+  }
+
   .input {
     @apply flex flex-col gap-1x;
 
