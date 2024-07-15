@@ -56,7 +56,6 @@ export default function CartItemProduct(item: CartItem) {
   const remove = async () => {
     setIsLoading(true);
     await removeItem(item.id);
-    setIsLoading(false);
   };
 
   const handleQuantityChange = (newQuantity: number) => {
@@ -74,7 +73,7 @@ export default function CartItemProduct(item: CartItem) {
 
   return (
     <div
-      className={`flex h-[150px] w-full border-b border-stroke-gray md:h-[170px] ${isLoading && "pointer-events-none opacity-50"}`}
+      className={`min-h- flex h-[150px] w-full border-b border-stroke-gray md:h-[170px] ${isLoading && "pointer-events-none opacity-50"}`}
     >
       {product?.featuredImage?.url ? (
         <RenderImage

@@ -22,8 +22,10 @@ export default function BuyButton({
   const addToCart = async () => {
     setBuyDisabled(true);
     await addItem(selectedVariant.id, quantity);
-    setBuyDisabled(false);
-    setIsCartOpen(true);
+    setTimeout(() => {
+      setBuyDisabled(false);
+      setIsCartOpen(true);
+    }, 200);
   };
 
   return (

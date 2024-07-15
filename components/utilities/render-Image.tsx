@@ -20,6 +20,7 @@ export default function RenderImage({
   onClick?: () => void;
 }) {
   const [isImageLoading, setImageLoading] = useState(!src.endsWith(".svg"));
+  const [isImageLoaded, setImageLoaded] = useState(false);
 
   if (!src) return null;
 
@@ -30,7 +31,10 @@ export default function RenderImage({
         alt={alt}
         width={width}
         height={height}
-        onLoad={() => setImageLoading(false)}
+        onLoad={() => {
+          setImageLoading(false);
+          setImageLoaded(true);
+        }}
         className={`${
           isImageLoading ? "blur-[20px]" : "remove-blur"
         } ${imageClassName}`}

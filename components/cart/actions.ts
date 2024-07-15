@@ -44,6 +44,8 @@ export async function addItem(selectedVariantId: string, quantity: number = 1) {
       { merchandiseId: selectedVariantId, quantity: quantity },
     ]);
     revalidateTag(TAGS.cart);
+
+    return "Item added to cart";
   } catch (e) {
     return "Error adding item to cart";
   }
