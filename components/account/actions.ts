@@ -494,7 +494,6 @@ export async function shopifyResetCustomer(
       if (cartId) {
         updateCartIdentity(cartId, res.customerAccessToken.accessToken);
       }
-      console.log("res", res);
 
       return { message: { success: "Reset customer successfully" } };
     }
