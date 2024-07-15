@@ -44,7 +44,6 @@ export default function ProductButton({ product }: { product: Product }) {
           />
         )}
         <video
-          autoPlay
           muted
           ref={videoRef}
           className={`pointer-events-none absolute inset-0 hidden h-full ${
