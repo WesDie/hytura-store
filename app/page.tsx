@@ -26,7 +26,6 @@ export default async function Home() {
         alignment="text-center"
         subtitle="Solutions for you"
         title="Simply water your plants as usual with our specially formulated solutions"
-        buttonTitle="Shop all products"
       />
       <TextImage
         direction="right"
