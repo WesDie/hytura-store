@@ -25,7 +25,7 @@ export default function FaqItems({
       }
       if (button.parentElement) {
         button.parentElement.style.height =
-          24 +
+          15 +
           55 +
           button.parentElement.querySelector("p")!.offsetHeight +
           "px";
@@ -53,7 +53,7 @@ export default function FaqItems({
         firstButton.setAttribute("aria-expanded", "true");
         if (firstButton.parentElement) {
           firstButton.parentElement.style.height =
-            24 +
+            15 +
             55 +
             firstButton.parentElement.querySelector("p")!.offsetHeight +
             "px";
@@ -67,7 +67,7 @@ export default function FaqItems({
       {faqItems.map(({ question, answer }, index) => (
         <div
           key={question}
-          className={`h-[55px] overflow-hidden border-b border-solid border-stroke-gray py-2x transition-all duration-300 ease-in-out ${topBottomBorders ? "first-of-type:border-y" : "last-of-type:border-b-0"} `}
+          className={`${firstOpen && index == 0 ? "" : "h-[55px]"} overflow-hidden border-b border-solid border-stroke-gray py-2x transition-all duration-300 ease-in-out ${topBottomBorders ? "first-of-type:border-y" : "last-of-type:border-b-0"} `}
         >
           <div
             className="group relative flex cursor-pointer justify-between"

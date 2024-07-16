@@ -42,11 +42,10 @@ export default function ProductDetails({ product }: { product: Product }) {
     },
     {
       question: "Specifications",
-      answer: "No specifications available",
-    },
-    {
-      question: "Shipping",
-      answer: "We deliver the next day",
+      answer:
+        product.metafields.find(
+          (metafield) => metafield?.key === "specifications",
+        )?.value || "No specifications available",
     },
   ];
 

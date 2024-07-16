@@ -1,5 +1,6 @@
 import imageFragment from "./image";
 import seoFragment from "./seo";
+import metafieldFragment from "./metafield";
 
 const productFragment = `
   fragment product on Product {
@@ -63,6 +64,12 @@ const productFragment = `
         }
       }
     }
+    metafields(identifiers: [
+      {namespace: "custom", key: "specifications"}
+      {namespace: "shopify", key: "package-type"}
+    ]) {
+      ...metafield
+    }
     seo {
       ...seo
     }
@@ -71,6 +78,7 @@ const productFragment = `
   }
   ${imageFragment}
   ${seoFragment}
+  ${metafieldFragment}
 `;
 
 export default productFragment;
