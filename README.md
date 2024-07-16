@@ -8,15 +8,13 @@ Welcome to the Hytura repository! Hytura is a modern e-commerce web application 
 - [Demo](#demo)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 - [Contact](#contact)
 
 ## Features
 
 - **Next.js**: A powerful React framework for server-side rendering and static site generation.
-- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
 - **Shopify Integration**: Robust e-commerce functionality with Shopify's powerful API.
+- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
 - **Responsive Design**: Optimized for various screen sizes.
 - **High Performance**: Fast load times and smooth interactions.
 - **SEO Optimized**: Enhanced search engine visibility.
@@ -46,6 +44,7 @@ To get started with Hytura store, follow these steps:
     ```env
     SHOPIFY_STORE_DOMAIN=your-store.myshopify.com
     SHOPIFY_STOREFRONT_ACCESS_TOKEN=your-access-token
+    SHOPIFY_ADMIN_API_ACCESS_TOKEN=admin-api-access-token
     ```
 
 4. **Run the development server:**
@@ -57,24 +56,9 @@ To get started with Hytura store, follow these steps:
 
 ## Usage
 
-- **Adding Products**: Manage your products directly through the Shopify dashboard.
-- **Customizing Styles**: Tailwind CSS makes it easy to customize the look and feel of your store. Edit the `tailwind.config.js` and the component styles as needed.
-- **Deploying**: Deploy your Next.js application to platforms like Vercel, Netlify, or your preferred hosting service.
-
-## Contributing
-
-We welcome contributions to improve Hytura! To contribute:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes.
-4. Commit your changes (`git commit -m 'Add some feature'`).
-5. Push to the branch (`git push origin feature-branch`).
-6. Open a Pull Request.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+- **Adding Content**: Manage your products, collections, menus and more directly through the Shopify dashboard.
+- **Handling Orders:** Process and manage orders through the Shopify admin panel. Integrate additional payment gateways if required.
+- **Deploying the Application:** Deploy Hytura using Vercel, Netlify, or any other preferred hosting service. Ensure environment variables are properly configured in the hosting platform.
 
 ## Contact
 
@@ -82,7 +66,3 @@ For questions or feedback, feel free to reach out:
 
 - Email: wes.dieleman@gmail.com
 - GitHub: [WesDie](https://github.com/WesDie)
-
----
-
-Feel free to customize this template according to your specific needs and preferences.
