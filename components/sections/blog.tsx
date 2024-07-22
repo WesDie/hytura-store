@@ -41,7 +41,7 @@ export default function MainBlog({
         <div className="flex gap-2x border-y border-solid border-stroke-gray p-1x px-2x py-2x md:px-4x">
           {blogData.map((blog: Blog, index: number) => (
             <div
-              key={index}
+              key={blog.id}
               onClick={changeCurrentBlog(blog.title)}
               className={`text-link-sm cursor-pointer ${blog.title === blogName ? "text-text-black" : "text-text-light-gray"}`}
             >
@@ -51,8 +51,8 @@ export default function MainBlog({
         </div>
       </div>
       <div className="grid grid-cols-1 gap-2x p-2x md:grid-cols-3 md:p-3x">
-        {filteredBlog[0].articles.map((article: Article, index: number) => (
-          <div key={index} className="flex w-full flex-col gap-2x pb-3x">
+        {filteredBlog[0].articles.map((article: Article) => (
+          <div key={article.id} className="flex w-full flex-col gap-2x pb-3x">
             <Link href={`/journal/article/${article.id.split("/").pop()}`}>
               <RenderImage
                 src={article.image.url}

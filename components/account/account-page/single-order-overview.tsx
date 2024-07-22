@@ -47,7 +47,7 @@ export default function SingleOrderOverview({ order }: { order: Order }) {
             </div>
             {order.lineItems.map((item, index) => (
               <div
-                key={index}
+                key={order.id}
                 className="flex w-full border-b border-stroke-light-gray px-1x py-2x"
               >
                 <Link

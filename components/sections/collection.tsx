@@ -55,9 +55,9 @@ export default function MainCollection({
           )}
         </div>
         <div className="flex gap-2x border-y border-solid border-stroke-gray p-1x px-2x py-2x md:px-4x">
-          {collections.map((collection: Collection, index: number) => (
+          {collections.map((collection: Collection) => (
             <div
-              key={index}
+              key={collection.id}
               onClick={changeCurrentCollection(collection.title.toLowerCase())}
               className={`text-link-sm cursor-pointer ${collection.title.toLowerCase() === collectionName.toLowerCase() ? "text-text-black" : "text-text-light-gray"}`}
             >
@@ -67,16 +67,14 @@ export default function MainCollection({
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-4">
-        {filteredCollection[0].products.map(
-          (product: Product, index: number) => (
-            <div
-              key={index}
-              className="h-full w-full border-b border-r border-stroke-gray"
-            >
-              <ProductButton product={product} />
-            </div>
-          ),
-        )}
+        {filteredCollection[0].products.map((product: Product) => (
+          <div
+            key={product.id}
+            className="h-full w-full border-b border-r border-stroke-gray"
+          >
+            <ProductButton product={product} />
+          </div>
+        ))}
         {filteredCollection[0].products.length % 4 !== 0 &&
           Array.from({
             length: 4 - (filteredCollection[0].products.length % 4),

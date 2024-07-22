@@ -42,6 +42,7 @@ export type CartItem = {
 
 export type Collection = {
   handle: string;
+  id: string;
   title: string;
   description: string;
   seo: SEO;
@@ -278,6 +279,7 @@ export type ShopifyCart = {
 export type ShopifyCollection = {
   handle: string;
   title: string;
+  id: string;
   description: string;
   seo: SEO;
   updatedAt: string;
