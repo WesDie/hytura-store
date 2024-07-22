@@ -49,7 +49,7 @@ export default function Slider({
       <div className="flex w-full justify-between px-2x py-2x md:px-4x md:pb-2x md:pt-3x">
         <h1 className="text-heading-xs md:text-heading-md">{text}</h1>
         <div className="flex gap-2x">
-          <button onClick={prevto} className="rotate-180">
+          <button onClick={prevto}>
             <RenderImage
               src={"/icons/arrow-left.svg"}
               alt={"arrow left"}
