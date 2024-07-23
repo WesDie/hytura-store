@@ -8,6 +8,36 @@
     -webkit-appearance: none;
     margin: 0;
   }
+
+  .wysiwyg {
+    h1 {
+      @apply text-heading-lg;
+    }
+    h2 {
+      @apply text-heading-md;
+    }
+    h3 {
+      @apply text-heading-sm;
+    }
+    h4 {
+      @apply text-heading-xs;
+    }
+    h5 {
+      @apply text-heading-2xs;
+    }
+    h6 {
+      @apply text-heading-3xs;
+    }
+    p {
+      @apply text-body-sm;
+    }
+    a {
+      @apply text-body-sm;
+    }
+    ul {
+      @apply text-body-sm;
+    }
+  }
 }
 
 @layer components {

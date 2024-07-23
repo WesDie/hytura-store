@@ -17,7 +17,7 @@ export default async function CollectionPage({
       <div className="mx-auto flex max-w-[1440px] flex-col gap-3x px-3x py-7x">
         <h1 className="text-heading-xl">{page.title}</h1>
         <div
-          className="flex flex-col gap-2x"
+          className="wysiwyg flex flex-col gap-2x"
           dangerouslySetInnerHTML={{ __html: page.body }}
         />
       </div>
