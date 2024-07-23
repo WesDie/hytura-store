@@ -28,9 +28,9 @@ export default function MainAccount() {
   }, [successMessage, setActiveSection]);
 
   return (
-    <div className="relative flex flex-col gap-2x">
+    <div className="relative flex flex-col gap-2x transition-opacity group-aria-hidden:opacity-0">
       {successMessage && (
-        <p className="text-heading-3xs text-text-green absolute left-3x top-1x text-center">
+        <p className="text-heading-3xs absolute left-3x top-1x text-center text-text-green">
           {successMessage}
         </p>
       )}

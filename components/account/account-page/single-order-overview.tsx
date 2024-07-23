@@ -50,12 +50,16 @@ export default function SingleOrderOverview({ order }: { order: Order }) {
                 key={order.id}
                 className="flex w-full border-b border-stroke-light-gray px-1x py-2x"
               >
-                <Link
-                  href={`/product/${item.variant.product.handle}`}
-                  className="button-link w-full"
-                >
-                  {item.title}
-                </Link>
+                {item.variant ? (
+                  <Link
+                    href={`/product/${item.variant.product.handle}`}
+                    className="button-link w-full"
+                  >
+                    {item.title}
+                  </Link>
+                ) : (
+                  <p className="text-body-sm w-full">{item.title}</p>
+                )}
                 <p className={orderListItemClass}>
                   {item.originalTotalPrice.amount}{" "}
                   {item.originalTotalPrice.currencyCode}
