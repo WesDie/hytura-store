@@ -10,7 +10,7 @@ export default function ArticleCard({ article }: { article: Article }) {
       className="flex h-full w-full flex-col gap-2x py-3x"
     >
       <RenderImage
-        src={article.image.url}
+        src={article.image?.url}
         alt={"Article image"}
         width={396}
         height={248}

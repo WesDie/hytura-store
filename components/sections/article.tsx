@@ -36,7 +36,7 @@ export default function ArticleDetails({ article }: { article: Article }) {
       </div>
       <div className="flex w-full flex-col">
         <RenderImage
-          src={article.image.url}
+          src={article.image?.url}
           alt={"article image"}
           width={1000}
           height={500}
@@ -44,7 +44,7 @@ export default function ArticleDetails({ article }: { article: Article }) {
           imageClassName="w-full h-full object-cover"
         />
         <div className="text-body-xs md:text-body-sm border-stroke-gray px-3x py-4x md:border-l">
-          {article.content}
+          <p dangerouslySetInnerHTML={{ __html: article.contentHtml }}></p>
         </div>
       </div>
     </section>

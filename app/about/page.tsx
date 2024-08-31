@@ -7,29 +7,32 @@ export default async function About() {
     <main>
       <Hero
         direction="right"
-        title="We value the health of your plants."
+        title="Nourish your plants, transform your space."
         buttonTitle="Explore"
-        imageSrc="/about.png"
-      />
-      <TextImage
-        direction="left"
-        title="Enhanced Growth"
-        description="Our plant water collection is meticulously crafted to meet the diverse needs of various plant species. From succulents to tropical plants, our specialized water formulations help you achieve the healthiest growth possible. Browse through our selection and find the perfect match for your plant care routine."
-        buttonTitle="Shop now"
-        imageSrc="/about.png"
+        imageSrc="/about1.png"
       />
       <BaseText
         alignment="text-center"
-        subtitle="Solutions for you"
-        title="Simply water your plants as usual with our specially formulated solutions"
+        subtitle="Healthy Plants, Happy Homes"
+        title="Transform your living space with vibrant, thriving plants that radiate health and beauty."
         buttonTitle="Shop all products"
       />
       <TextImage
+        direction="left"
+        title="Nourish Your Indoor Garden"
+        className="md:!h-[436px]"
+        description="Located in Haarlem, Netherlands, our company specializes in premium, high-quality liquids for your indoor plants. Our products are expertly crafted to cater to the specific needs of various plant species, promoting vibrant growth and overall well-being. Discover our collection and find the ideal solution for your plant care journey."
+        buttonTitle="Contact us"
+        url="/contact"
+        imageSrc="/about2.jpeg"
+      />
+      <TextImage
         direction="right"
-        title="It has never been easier"
-        description="Our plant water collection is meticulously crafted to meet the diverse needs of various plant species. From succulents to tropical plants, our specialized water formulations help you achieve the healthiest growth possible. Browse through our selection and find the perfect match for your plant care routine."
+        className="md:!h-[436px]"
+        title="Rooted in Excellence"
+        description="Our mission is to elevate indoor plant care with premium-quality liquids designed to enhance growth and vitality. With a passion for plants and a commitment to innovation, we carefully craft each formulation to nourish a wide range of species, from the hardiest succulents to the most delicate ferns. Trust our expertise to bring out the best in your indoor garden."
         buttonTitle="Shop all products"
-        imageSrc="/about.png"
+        imageSrc="/about3.jpeg"
       />
     </main>
   );

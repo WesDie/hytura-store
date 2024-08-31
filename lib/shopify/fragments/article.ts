@@ -8,6 +8,7 @@ const articleFragment = `
       ...image
     }
     title
+    contentHtml
     content
     publishedAt
     excerpt

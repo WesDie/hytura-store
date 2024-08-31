@@ -18,7 +18,7 @@ export default async function ArticleSlider() {
         paddingMobile={16}
         slidesMobile={1.2}
         slidesTablet={2.2}
-        slidesDesktop={2.8}
+        slidesDesktop={3.1}
       />
     </section>
   );

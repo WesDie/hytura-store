@@ -256,6 +256,7 @@ export type Article = {
     width: number;
     height: number;
   };
+  contentHtml: string;
   content: string;
   excerpt: string;
   handle: string;

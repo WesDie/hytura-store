@@ -55,7 +55,7 @@ export default function MainBlog({
           <div key={article.id} className="flex w-full flex-col gap-2x pb-3x">
             <Link href={`/journal/article/${article.id.split("/").pop()}`}>
               <RenderImage
-                src={article.image.url}
+                src={article.image?.url}
                 alt="Article Image"
                 width={336}
                 height={201}

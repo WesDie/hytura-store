@@ -19,7 +19,7 @@ export default function SmoothScroller() {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
-      lerp: 0.1,
+      lerp: 0.2,
     });
 
     lenis.on("scroll", (e: any) => {

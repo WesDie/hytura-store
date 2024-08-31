@@ -11,16 +11,17 @@ export default function Faq({ direction }: { direction: "left" | "right" }) {
     {
       question: "How do I track my order?",
       answer:
-        "You can track your order by visiting our website and entering your order number.",
+        "You can track your order by visiting our website and going to the order tracking page in the account section (You must have an account to track your order in the website). You can also track your order by opening the link you will recieve within a day or two of ordering.",
     },
     {
       question: "Do you offer gift cards?",
       answer:
-        "Yes, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in vestibulum nisl. Nam et tincidunt erat. Vivamus quis magna nec mi dapibus posuere vehicula a justo. Nulla sit amet vestibulum urna. Fusce arcu nunc, dignissim eget blandit id, auctor semper velit. Phasellus non dui felis. Nullam suscipit magna laoreet interdum dapibus.",
+        "Yes, we offer gift cards. You can purchase gift cards on our website and send them to your friends and family.",
     },
     {
       question: "How do I contact customer support?",
-      answer: "You can contact customer support by emailing",
+      answer:
+        "You can contact customer support by emailing us at support@hytura.com or by filling in the form on the contact page.",
     },
   ];
 
