@@ -1,7 +1,15 @@
 "use client";
 import FaqItems from "../elements/faq-items";
 
-export default function Faq({ direction }: { direction: "left" | "right" }) {
+export default function Faq({
+  direction,
+  extraText,
+  overwriteFaqItems,
+}: {
+  direction: "left" | "right";
+  extraText?: string;
+  overwriteFaqItems?: { question: string; answer: string }[];
+}) {
   const faqItems = [
     {
       question: "What is the refund policy?",
@@ -31,9 +39,12 @@ export default function Faq({ direction }: { direction: "left" | "right" }) {
         direction === "left" ? "md:flex-row-reverse" : "md:flex-row"
       }`}
     >
-      <h1 className="text-heading-sm md:text-heading-md">FAQ</h1>
+      <div className="flex max-w-[600px] flex-col gap-2x">
+        <h1 className="text-heading-sm md:text-heading-md">FAQ</h1>
+        <p className="text-body-sm">{extraText}</p>
+      </div>
       <div className="flex w-full flex-col pb-3x md:w-[650px] md:pb-4x">
-        <FaqItems faqItems={faqItems} />
+        <FaqItems faqItems={overwriteFaqItems || faqItems} />
       </div>
     </section>
   );
