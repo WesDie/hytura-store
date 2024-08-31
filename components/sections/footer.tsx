@@ -114,13 +114,13 @@ export default function Footer({ menu }: { menu: Menu[] }) {
         </p>
         <div className="flex gap-3x">
           <Link
-            href={"/"}
+            href={"/page/terms-of-service"}
             className={`text-body-xs md:text-body-sm ${linkClass}`}
           >
             Terms of service
           </Link>
           <Link
-            href={"/"}
+            href={"/page/privacy-policy"}
             className={`text-body-xs md:text-body-sm ${linkClass}`}
           >
             Privacy policy
