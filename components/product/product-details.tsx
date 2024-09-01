@@ -66,7 +66,7 @@ export default function ProductDetails({ product }: { product: Product }) {
           <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
           <BuyButton selectedVariant={selectedVariant} quantity={quantity} />
         </div>
-        <ProductUsps />
+        <ProductUsps product={product} />
       </div>
       <div className="flex flex-col px-2x py-2x md:px-4x">
         <FaqItems
