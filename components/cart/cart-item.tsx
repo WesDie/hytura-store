@@ -92,12 +92,23 @@ export default function CartItemProduct(item: CartItem) {
           <h3 className="text-heading-2xs">
             {product.title} - {item.merchandise.title.replace("/", "-")}
           </h3>
-          <p className="text-body-sm text-text-light-gray">
-            €{" "}
-            {(
-              Number(item.merchandise.price.amount) * Number(localQuantity)
-            ).toFixed(2)}
-          </p>
+          <div className="flex gap-1x">
+            <p className="text-body-sm text-text-light-gray">
+              €{" "}
+              {(
+                Number(item.merchandise.price.amount) * Number(localQuantity)
+              ).toFixed(2)}
+            </p>
+            {item.merchandise.compareAtPrice && (
+              <p className="text-body-sm text-text-light-gray line-through">
+                €{" "}
+                {(
+                  Number(item.merchandise.compareAtPrice.amount) *
+                  Number(localQuantity)
+                ).toFixed(2)}
+              </p>
+            )}
+          </div>
         </div>
         <div className="flex w-full justify-between">
           <div className="flex w-[80px] border border-stroke-gray py-[2px]">

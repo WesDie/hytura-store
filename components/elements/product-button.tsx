@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import { Product } from "@/lib/shopify/types";
 import BuyButton from "./buy-button";
+import Price from "./price";
 
 export default function ProductButton({ product }: { product: Product }) {
   const [showSecondProductImage, setShowSecondProductImage] = useState(false);
@@ -63,9 +64,7 @@ export default function ProductButton({ product }: { product: Product }) {
         >
           <div className="flex gap-1x">
             <h3 className="text-heading-2xs">{product.title}</h3>
-            <p className="text-body-sm mt-auto leading-[21px] text-text-light-gray">
-              € {product.priceRange.minVariantPrice.amount}
-            </p>
+            <Price productVariant={product.variants[0]} />
           </div>
           <p className="text-body-xs text-text-light-gray">
             Spray | Bottle | Instructions

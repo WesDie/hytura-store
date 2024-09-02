@@ -37,8 +37,13 @@ const cartFragment = `
                 name
                 value
               }
+              compareAtPrice {
+                amount
+                currencyCode
+              }
               price {
                 amount
+                currencyCode
               }
               product {
                 ...product

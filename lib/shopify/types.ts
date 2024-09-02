@@ -33,9 +33,8 @@ export type CartItem = {
       name: string;
       value: string;
     }[];
-    price: {
-      amount: string;
-    };
+    compareAtPrice: Money;
+    price: Money;
     product: Product;
   };
 };
@@ -231,6 +230,7 @@ export type ProductVariant = {
     value: string;
   }[];
   price: Money;
+  compareAtPrice: Money;
 };
 
 export type SEO = {

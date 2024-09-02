@@ -14,7 +14,7 @@ export default function CartSummary({ cart }: { cart: Cart | null }) {
         Shipping calculated at checkout
       </p>
       <Link href={cart.checkoutUrl} className="button-primary text-center">
-        Checkout - € {cart.cost.totalAmount.amount}
+        Checkout - € {cart.cost.subtotalAmount.amount}
       </Link>
       <Button
         text="Continue shopping"

@@ -39,6 +39,10 @@ const productFragment = `
             amount
             currencyCode
           }
+          compareAtPrice {
+            amount
+            currencyCode
+          }
         }
       }
     }

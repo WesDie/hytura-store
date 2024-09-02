@@ -1,6 +1,7 @@
 "use client";
 
 import { Product, ProductVariant } from "@/lib/shopify/types";
+import Price from "../elements/price";
 
 export default function ProductTitleAndPrice({
   selectedVariant,
@@ -22,9 +23,15 @@ export default function ProductTitleAndPrice({
         <h1 className="text-heading-lg">{product.title}</h1>
       </div>
       <p className="text-body-lg">
-        {selectedVariant
-          ? "€ " + selectedVariant?.price?.amount
-          : "From € " + product.priceRange.minVariantPrice.amount}
+        {selectedVariant ? (
+          <Price
+            productVariant={selectedVariant}
+            priceClassName="!text-body-lg"
+            discountClassName="!text-body-lg line-through text-text-light-gray"
+          />
+        ) : (
+          "From € " + product.priceRange.minVariantPrice.amount
+        )}
       </p>
     </>
   );
