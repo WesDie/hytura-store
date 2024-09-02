@@ -10,7 +10,7 @@ export default async function Home() {
     <main>
       <Hero
         direction="right"
-        title="High quality liquids like never before."
+        title="High quality plant care products 🪴"
         buttonTitle="Shop now"
         imageSrc="/hero.png"
       />

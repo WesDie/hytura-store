@@ -24,7 +24,7 @@ export default function ProductMedia({ product }: { product: Product }) {
               alt={"product image"}
               width={500}
               height={500}
-              className="h-[350px] w-full object-cover"
+              className={`${product.images.length > 3 ? "h-[350px]" : "h-full"} w-full object-cover`}
               imageClassName="object-cover w-full h-full"
             />
           ))}
