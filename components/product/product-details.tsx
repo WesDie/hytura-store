@@ -47,6 +47,14 @@ export default function ProductDetails({ product }: { product: Product }) {
           (metafield) => metafield?.key === "specifications",
         )?.value || "No specifications available",
     },
+    {
+      question: "Includes",
+      answer:
+        JSON.parse(
+          product.metafields.find((metafield) => metafield?.key === "includes")
+            ?.value || "[]",
+        ).join(", ") || "No information available",
+    },
   ];
 
   return (

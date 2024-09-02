@@ -70,6 +70,7 @@ const productFragment = `
     }
     metafields(identifiers: [
       {namespace: "custom", key: "features"}
+      {namespace: "custom", key: "includes"}
       {namespace: "custom", key: "specifications"}
       {namespace: "custom", key: "usps"}
       {namespace: "shopify", key: "package-type"}
