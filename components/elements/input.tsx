@@ -15,6 +15,7 @@ export default function Input({
   toggleShow,
   onChange,
   value,
+  isTextArea,
 }: {
   name: string;
   label?: string;
@@ -28,6 +29,7 @@ export default function Input({
   toggleShow?: boolean;
   onChange?: (e: any) => void;
   value?: string | number;
+  isTextArea?: boolean;
 }) {
   const [show, setShow] = useState(false);
   const [inoutValue, setInputValue] = useState(value || "");
@@ -47,18 +49,32 @@ export default function Input({
       <div
         className={`relative ${disabled ? "pointer-events-none opacity-50" : ""}`}
       >
-        <input
-          {...(show ? { type: "text" } : { type: type || "text" })}
-          disabled={disabled || false}
-          id={id || name}
-          name={name}
-          {...(onChange ? { value: value } : { value: inoutValue })}
-          placeholder={placeholder || label || ""}
-          autoComplete={autoComplete || ""}
-          aria-invalid={state?.message?.[name] ? "true" : "false"}
-          onChange={onChange || ((e) => setInputValue(e.target.value))}
-        />
-        {toggleShow && (
+        {isTextArea ? (
+          <textarea
+            disabled={disabled || false}
+            id={id || name}
+            name={name}
+            {...(onChange ? { value: value } : { value: inoutValue })}
+            placeholder={placeholder || label || ""}
+            autoComplete={autoComplete || ""}
+            aria-invalid={state?.message?.[name] ? "true" : "false"}
+            onChange={onChange || ((e) => setInputValue(e.target.value))}
+            data-lenis-prevent="true"
+          />
+        ) : (
+          <input
+            {...(show ? { type: "text" } : { type: type || "text" })}
+            disabled={disabled || false}
+            id={id || name}
+            name={name}
+            {...(onChange ? { value: value } : { value: inoutValue })}
+            placeholder={placeholder || label || ""}
+            autoComplete={autoComplete || ""}
+            aria-invalid={state?.message?.[name] ? "true" : "false"}
+            onChange={onChange || ((e) => setInputValue(e.target.value))}
+          />
+        )}
+        {toggleShow && !isTextArea && (
           <button
             onClick={() => setShow(!show)}
             className={`absolute bottom-0 right-2x top-0 my-auto ${disabled && "opacity-50"}`}

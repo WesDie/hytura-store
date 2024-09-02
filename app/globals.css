@@ -124,11 +124,17 @@
       @apply text-heading-3xs;
     }
 
-    input {
+    input,
+    textarea {
       @apply text-body-md w-full appearance-none rounded-none border border-stroke-black bg-transparent px-2x py-1x transition-colors duration-300 placeholder-shown:border-stroke-gray focus:outline-none;
     }
-    input:is([aria-invalid="true"]) {
+    input:is([aria-invalid="true"]),
+    textarea:is([aria-invalid="true"]) {
       @apply border-stroke-red;
+    }
+
+    textarea {
+      @apply h-[200px] resize-none;
     }
   }
 
