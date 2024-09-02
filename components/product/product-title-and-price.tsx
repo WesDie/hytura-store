@@ -22,7 +22,7 @@ export default function ProductTitleAndPrice({
         )}
         <h1 className="text-heading-lg">{product.title}</h1>
       </div>
-      <p className="text-body-lg">
+      <div className="text-body-lg">
         {selectedVariant ? (
           <Price
             productVariant={selectedVariant}
@@ -32,7 +32,7 @@ export default function ProductTitleAndPrice({
         ) : (
           "From € " + product.priceRange.minVariantPrice.amount
         )}
-      </p>
+      </div>
     </>
   );
 }

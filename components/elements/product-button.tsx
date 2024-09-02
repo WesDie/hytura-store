@@ -64,7 +64,7 @@ export default function ProductButton({ product }: { product: Product }) {
           <source src={`${videoUrl}`} className="h-full w-full object-cover" />
         </video>
       </Link>
-      <div className="mt-0 flex max-w-full flex-row justify-between gap-0 overflow-hidden p-2x md:mt-auto md:flex-col md:gap-1x xl:mt-0 xl:flex-row xl:gap-0">
+      <div className="mt-0 flex max-w-full flex-row justify-between overflow-hidden p-2x md:mt-auto md:flex-col xl:mt-0 xl:flex-row xl:gap-1x">
         <Link
           className="flex max-w-full cursor-pointer flex-col justify-center gap-[4px] overflow-hidden"
           href={"/product/" + product.handle}
