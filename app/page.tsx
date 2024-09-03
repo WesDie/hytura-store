@@ -12,7 +12,7 @@ export default async function Home() {
         direction="right"
         title="High quality plant care products 🪴"
         buttonTitle="Shop now"
-        imageSrc="/hero.png"
+        imageSrc="/homepage1.png"
       />
       <ProductSlider />
       <TextImage
@@ -20,7 +20,7 @@ export default async function Home() {
         title="Enhanced Growth"
         description="Our plant water collection is meticulously crafted to meet the diverse needs of various plant species. From succulents to tropical plants, our specialized water formulations help you achieve the healthiest growth possible. Browse through our selection and find the perfect match for your plant care routine."
         buttonTitle="Shop now"
-        imageSrc="/landing1.png"
+        imageSrc="/homepage3.png"
         url="/collection/all"
       />
       <BaseText
@@ -33,7 +33,7 @@ export default async function Home() {
         title="Your Plants, Our Passion"
         description="Transform your indoor garden with our high-quality plant care liquids, designed to nurture a wide variety of plants, from succulents to tropical species. Our expertly crafted formulations provide essential nutrients that promote vibrant growth and lasting health. Whether you’re an experienced plant parent or just getting started, our products are here to support every step of your green journey."
         buttonTitle="About us"
-        imageSrc="/landing2.png"
+        imageSrc="/homepage2.png"
         url="/about"
       />
       <Faq direction="right" />
