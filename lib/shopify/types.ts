@@ -265,6 +265,12 @@ export type Article = {
   title: string;
 };
 
+export type Review = {
+  author: string;
+  title: string;
+  content: string;
+};
+
 export type ShopifyCart = {
   id: string;
   checkoutUrl: string;

@@ -1,7 +1,7 @@
 // @ts-nocheck
 "use client";
 import { useState } from "react";
-import { Product, Article } from "@/lib/shopify/types";
+import { Product, Article, Review } from "@/lib/shopify/types";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import ProductButton from "./product-button";
@@ -13,6 +13,7 @@ export default function Slider({
   products,
   text,
   articles,
+  reviews,
   spaceBetween,
   sliderClass,
   slidesMobile,
@@ -25,6 +26,7 @@ export default function Slider({
   text: string;
   products?: Product[];
   articles?: Article[];
+  reviews?: Review[];
   spaceBetween?: number;
   sliderClass?: string;
   slidesMobile?: number;
@@ -46,7 +48,7 @@ export default function Slider({
 
   return (
     <div>
-      <div className="flex w-full justify-between px-2x py-2x md:px-4x md:pb-2x md:pt-3x">
+      <div className="flex justify-between w-full px-2x py-2x md:px-4x md:pb-2x md:pt-3x">
         <h1 className="text-heading-xs md:text-heading-md">{text}</h1>
         <div className="flex gap-2x">
           <button onClick={prevto}>
@@ -106,10 +108,10 @@ export default function Slider({
               </SwiperSlide>
             ))
           : null}
-        {!products && !articles
-          ? Array.from(Array(10)).map((test: any, index: number) => (
-              <SwiperSlide key={index}>
-                <ReviewCard />
+        {!products && !articles && reviews && reviews.length > 0
+          ? reviews.map((review: review[], index: number) => (
+              <SwiperSlide key={index} className="!flex !h-auto">
+                <ReviewCard review={reviews[index]} />
               </SwiperSlide>
             ))
           : null}

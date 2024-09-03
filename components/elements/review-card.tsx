@@ -1,19 +1,16 @@
 "use client";
+import { Review } from "@/lib/shopify/types";
 
-export default function ReviewCard() {
+export default function ReviewCard({ review }: { review: Review }) {
   return (
-    <div className="my-3x flex flex-col gap-2x bg-background-dark-sand px-3x py-4x">
+    <div className="flex flex-col my-3x gap-2x bg-background-dark-sand px-3x py-4x">
       <div className="flex flex-col gap-1x">
         <h3 className="text-heading-2xs md:text-heading-xs">
-          “Best product ever”
+          “{review.title}”
         </h3>
-        <p className="text-body-xs md:text-body-sm">
-          Simply water your plants as usual with our specially formulated
-          solutions. For best results, use our water in combination with a
-          proper feeding schedule and adequate sunlight...
-        </p>
+        <p className="text-body-xs md:text-body-sm">{review.content}</p>
       </div>
-      <p className="text-body-xs">By Wes Dieleman</p>
+      <p className="text-body-xs">By {review.author}</p>
     </div>
   );
 }
