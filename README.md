@@ -42,9 +42,11 @@ To get started with Hytura store, follow these steps:
 
     Create a `.env.local` file in the root directory and add your Shopify credentials:
     ```env
-    SHOPIFY_STORE_DOMAIN=your-store.myshopify.com
-    SHOPIFY_STOREFRONT_ACCESS_TOKEN=your-access-token
-    SHOPIFY_ADMIN_API_ACCESS_TOKEN=admin-api-access-token
+    SHOPIFY_STORE_DOMAIN='your-store.myshopify.com'
+    SHOPIFY_STOREFRONT_ACCESS_TOKEN='your-access-token'
+    SHOPIFY_ADMIN_API_ACCESS_TOKEN='admin-api-access-token'
+    SHOPIFY_STORE_DOMAIN='https://yourstore.myshopify.com/api/version/graphql.json'
+    SHOPIFY_ADMIN_DOMAIN='https://yourstore.myshopify.com/admin/api/version'
     ```
 
 4. **Run the development server:**
