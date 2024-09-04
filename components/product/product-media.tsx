@@ -4,7 +4,7 @@ import RenderImage from "../utilities/render-Image";
 export default function ProductMedia({ product }: { product: Product }) {
   return (
     <div className="flex w-full flex-col border-b border-stroke-gray md:border-b-0 md:border-r">
-      <div className="flex">
+      <div className="flex md:flex-col lg:flex-row">
         {product.images.slice(0, 1).map((image: Image, index: number) => (
           <RenderImage
             key={index}
@@ -24,7 +24,7 @@ export default function ProductMedia({ product }: { product: Product }) {
               alt={"product image"}
               width={500}
               height={500}
-              className={`${product.images.length > 3 ? "h-[350px]" : "h-full"} w-full object-cover`}
+              className={`${product.images.length > 2 ? "3xl:h-[650px] md:h-full xl:h-[360px]" : "h-full"} w-full object-cover`}
               imageClassName="object-cover w-full h-full"
             />
           ))}

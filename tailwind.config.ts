@@ -48,6 +48,9 @@ const config: Config = {
         "9x": "72px",
         "10x": "80px",
       },
+      screens: {
+        "3xl": "1920px",
+      },
     },
   },
   plugins: [],
