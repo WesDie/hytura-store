@@ -28,7 +28,7 @@ export default async function Hero({
         imageClassName="w-full h-full object-cover"
       />
       <div className="flex w-full border-b border-solid border-stroke-gray md:h-[667px]">
-        <div className="m-auto ml-2x flex w-[365px] flex-col gap-3x md:ml-[64px]">
+        <div className="m-auto ml-2x flex w-[355px] flex-col gap-3x md:ml-[64px]">
           <h1 className="text-heading-lg md:text-heading-xl">{title}</h1>
           <div className="flex gap-2x">
             <Link href="/collection/all">
