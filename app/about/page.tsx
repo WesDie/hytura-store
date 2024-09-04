@@ -32,7 +32,7 @@ export default async function About() {
         title="Rooted in Excellence"
         description="Our mission is to elevate indoor plant care with premium-quality liquids designed to enhance growth and vitality. With a passion for plants and a commitment to innovation, we carefully craft each formulation to nourish a wide range of species, from the hardiest succulents to the most delicate ferns. Trust our expertise to bring out the best in your indoor garden."
         buttonTitle="Shop all products"
-        imageSrc="/about3.jpeg"
+        imageSrc="/about3.png"
       />
     </main>
   );
