@@ -14,6 +14,8 @@ export default function CartItemProduct(item: CartItem) {
   const [localQuantity, setLocalQuantity] = useState(item.quantity);
   const quantityRef = useRef(item.quantity);
   const debounceTimeoutRef = useRef<null | NodeJS.Timeout>(null);
+  const productUrl = `/product/${product.handle}`;
+  const { setIsCartOpen } = useCartDrawer();
 
   const updateQuantity = (amount: number, newValue?: number) => {
     let newQuantity = quantityRef.current + amount;
@@ -72,9 +74,6 @@ export default function CartItemProduct(item: CartItem) {
     quantityRef.current = item.quantity;
     setLocalQuantity(item.quantity);
   }, [item.quantity]);
-
-  const productUrl = `/product/${product.handle}`;
-  const { setIsCartOpen } = useCartDrawer();
 
   return (
     <div
