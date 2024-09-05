@@ -54,6 +54,7 @@ export default function ProductDetails({ product }: { product: Product }) {
           product.metafields.find((metafield) => metafield?.key === "includes")
             ?.value || "[]",
         ).join(", ") || "No information available",
+      list: true,
     },
   ];
 

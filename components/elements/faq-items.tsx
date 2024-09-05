@@ -9,7 +9,7 @@ export default function FaqItems({
 }: {
   firstOpen?: boolean;
   topBottomBorders?: boolean;
-  faqItems: { question: string; answer: string }[];
+  faqItems: { question: string; answer: string; list?: boolean }[];
 }) {
   const openDropdown = (index: number) => () => {
     const button = document.getElementById(`dropdown-button-${index}`);
@@ -24,11 +24,10 @@ export default function FaqItems({
         return;
       }
       if (button.parentElement) {
-        button.parentElement.style.height =
-          15 +
-          55 +
-          button.parentElement.querySelector("p")!.offsetHeight +
-          "px";
+        let content = button.parentElement.querySelector(
+          "#content",
+        ) as HTMLElement;
+        button.parentElement.style.height = 70 + content.offsetHeight + "px";
       }
     }
 
@@ -52,11 +51,11 @@ export default function FaqItems({
       if (firstButton) {
         firstButton.setAttribute("aria-expanded", "true");
         if (firstButton.parentElement) {
+          let content = firstButton.parentElement.querySelector(
+            "#content",
+          ) as HTMLElement;
           firstButton.parentElement.style.height =
-            15 +
-            55 +
-            firstButton.parentElement.querySelector("p")!.offsetHeight +
-            "px";
+            70 + content?.offsetHeight + "px";
         }
       }
     }
@@ -93,9 +92,21 @@ export default function FaqItems({
               className="absolute right-0 opacity-0 transition-all duration-300 ease-in-out group-aria-expanded:opacity-100"
             />
           </div>
-          <p className="text-body-sm mt-2x select-none text-text-light-gray">
-            {answer}
-          </p>
+          <div id="content">
+            {faqItems[index].list ? (
+              <ul className="mt-2x list-disc pl-6">
+                {answer.split(", ").map((item) => (
+                  <li key={item} className="text-body-sm text-text-light-gray">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-body-sm mt-2x select-none text-text-light-gray">
+                {answer}
+              </p>
+            )}
+          </div>
         </div>
       ))}
     </>
