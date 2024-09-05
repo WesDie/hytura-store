@@ -4,7 +4,9 @@ import RenderImage from "@/components/utilities/render-Image";
 import { removeItem, updateItemQuantity } from "./actions";
 import { CartItem } from "@/lib/shopify/types";
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import Button from "@/components/elements/button";
+import { useCartDrawer } from "@/components/context/cart-drawer-context";
 
 export default function CartItemProduct(item: CartItem) {
   const product = item.merchandise.product;
@@ -71,27 +73,40 @@ export default function CartItemProduct(item: CartItem) {
     setLocalQuantity(item.quantity);
   }, [item.quantity]);
 
+  const productUrl = `/product/${product.handle}`;
+  const { setIsCartOpen } = useCartDrawer();
+
   return (
     <div
       className={`min-h- flex h-[150px] w-full border-b border-stroke-gray md:h-[170px] ${isLoading && "pointer-events-none opacity-50"}`}
     >
-      {product?.featuredImage?.url ? (
-        <RenderImage
-          src={product.featuredImage.url}
-          alt={"product item image"}
-          width={150}
-          height={170}
-          className="h-full min-w-[150px] border-r border-stroke-gray"
-          imageClassName="object-cover w-full h-full"
-        />
-      ) : (
-        <div className="h-full min-w-[150px] border-r border-stroke-gray"></div>
-      )}
+      <Link
+        href={productUrl}
+        onClick={() => setIsCartOpen(false)}
+        className="h-full min-w-[150px]"
+      >
+        {product?.featuredImage?.url ? (
+          <RenderImage
+            src={product.featuredImage.url}
+            alt={"product item image"}
+            width={150}
+            height={170}
+            className="h-full min-w-[150px] border-r border-stroke-gray"
+            imageClassName="object-cover w-full h-full"
+          />
+        ) : (
+          <div className="h-full min-w-[150px] border-r border-stroke-gray"></div>
+        )}
+      </Link>
       <div className="flex w-full flex-col justify-between p-2x">
         <div className="flex flex-col">
-          <h3 className="text-heading-2xs">
+          <Link
+            className="text-heading-2xs"
+            href={productUrl}
+            onClick={() => setIsCartOpen(false)}
+          >
             {product.title} - {item.merchandise.title.replace("/", "-")}
-          </h3>
+          </Link>
           <div className="flex gap-1x">
             <p className="text-body-sm text-text-light-gray">
               €{" "}
