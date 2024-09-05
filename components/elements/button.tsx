@@ -35,7 +35,7 @@ export default function Button({
     <button
       disabled={disabled || pending}
       type={type}
-      className={`${variantClass} ${className} ${arrow ? "flex gap-4x" : ""}`}
+      className={`${variantClass} ${className ? className : ""} ${arrow ? "flex gap-4x" : ""}`}
       onClick={onclick}
     >
       {text}

@@ -16,7 +16,7 @@ export default function Checkbox({
   state?: any;
 }) {
   return (
-    <div className={`checkbox ${className}`}>
+    <div className={`checkbox ${className ? className : ""}`}>
       <input
         type="checkbox"
         id={id || value}

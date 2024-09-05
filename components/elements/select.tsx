@@ -83,7 +83,7 @@ export default function Select({
 
   return (
     name && (
-      <div className={`select ${className}`}>
+      <div className={`select ${className ? className : ""}`}>
         {label && (
           <div className="flex justify-between">
             {label && <label htmlFor="password">{label}</label>}

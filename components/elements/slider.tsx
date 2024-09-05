@@ -48,7 +48,7 @@ export default function Slider({
 
   return (
     <div>
-      <div className="flex justify-between w-full px-2x py-2x md:px-4x md:pb-2x md:pt-3x">
+      <div className="flex w-full justify-between px-2x py-2x md:px-4x md:pb-2x md:pt-3x">
         <h1 className="text-heading-xs md:text-heading-md">{text}</h1>
         <div className="flex gap-2x">
           <button onClick={prevto}>
@@ -89,7 +89,7 @@ export default function Slider({
         }}
         onSwiper={setSwiper}
         spaceBetween={spaceBetween || 0}
-        className={`border-y border-solid border-stroke-gray ${sliderClass}`}
+        className={`border-y border-solid border-stroke-gray ${sliderClass ? sliderClass : ""}`}
       >
         {products && products.length > 0
           ? products.map((product: Product) => (

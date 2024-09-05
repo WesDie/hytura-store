@@ -28,7 +28,10 @@ export default function Transiton({
   }, [state, transitonTime]);
 
   return renderCart ? (
-    <div aria-hidden={!transition} className={`group ${className}`}>
+    <div
+      aria-hidden={!transition}
+      className={`group ${className ? className : ""}`}
+    >
       {children}
     </div>
   ) : null;

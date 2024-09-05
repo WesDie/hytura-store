@@ -13,7 +13,7 @@ export default function Price({
   discountClassName?: string;
 }) {
   return (
-    <div className={`flex gap-1x ${className}`}>
+    <div className={`flex gap-1x ${className ? className : ""}`}>
       <p
         className={`${priceClassName ? priceClassName : "text-body-sm mt-auto leading-[21px] text-text-light-gray"}`}
       >

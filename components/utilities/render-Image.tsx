@@ -24,7 +24,10 @@ export default function RenderImage({
   if (!src) return null;
 
   return (
-    <div className={`${className} overflow-hidden`} onClick={onClick}>
+    <div
+      className={`${className ? className : ""} overflow-hidden`}
+      onClick={onClick}
+    >
       <Image
         src={src}
         alt={alt}
@@ -35,7 +38,7 @@ export default function RenderImage({
         }}
         className={`${
           isImageLoading ? "blur-[20px]" : "remove-blur"
-        } ${imageClassName}`}
+        } ${imageClassName ? imageClassName : ""}`}
       ></Image>
     </div>
   );
