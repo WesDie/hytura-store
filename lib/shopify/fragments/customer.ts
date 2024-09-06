@@ -78,6 +78,10 @@ export const customerFragment = `
             amount
             currencyCode
           }
+          totalShippingPrice {
+            amount
+            currencyCode
+          }
           billingAddress{
             address1
             city

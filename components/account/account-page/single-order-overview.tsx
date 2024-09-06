@@ -35,6 +35,12 @@ export default function SingleOrderOverview({ order }: { order: Order }) {
                 {order.financialStatus}
               </p>
             </div>
+            <div className="flex flex-col gap-1x">
+              <h2 className="text-heading-3xs">Total price:</h2>
+              <p className="text-body-sm text-text-light-gray">
+                {order.totalPrice.amount} {order.totalPrice.currencyCode}
+              </p>
+            </div>
           </div>
         </div>
         <div className="flex flex-col gap-2x">
@@ -45,7 +51,7 @@ export default function SingleOrderOverview({ order }: { order: Order }) {
               <p className={orderHeaderItemClass}>Amount</p>
               <p className={`${orderHeaderItemClass} text-end`}>Total cost</p>
             </div>
-            {order.lineItems.map((item, index) => (
+            {order.lineItems.map((item) => (
               <div
                 key={order.id}
                 className="flex w-full border-b border-stroke-light-gray px-1x py-2x"
@@ -77,6 +83,7 @@ export default function SingleOrderOverview({ order }: { order: Order }) {
             <div className="flex w-full border-b border-stroke-light-gray px-1x py-2x">
               <p className="text-heading-3xs w-full">Subtotal</p>
               <p className={orderHeaderItemClass}>Tax</p>
+              <p className={orderHeaderItemClass}>Shipping</p>
               <p className={orderHeaderItemClass}>Total</p>
             </div>
             <div className="flex w-full border-b border-stroke-light-gray px-1x py-2x">
@@ -90,6 +97,10 @@ export default function SingleOrderOverview({ order }: { order: Order }) {
                   : "Included"}
               </p>
               <p className={orderListItemClass}>
+                {order.totalShippingPrice.amount}{" "}
+                {order.totalShippingPrice.currencyCode}
+              </p>
+              <p className={`${orderListItemClass} font-medium`}>
                 {order.totalPrice.amount} {order.totalPrice.currencyCode}
               </p>
             </div>

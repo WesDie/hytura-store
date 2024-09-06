@@ -167,6 +167,7 @@ export type Order = {
   currencyCode: string;
   canceledAt: string;
   cancelReason: string;
+  totalShippingPrice: Money;
   totalPrice: Money;
   billingAddress: Address;
   shippingAddress: Address;
@@ -191,6 +192,7 @@ export type ShopifyOrder = {
   currencyCode: string;
   canceledAt: string;
   cancelReason: string;
+  totalShippingPrice: Money;
   totalPrice: Money;
   billingAddress: Address;
   shippingAddress: Address;
