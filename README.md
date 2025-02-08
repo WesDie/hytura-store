@@ -1,6 +1,6 @@
 # Hytura - Next.js & Shopify Headless E-Commerce Template
 
-![Hytura Store](https://github.com/user-attachments/assets/e02316dc-a5b6-4f6d-93fa-dee7c5d1cb8e)
+<img width="1728" alt="Screenshot 2025-02-08 at 14 22 59" src="https://github.com/user-attachments/assets/db6514a8-7426-4dcc-97e5-b024d3770427" />
 
 This is a modern, high-performance e-commerce template built with **Next.js**, **Tailwind CSS**, and **Shopify**. Designed for a seamless shopping experience, the template already contains content for the `Hytura store` this can be modified for other stores content.
 
