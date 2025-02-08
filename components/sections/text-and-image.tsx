@@ -21,20 +21,20 @@ export default async function TextImage({
 }) {
   return (
     <section
-      className={`flex h-fit w-full flex-col overflow-hidden md:grid md:h-[536px] md:grid-cols-2 ${className ? className : ""}`}
+      className={`4xl:h-[700px] flex h-fit w-full flex-col overflow-hidden md:grid md:h-[536px] md:grid-cols-2 ${className ? className : ""}`}
     >
       <RenderImage
         src={imageSrc}
         alt={"product image"}
         width={1000}
         height={667}
-        className={`h-[297px] w-full md:h-[536px] ${className ? className : ""} ${
+        className={`4xl:h-[700px] h-[297px] w-full md:h-[536px] ${className ? className : ""} ${
           direction === "left" ? "order-1" : "order-0"
         }`}
         imageClassName="w-full h-full object-cover"
       />
       <div
-        className={`flex w-full border-b border-solid border-stroke-gray md:h-[536px] ${className ? className : ""}`}
+        className={`4xl:h-[700px] flex w-full border-b border-solid border-stroke-gray md:h-[536px] ${className ? className : ""}`}
       >
         <div className="mx-2x my-3x flex w-full flex-col gap-3x md:m-auto md:ml-[64px] md:mr-0 md:w-[500px]">
           <h1 className="text-heading-md">{title}</h1>
