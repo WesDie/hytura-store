@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { Product, Article, Review } from "@/lib/shopify/types";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
+import { FreeMode, Mousewheel } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/free-mode";
 import ProductButton from "./product-button";
 import ArticleCard from "./article-card";
 import ReviewCard from "./review-card";
@@ -36,14 +38,23 @@ export default function Slider({
   paddingTablet?: number;
   paddingMobile?: number;
 }) {
-  const [swiper, setSwiper] = useState(null);
+  const [swiper, setSwiper] = useState<SwiperClass | null>(null);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
   const nexto = () => {
-    swiper.slideNext();
+    swiper?.slideNext();
   };
 
   const prevto = () => {
-    swiper.slidePrev();
+    swiper?.slidePrev();
+  };
+
+  const handleSlideChange = () => {
+    if (swiper) {
+      setIsBeginning(swiper.isBeginning);
+      setIsEnd(swiper.isEnd);
+    }
   };
 
   return (
@@ -51,7 +62,11 @@ export default function Slider({
       <div className="flex w-full justify-between px-2x py-2x md:px-4x md:pb-2x md:pt-3x">
         <h1 className="text-heading-xs md:text-heading-md">{text}</h1>
         <div className="flex gap-2x">
-          <button onClick={prevto}>
+          <button
+            onClick={prevto}
+            disabled={isBeginning}
+            className="transition-opacity disabled:opacity-30"
+          >
             <RenderImage
               src={"/icons/arrow-left.svg"}
               alt={"arrow left"}
@@ -59,7 +74,11 @@ export default function Slider({
               height={17}
             />
           </button>
-          <button onClick={nexto}>
+          <button
+            onClick={nexto}
+            disabled={isEnd}
+            className="transition-opacity disabled:opacity-30"
+          >
             <RenderImage
               src={"/icons/arrow-right.svg"}
               alt={"arrow right"}
@@ -70,6 +89,17 @@ export default function Slider({
         </div>
       </div>
       <Swiper
+        modules={[FreeMode, Mousewheel]}
+        mousewheel={{
+          forceToAxis: true,
+          sensitivity: 1,
+        }}
+        freeMode={{
+          enabled: true,
+          momentum: true,
+          momentumRatio: 0.25,
+          momentumVelocityRatio: 0.5,
+        }}
         breakpoints={{
           0: {
             slidesPerView: slidesMobile || 1.2,
@@ -87,7 +117,12 @@ export default function Slider({
             slidesOffsetAfter: paddingDesktop || 0,
           },
         }}
-        onSwiper={setSwiper}
+        onSwiper={(swiperInstance) => {
+          setSwiper(swiperInstance);
+          setIsBeginning(swiperInstance.isBeginning);
+          setIsEnd(swiperInstance.isEnd);
+        }}
+        onSlideChange={handleSlideChange}
         spaceBetween={spaceBetween || 0}
         className={`border-y border-solid border-stroke-gray ${sliderClass ? sliderClass : ""}`}
       >
@@ -109,7 +144,7 @@ export default function Slider({
             ))
           : null}
         {!products && !articles && reviews && reviews.length > 0
-          ? reviews.map((review: review[], index: number) => (
+          ? reviews.map((review: Review[], index: number) => (
               <SwiperSlide key={index} className="!flex !h-auto">
                 <ReviewCard review={reviews[index]} />
               </SwiperSlide>
