@@ -1,36 +1,30 @@
-# Hytura - High Quality Indoor Plant Care Products
+# Hytura - Next.js & Shopify Headless E-Commerce Template
 
-Welcome to the Hytura repository! Hytura is a modern e-commerce web application built with Next.js and Tailwind CSS, integrated with Shopify to offer a seamless shopping experience. Hytura specialises in high-quality indoor plant care products.
+<img width="1728" alt="Screenshot 2025-02-08 at 14 22 59" src="https://github.com/user-attachments/assets/db6514a8-7426-4dcc-97e5-b024d3770427" />
 
-## Table of Contents
+This is a modern, high-performance e-commerce template built with **Next.js**, **Tailwind CSS**, and **Shopify**. Designed for a seamless shopping experience, the template already contains content for the `Hytura store` this can be modified for other stores content.
 
-- [Features](#features)
-- [Demo](#demo)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contact](#contact)
+## ✨ Features
 
-## Features
+- **Next.js** – Server-side rendering (SSR) and static site generation (SSG) for optimal performance.
+- **Shopify Integration** – Leverage Shopify’s powerful API for product management, checkout, and more.
+- **Tailwind CSS** – Rapid UI development with a modern utility-first CSS framework.
+- **Fully Responsive** – Optimized for desktops, tablets, and mobile devices.
+- **High Performance** – Fast load times with optimized images and efficient data fetching.
+- **SEO Optimized** – Meta tags, structured data, and best practices for search engine visibility.
 
-- **Next.js**: A powerful React framework for server-side rendering and static site generation.
-- **Shopify Integration**: Robust e-commerce functionality with Shopify's powerful API.
-- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
-- **Responsive Design**: Optimized for various screen sizes.
-- **High Performance**: Fast load times and smooth interactions.
-- **SEO Optimized**: Enhanced search engine visibility.
+## 🚀 Demo
 
-## Demo
+Experience the live demo of Hytura: [Hytura Store](https://hytura-store.vercel.app/)
 
-Check out the live demo of Hytura [here](https://hytura-store.vercel.app/).
+## 📥 Installation
 
-## Installation
-
-To get started with Hytura store, follow these steps:
+Follow these steps to set up the project locally:
 
 1. **Clone the repository:**
     ```sh
     git clone https://github.com/WesDie/hytura-store.git
-    cd hytura
+    cd hytura-store
     ```
 
 2. **Install dependencies:**
@@ -41,7 +35,7 @@ To get started with Hytura store, follow these steps:
 3. **Set up environment variables:**
 
     Create a `.env.local` file in the root directory and add your Shopify credentials:
-    ```env
+    ```sh
     SHOPIFY_STORE_DOMAIN='your-store.myshopify.com'
     SHOPIFY_STOREFRONT_ACCESS_TOKEN='your-access-token'
     SHOPIFY_ADMIN_API_ACCESS_TOKEN='admin-api-access-token'
@@ -54,17 +48,26 @@ To get started with Hytura store, follow these steps:
     npm run dev
     ```
 
-    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Usage
+## 📖 Usage
 
-- **Adding Content**: Manage your products, collections, menus and more directly through the Shopify dashboard.
-- **Handling Orders:** Process and manage orders through the Shopify admin panel. Integrate additional payment gateways if required.
-- **Deploying the Application:** Deploy Hytura using Vercel, Netlify, or any other preferred hosting service. Ensure environment variables are properly configured in the hosting platform.
+- **Adding Products**: Manage inventory through your Shopify dashboard.
+- **Handling Orders**: Process payments and orders via Shopify’s admin panel.
+- **Deployment**: Deploy using Vercel, Netlify, or any preferred hosting service. Ensure environment variables are properly configured.
 
-## Contact
+## 🔗 License & Usage
 
-For questions or feedback, feel free to reach out:
+Hytura is available as a **template for others to use and improve**. However, if you wish to use it, **you must credit me (Wes Dieleman) and contact me for approval first**.
 
-- Email: wes.dieleman@gmail.com
-- GitHub: [WesDie](https://github.com/WesDie)
+- **Personal & Commercial Use**: Allowed with credit and approval.
+- **Modifications & Improvements**: Feel free to enhance and contribute back.
+- **Redistribution**: Not allowed without explicit permission.
+
+## 📬 Contact
+
+For questions, feedback, or approval requests, reach out:
+
+- **Email:** wes.dieleman@gmail.com
+- **GitHub:** [WesDie](https://github.com/WesDie)
+
