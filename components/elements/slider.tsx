@@ -24,6 +24,7 @@ export default function Slider({
   paddingDesktop,
   paddingTablet,
   paddingMobile,
+  textClass,
 }: {
   text: string;
   products?: Product[];
@@ -37,6 +38,7 @@ export default function Slider({
   paddingDesktop?: number;
   paddingTablet?: number;
   paddingMobile?: number;
+  textClass?: string;
 }) {
   const [swiper, setSwiper] = useState<SwiperClass | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
@@ -60,7 +62,11 @@ export default function Slider({
   return (
     <div>
       <div className="flex w-full justify-between px-2x py-2x md:px-4x md:pb-2x md:pt-3x">
-        <h1 className="text-heading-xs md:text-heading-md">{text}</h1>
+        <h1
+          className={`text-heading-xs md:text-heading-md ${textClass ? textClass : ""}`}
+        >
+          {text}
+        </h1>
         <div className="flex gap-2x">
           <button
             onClick={prevto}
@@ -124,13 +130,13 @@ export default function Slider({
         }}
         onSlideChange={handleSlideChange}
         spaceBetween={spaceBetween || 0}
-        className={`border-y border-solid border-stroke-gray ${sliderClass ? sliderClass : ""}`}
+        className={`-translate-x-[1px] border-y border-solid border-stroke-gray ${sliderClass ? sliderClass : ""}`}
       >
         {products && products.length > 0
           ? products.map((product: Product) => (
               <SwiperSlide
                 key={product.id}
-                className="flex flex-col border-r border-solid border-stroke-gray first-of-type:border-x"
+                className="flex h-full flex-col border-r border-solid border-stroke-gray first-of-type:border-x"
               >
                 <ProductButton product={product} />
               </SwiperSlide>

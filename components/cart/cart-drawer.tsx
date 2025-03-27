@@ -11,6 +11,7 @@ import { Cart } from "@/lib/shopify/types";
 import { useEffect } from "react";
 import Transiton from "@/components/utilities/transition";
 import Button from "@/components/elements/button";
+import CartUpsell from "./cart-upsell";
 
 export default function CartDrawer({ cart }: { cart: Cart | null }) {
   const { isCartOpen, setIsCartOpen } = useCartDrawer();
@@ -25,6 +26,8 @@ export default function CartDrawer({ cart }: { cart: Cart | null }) {
     });
     setCartCount(cartCount);
   }, [cart, setCartCount]);
+
+  // if (!cart?.lines?.length) return null;
 
   function EmptyCart(): JSX.Element {
     return (
@@ -50,7 +53,7 @@ export default function CartDrawer({ cart }: { cart: Cart | null }) {
         onClick={() => setIsCartOpen(false)}
       ></div>
       <div
-        className={`fixed bottom-0 right-0 top-0 flex w-full translate-x-0 flex-col bg-background-sand transition-transform duration-300 group-aria-hidden:translate-x-[100%] md:w-[420px]`}
+        className={`fixed bottom-0 right-0 top-0 flex w-full translate-x-0 flex-col overflow-hidden bg-background-sand transition-transform duration-300 group-aria-hidden:translate-x-[100%] md:w-[420px]`}
       >
         <CartHeader />
         {!cart?.id ? (
@@ -67,6 +70,7 @@ export default function CartDrawer({ cart }: { cart: Cart | null }) {
             ))}
           </div>
         )}
+        <CartUpsell cart={cart} />
         <CartSummary cart={cart} />
       </div>
     </Transiton>

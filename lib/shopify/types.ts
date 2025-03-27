@@ -643,3 +643,12 @@ export type ShopifyBlogsOperation = {
     blogs: Connection<ShopifyBlog>;
   };
 };
+
+export type ShopifyProductRecommendationsOperation = {
+  data: {
+    productRecommendations: ShopifyProduct[];
+  };
+  variables: {
+    productId: string;
+  };
+};

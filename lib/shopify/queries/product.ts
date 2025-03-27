@@ -21,3 +21,12 @@ export const getSingleProductQuery = `
   }
   ${productFragment}
 `;
+
+export const getProductRecommendationsQuery = `
+  query getProductRecommendations($productId: ID!, $intent: ProductRecommendationIntent!) {
+    productRecommendations(productId: $productId, intent: $intent) {
+      ...product
+    }
+  }
+  ${productFragment}
+`;

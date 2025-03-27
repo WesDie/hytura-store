@@ -1,6 +1,12 @@
+"use server";
+
 import { TAGS } from "@/lib/constants";
 import { getCartQuery } from "./queries/cart";
-import { getAllProductsQuery, getSingleProductQuery } from "./queries/product";
+import {
+  getAllProductsQuery,
+  getSingleProductQuery,
+  getProductRecommendationsQuery,
+} from "./queries/product";
 import { getAllBlogsQuery, getSingleArticleQuery } from "./queries/blog";
 import {
   createCartMutation,
@@ -54,6 +60,7 @@ import {
   ShopifyOrder,
   ShopifyCreateCustomerAddressOperation,
   shopifyCustomerResetOperation,
+  ShopifyProductRecommendationsOperation,
 } from "./types";
 import { getPageQuery } from "./queries/page";
 import {
@@ -626,4 +633,19 @@ export async function createCustomerAddress(address: any[], token: string) {
   });
 
   return res.body.data.customerAddressCreate;
+}
+
+export async function getProductRecommendations(
+  productId: string,
+  intent: "RELATED" | "COMPLEMENTARY" = "RELATED",
+): Promise<Product[]> {
+  const res = await shopifyFetch<ShopifyProductRecommendationsOperation>({
+    query: getProductRecommendationsQuery,
+    variables: {
+      productId,
+      intent,
+    },
+  });
+
+  return reshapeProducts(res.body.data.productRecommendations);
 }
