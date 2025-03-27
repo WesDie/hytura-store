@@ -8,7 +8,7 @@ import {
   useCartCount,
 } from "@/components/context/cart-drawer-context";
 import { Cart } from "@/lib/shopify/types";
-import { useEffect } from "react";
+import { useEffect, type JSX } from "react";
 import Transiton from "@/components/utilities/transition";
 import Button from "@/components/elements/button";
 import CartUpsell from "./cart-upsell";

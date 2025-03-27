@@ -2,11 +2,12 @@ import ProductSlider from "@/components/sections/product-slider";
 import { getSingleProductData } from "@/lib/shopify";
 import ProductMedia from "@/components/product/product-media";
 import ProductDetails from "@/components/product/product-details";
-export default async function Product({
-  params,
-}: {
-  params: { handle: string };
-}) {
+export default async function Product(
+  props: {
+    params: Promise<{ handle: string }>;
+  }
+) {
+  const params = await props.params;
   const product = await getSingleProductData(params.handle);
 
   return (

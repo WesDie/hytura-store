@@ -2,12 +2,11 @@
 import Button from "../../elements/button";
 import type { Address } from "@/lib/shopify/types";
 import Input from "../../elements/input";
-import { useFormState } from "react-dom";
 import {
   ShopifyUpdateCustomerAddress,
   ShopifyCreateCustomerAddress,
 } from "../actions";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useActionState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import CountrySelector from "@/components/elements/country-selector";
@@ -17,11 +16,11 @@ const initialState = {
 };
 
 export default function EditAddressForm({ address }: { address?: Address }) {
-  const [stateEdit, formActionEdit] = useFormState(
+  const [stateEdit, formActionEdit] = useActionState(
     ShopifyUpdateCustomerAddress,
     initialState,
   );
-  const [stateCreate, formActionCreate] = useFormState(
+  const [stateCreate, formActionCreate] = useActionState(
     ShopifyCreateCustomerAddress,
     initialState,
   );

@@ -1,11 +1,12 @@
 import { getPage } from "@/lib/shopify";
 import { notFound } from "next/navigation";
 
-export default async function CollectionPage({
-  params,
-}: {
-  params: { handle: string };
-}) {
+export default async function CollectionPage(
+  props: {
+    params: Promise<{ handle: string }>;
+  }
+) {
+  const params = await props.params;
   const page = await getPage(params.handle);
 
   if (!page) {

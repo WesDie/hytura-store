@@ -14,8 +14,8 @@ import { revalidateTag } from "next/cache";
 import { Cart, CartItem } from "@/lib/shopify/types";
 
 export async function addItem(selectedVariantId: string, quantity: number = 1) {
-  let cartId = cookies().get("cartId")?.value;
-  let accountToken = cookies().get("customerAccessToken")?.value;
+  let cartId = (await cookies()).get("cartId")?.value;
+  let accountToken = (await cookies()).get("customerAccessToken")?.value;
 
   let cart;
 
@@ -31,7 +31,7 @@ export async function addItem(selectedVariantId: string, quantity: number = 1) {
     }
     cartId = cart.id;
     if (cartId) {
-      cookies().set("cartId", cartId);
+      (await cookies()).set("cartId", cartId);
     }
   }
 
@@ -52,7 +52,7 @@ export async function addItem(selectedVariantId: string, quantity: number = 1) {
 }
 
 export async function removeItem(lineId: string) {
-  const cartId = cookies().get("cartId")?.value;
+  const cartId = (await cookies()).get("cartId")?.value;
 
   if (!cartId) {
     return "Missing cart ID";
@@ -71,7 +71,7 @@ export async function updateItemQuantity(payload: {
   variantId: string;
   quantity: number;
 }): Promise<CartItem | string | undefined> {
-  const cartId = cookies().get("cartId")?.value;
+  const cartId = (await cookies()).get("cartId")?.value;
 
   if (!cartId) {
     return "Missing cart ID";
@@ -102,7 +102,7 @@ export async function updateItemQuantity(payload: {
 }
 
 export async function getCartData(): Promise<Cart | null> {
-  const cartId = cookies().get("cartId")?.value;
+  const cartId = (await cookies()).get("cartId")?.value;
   if (!cartId) {
     return null;
   }

@@ -2,12 +2,13 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import AccountReset from "@/components/account/account-reset";
 
-export default async function MainAccountReset({
-  params,
-}: {
-  params: { id: string };
-}) {
-  if (cookies().get("customerAccessToken")) {
+export default async function MainAccountReset(
+  props: {
+    params: Promise<{ id: string }>;
+  }
+) {
+  const params = await props.params;
+  if ((await cookies()).get("customerAccessToken")) {
     return notFound();
   }
 

@@ -9,11 +9,11 @@ export default async function AppLayout({
 }: {
   children: React.ReactNode;
 }) {
-  if (!cookies().get("customerAccessToken")) {
+  if (!(await cookies()).get("customerAccessToken")) {
     return notFound();
   }
 
-  const customerAccessToken = cookies().get("customerAccessToken") ?? "";
+  const customerAccessToken = (await cookies()).get("customerAccessToken") ?? "";
   const customer = await getCustomer(
     customerAccessToken !== "" ? customerAccessToken.value : "",
   );

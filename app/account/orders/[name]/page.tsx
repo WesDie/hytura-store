@@ -1,11 +1,13 @@
-"use client";
+"use client";;
+import { use } from "react";
 import SingleOrderOverview from "@/components/account/account-page/single-order-overview";
 import { useCustomer } from "@/components/context/customer-context";
 import Button from "@/components/elements/button";
 import type { Order } from "@/lib/shopify/types";
 import Link from "next/link";
 
-export default function Order({ params }: { params: { name: string } }) {
+export default function Order(props: { params: Promise<{ name: string }> }) {
+  const params = use(props.params);
   const { customer } = useCustomer();
   const order = customer?.orders.find(
     (order) => order.name === "#" + params.name,

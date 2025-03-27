@@ -1,10 +1,9 @@
 "use client";
 
-import { useFormState } from "react-dom";
 import { shopifyCreateCustomer } from "../account/actions";
 import Input from "../elements/input";
 import Button from "../elements/button";
-import { Dispatch } from "react";
+import { Dispatch, useActionState } from "react";
 import { useEffect } from "react";
 import Checkbox from "../elements/checkbox";
 
@@ -19,7 +18,7 @@ export default function Register({
   setActiveSection: Dispatch<string>;
   setSuccessMessage: Dispatch<string>;
 }) {
-  const [state, formAction] = useFormState(shopifyCreateCustomer, initialState);
+  const [state, formAction] = useActionState(shopifyCreateCustomer, initialState);
 
   useEffect(() => {
     if (state?.message?.success === "Created customer successfully") {

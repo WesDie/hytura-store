@@ -38,7 +38,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isLoggedIn = cookies().get("customerAccessToken") ? false : true;
+  const isLoggedIn = (await cookies()).get("customerAccessToken") ? false : true;
 
   const footerMenu = await getMenu("footer");
   const headerMenu = await getMenu("header");

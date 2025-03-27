@@ -1,9 +1,8 @@
 "use client";
 
-import { useFormState } from "react-dom";
 import { useSearchParams } from "next/navigation";
 import { shopifyResetCustomer } from "../account/actions";
-import { useEffect } from "react";
+import { useEffect, useActionState } from "react";
 import { useRouter } from "next/navigation";
 import Input from "../elements/input";
 import Button from "../elements/button";
@@ -13,7 +12,7 @@ const initialState = {
 };
 
 export default function AccountReset({ id }: { id: string }) {
-  const [state, formAction] = useFormState(shopifyResetCustomer, initialState);
+  const [state, formAction] = useActionState(shopifyResetCustomer, initialState);
   const params = useSearchParams();
   const token = params.get("token");
 

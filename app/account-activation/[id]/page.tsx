@@ -2,12 +2,13 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import AccountActivation from "@/components/account/account-activation";
 
-export default async function MainAccountActivation({
-  params,
-}: {
-  params: { id: string };
-}) {
-  if (cookies().get("customerAccessToken")) {
+export default async function MainAccountActivation(
+  props: {
+    params: Promise<{ id: string }>;
+  }
+) {
+  const params = await props.params;
+  if ((await cookies()).get("customerAccessToken")) {
     return notFound();
   }
 

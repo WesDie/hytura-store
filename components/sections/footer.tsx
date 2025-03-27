@@ -3,8 +3,7 @@ import Link from "next/link";
 import Input from "../elements/input";
 import Button from "../elements/button";
 import { shopifySubscribeMarketing } from "../account/actions";
-import { useFormState } from "react-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useActionState } from "react";
 import { Menu } from "@/lib/shopify/types";
 
 const initialState = {
@@ -15,7 +14,7 @@ export default function Footer({ menu }: { menu: Menu[] }) {
   const linkClass =
     "w-fit inline-block relative after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-text-black after:origin-bottom-right after:transition-transform after:duration-200 after:ease-in-out hover:after:scale-x-[1] hover:after:origin-bottom-left";
 
-  const [state, formAction] = useFormState(
+  const [state, formAction] = useActionState(
     shopifySubscribeMarketing,
     initialState,
   );

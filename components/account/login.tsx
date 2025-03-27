@@ -1,10 +1,9 @@
 "use client";
 
-import { useFormState } from "react-dom";
 import { shopifyLoginCustomer } from "../account/actions";
 import Input from "../elements/input";
 import Button from "../elements/button";
-import { Dispatch } from "react";
+import { Dispatch, useActionState } from "react";
 
 const initialState = {
   message: "",
@@ -15,7 +14,7 @@ export default function Login({
 }: {
   setActiveSection: Dispatch<string>;
 }) {
-  const [state, formAction] = useFormState(shopifyLoginCustomer, initialState);
+  const [state, formAction] = useActionState(shopifyLoginCustomer, initialState);
 
   return (
     <div className="flex h-full flex-col gap-2x px-3x py-5x pb-0">

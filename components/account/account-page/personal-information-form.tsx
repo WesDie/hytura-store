@@ -2,9 +2,8 @@
 import Button from "../../elements/button";
 import { Customer } from "@/lib/shopify/types";
 import Input from "../../elements/input";
-import { useFormState } from "react-dom";
 import { shopifyUpdateCustomer } from "../actions";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useActionState } from "react";
 
 const initialState = {
   message: "",
@@ -15,7 +14,7 @@ export default function PersonalInformationForm({
 }: {
   customer: Customer;
 }) {
-  const [state, formAction] = useFormState(shopifyUpdateCustomer, initialState);
+  const [state, formAction] = useActionState(shopifyUpdateCustomer, initialState);
   const [canbeEdited, setCanBeEdited] = useState(false);
 
   const [newFirstName, setNewFirstName] = useState(customer.firstName || "");

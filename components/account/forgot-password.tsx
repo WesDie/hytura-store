@@ -1,6 +1,6 @@
 "use client";
 
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { shopifySendPasswordResetEmail } from "../account/actions";
 import Input from "../elements/input";
 import Button from "../elements/button";
@@ -10,7 +10,7 @@ const initialState = {
 };
 
 export default function ResetPassword() {
-  const [state, formAction] = useFormState(
+  const [state, formAction] = useActionState(
     shopifySendPasswordResetEmail,
     initialState,
   );

@@ -1,11 +1,13 @@
-"use client";
+"use client";;
+import { use } from "react";
 import EditAddressForm from "@/components/account/account-page/edit-address-form";
 import { useCustomer } from "@/components/context/customer-context";
 import Button from "@/components/elements/button";
 import type { Order } from "@/lib/shopify/types";
 import Link from "next/link";
 
-export default function Order({ params }: { params: { id: string } }) {
+export default function Order(props: { params: Promise<{ id: string }> }) {
+  const params = use(props.params);
   const { customer } = useCustomer();
   const address = customer?.addresses.find(
     (address) => address.id.split("?")[0].split("/").pop() === params.id,

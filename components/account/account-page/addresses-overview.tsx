@@ -4,8 +4,7 @@ import Button from "../../elements/button";
 import { Address } from "@/lib/shopify/types";
 import { usePathname } from "next/navigation";
 import { ShopifyDeleteCustomerAddress } from "../actions";
-import { useFormState } from "react-dom";
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useState, useActionState } from "react";
 
 const initialState = {
   message: "",
@@ -18,7 +17,7 @@ export default function AddressesOverview({
   addresses: Address[];
   defaultAddressId: string;
 }) {
-  const [state, formAction] = useFormState(
+  const [state, formAction] = useActionState(
     ShopifyDeleteCustomerAddress,
     initialState,
   );

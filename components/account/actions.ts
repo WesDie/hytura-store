@@ -74,9 +74,9 @@ export async function shopifyLoginCustomer(
     const res = await createCustomerToken(email, password);
 
     if (res.customerAccessToken?.accessToken) {
-      cookies().set("customerAccessToken", res.customerAccessToken.accessToken);
+      (await cookies()).set("customerAccessToken", res.customerAccessToken.accessToken);
 
-      let cartId = cookies().get("cartId")?.value;
+      let cartId = (await cookies()).get("cartId")?.value;
 
       if (cartId) {
         updateCartIdentity(cartId, res.customerAccessToken.accessToken);
@@ -129,7 +129,7 @@ export async function shopifySendPasswordResetEmail(
 }
 
 export async function shopifyLogoutCustomer() {
-  cookies().delete("customerAccessToken");
+  (await cookies()).delete("customerAccessToken");
 
   return { message: { success: "Logout success" } };
 }
@@ -165,9 +165,9 @@ export async function shopifyActivateCustomer(
     if (res.customerUserErrors && res.customerUserErrors.length > 0) {
       return { message: { base: res.customerUserErrors[0].message } };
     } else if (res.customerAccessToken) {
-      cookies().set("customerAccessToken", res.customerAccessToken.accessToken);
+      (await cookies()).set("customerAccessToken", res.customerAccessToken.accessToken);
 
-      let cartId = cookies().get("cartId")?.value;
+      let cartId = (await cookies()).get("cartId")?.value;
 
       if (cartId) {
         updateCartIdentity(cartId, res.customerAccessToken.accessToken);
@@ -199,7 +199,7 @@ export async function shopifySubscribeMarketing(
   formData.set("email_marketing_status", "on");
   formData.set("new_email_marketing_status", "on");
 
-  const customerToken = cookies().get("customerAccessToken")?.value;
+  const customerToken = (await cookies()).get("customerAccessToken")?.value;
 
   if (customerToken) {
     const customer = await getCustomer(customerToken);
@@ -224,7 +224,7 @@ export async function shopifyUpdateCustomer(
   formData: FormData,
   customer?: Customer,
 ): Promise<{ message: any }> {
-  const customerToken = cookies().get("customerAccessToken")?.value;
+  const customerToken = (await cookies()).get("customerAccessToken")?.value;
 
   if (!customerToken) {
     return { message: { base: ["Unauthorized"] } };
@@ -285,7 +285,7 @@ export async function ShopifyUpdateCustomerAddress(
   formData: FormData,
   customer?: Customer,
 ): Promise<{ message: any }> {
-  const customerToken = cookies().get("customerAccessToken")?.value;
+  const customerToken = (await cookies()).get("customerAccessToken")?.value;
 
   if (!customerToken) {
     return { message: { base: ["Unauthorized"] } };
@@ -358,7 +358,7 @@ export async function ShopifyDeleteCustomerAddress(
   formData: FormData,
   customer?: Customer,
 ): Promise<{ message: any }> {
-  const customerToken = cookies().get("customerAccessToken")?.value;
+  const customerToken = (await cookies()).get("customerAccessToken")?.value;
 
   if (!customerToken) {
     return { message: { base: ["Unauthorized"] } };
@@ -394,7 +394,7 @@ export async function ShopifyCreateCustomerAddress(
   formData: FormData,
   customer?: Customer,
 ): Promise<{ message: any }> {
-  const customerToken = cookies().get("customerAccessToken")?.value;
+  const customerToken = (await cookies()).get("customerAccessToken")?.value;
 
   if (!customerToken) {
     return { message: { base: ["Unauthorized"] } };
@@ -487,9 +487,9 @@ export async function shopifyResetCustomer(
     if (res.customerUserErrors && res.customerUserErrors.length > 0) {
       return { message: { base: res.customerUserErrors[0].message } };
     } else if (res.customerAccessToken) {
-      cookies().set("customerAccessToken", res.customerAccessToken.accessToken);
+      (await cookies()).set("customerAccessToken", res.customerAccessToken.accessToken);
 
-      let cartId = cookies().get("cartId")?.value;
+      let cartId = (await cookies()).get("cartId")?.value;
 
       if (cartId) {
         updateCartIdentity(cartId, res.customerAccessToken.accessToken);

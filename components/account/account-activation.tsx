@@ -1,9 +1,8 @@
 "use client";
 
-import { useFormState } from "react-dom";
 import { useSearchParams } from "next/navigation";
 import { shopifyActivateCustomer } from "../account/actions";
-import { useEffect } from "react";
+import { useEffect, useActionState } from "react";
 import { useRouter } from "next/navigation";
 import Input from "../elements/input";
 import Button from "../elements/button";
@@ -13,7 +12,7 @@ const initialState = {
 };
 
 export default function AccountActivation({ id }: { id: string }) {
-  const [state, formAction] = useFormState(
+  const [state, formAction] = useActionState(
     shopifyActivateCustomer,
     initialState,
   );
