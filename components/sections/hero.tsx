@@ -15,19 +15,19 @@ export default async function Hero({
 }) {
   return (
     <section
-      className={`4xl:h-[800px] grid h-[592px] w-full grid-rows-2 overflow-hidden md:h-[667px] md:grid-cols-2`}
+      className={`grid h-[592px] w-full grid-rows-2 overflow-hidden md:h-[667px] md:grid-cols-2 4xl:h-[800px]`}
     >
       <RenderImage
         src={imageSrc}
         alt={"product image"}
         width={1000}
         height={667}
-        className={`4xl:h-[800px] h-full w-full md:h-[667px] ${
+        className={`h-full w-full md:h-[667px] 4xl:h-[800px] ${
           direction === "left" ? "order-1" : "order-0"
         }`}
         imageClassName="w-full h-full object-cover"
       />
-      <div className="4xl:h-[800px] flex w-full border-b border-solid border-stroke-gray md:h-[667px]">
+      <div className="flex w-full border-b border-solid border-stroke-gray md:h-[667px] 4xl:h-[800px]">
         <div className="m-auto ml-2x flex w-[355px] flex-col gap-3x md:ml-[64px]">
           <h1 className="text-heading-lg md:text-heading-xl">{title}</h1>
           <div className="flex gap-2x">

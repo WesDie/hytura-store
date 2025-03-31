@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Kaisei_Tokumin } from "next/font/google";
-import "@/app/globals.css";
+import "@/app/(webshop)/globals.css";
 import localFont from "next/font/local";
 
 import type { Viewport } from "next";
@@ -19,12 +18,11 @@ export const viewport: Viewport = {
 };
 
 const generalSans = localFont({
-  src: "../fonts/GeneralSans-Variable.ttf",
+  src: "../../fonts/GeneralSans-Variable.ttf",
   variable: "--font-general-sans",
 });
-const kaiseiTokumin = Kaisei_Tokumin({
-  subsets: ["latin"],
-  weight: ["400", "500", "700", "800"],
+const kaiseiTokumin = localFont({
+  src: "../../fonts/KaiseiTokumin-Regular.ttf",
   variable: "--font-kaisei-tokumin",
 });
 
@@ -38,7 +36,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isLoggedIn = (await cookies()).get("customerAccessToken") ? false : true;
+  const isLoggedIn = (await cookies()).get("customerAccessToken")
+    ? false
+    : true;
 
   const footerMenu = await getMenu("footer");
   const headerMenu = await getMenu("header");
